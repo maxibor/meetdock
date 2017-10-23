@@ -104,7 +104,7 @@ if __name__ == "__main__":
     filename = sys.argv[1]
     mypdb = read_pdb(filename=filename)
     coords = map_to_range(x=mypdb[0], y=mypdb[1], z=mypdb[2], grid_parameters=get_grid_parameters(
-        x=mypdb[0], y=mypdb[1], z=mypdb[2], resolution=resolution=))
+        x=mypdb[0], y=mypdb[1], z=mypdb[2], resolution=resolution))
     print(coords.shape)
 
     print(mypdb[3])
