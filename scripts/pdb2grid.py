@@ -20,12 +20,12 @@ def read_pdb(filename):
                 x(list) x position of residues (CA or CB)
                 y(list) y position of residues (CA or CB)
                 z(list) z position of residues (CA or CB)
-                resdepth(dict) residue depth indexed by 'xi,yi,zi'
+                resdepth(list) residue depth (to add)
     """
     x = []
     y = []
     z = []
-    resdepth = {}
+    resdepth = []
     structure = parser.get_structure(pdbid, filename)
     for model in structure:
         for chain in model:
@@ -39,8 +39,7 @@ def read_pdb(filename):
                             y.append(posy)
                             posz = int(atom.get_coord()[2])
                             z.append(posz)
-                            resdepth[str(posx) + "," + str(posy) + "," +
-                                     str(posz)] = "inside/surface/outside"
+                            resdepth.append(0)
                 else:
                     for atom in residue:
                         if atom.get_name() == "CB":
@@ -50,8 +49,7 @@ def read_pdb(filename):
                             y.append(posy)
                             posz = int(atom.get_coord()[2])
                             z.append(posz)
-                            resdepth[str(posx) + "," + str(posy) + "," +
-                                     str(posz)] = "inside/surface/outside"
+                            resdepth.append(0)
     coords = (x, y, z, resdepth)
     return(coords)
 
@@ -77,7 +75,7 @@ def get_grid_parameters(x, y, z, resolution):
     return(parameters)
 
 
-def map_to_range(x, y, z, grid_parameters):
+def map_to_range(x, y, z, resdepth, grid_parameters):
     """
     SCALES RESIDUE COORDINATES
     INPUT:
@@ -89,7 +87,7 @@ def map_to_range(x, y, z, grid_parameters):
         coords(np.ndarray) coordinates of residues scaled to 0-nb_cells
     """
 
-    coords = np.array((x, y, z), dtype=int)
+    coords = np.array((x, y, z, resdepth), dtype=int)
     coords[0] = np.interp(coords[0], [grid_parameters[1], grid_parameters[2]], [
                           0, grid_parameters[0]])
     coords[1] = np.interp(coords[1], [grid_parameters[1], grid_parameters[2]], [
@@ -103,7 +101,7 @@ if __name__ == "__main__":
     resolution = 1
     filename = sys.argv[1]
     mypdb = read_pdb(filename=filename)
-    coords = map_to_range(x=mypdb[0], y=mypdb[1], z=mypdb[2], grid_parameters=get_grid_parameters(
+    coords = map_to_range(x=mypdb[0], y=mypdb[1], z=mypdb[2], resdepth=mypdb[3], grid_parameters=get_grid_parameters(
         x=mypdb[0], y=mypdb[1], z=mypdb[2], resolution=resolution))
     print(coords.shape)
 
