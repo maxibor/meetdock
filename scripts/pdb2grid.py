@@ -13,8 +13,14 @@ def read_pdb(filename):
     pdbid = filename.split(".")[0]
     """
         READs PDB FILE AND COMPUTES RESIDUE POSITIONS AND DEPTH
-        INPUT : PDB path/filename
-        OUTPUT : tuple of positions of CB/CA and RESIDUE DEPTH (to add)
+        INPUT :
+            PDB path/filename(str)
+        OUTPUT :
+            coords(tuple) positions of CB/CA and RESIDUE DEPTH (to add)
+                x(list) x position of residues (CA or CB)
+                y(list) y position of residues (CA or CB)
+                z(list) z position of residues (CA or CB)
+                resdepth(dict) residue depth indexed by 'xi,yi,zi'
     """
     x = []
     y = []
@@ -51,6 +57,18 @@ def read_pdb(filename):
 
 
 def get_grid_parameters(x, y, z, resolution):
+    """
+        COMPUTES GRID PARAMETERS FOR FFT
+        INPUT:
+            x(list) x coordinates of residues
+            y(list) y coordinates of residues
+            z(list) z coordinates of residues
+        OUTPUT:
+            nb_cells(int) number of grid cells
+            Lmin(int) min X|Y|Z positions
+            Lmax(int) max X|Y|Z positions
+    """
+
     Lmax = max(max(x), max(y), max(z))
     Lmin = min(min(x), min(y), min(z))
     L = Lmax - Lmin
@@ -60,6 +78,17 @@ def get_grid_parameters(x, y, z, resolution):
 
 
 def map_to_range(x, y, z, grid_parameters):
+    """
+    SCALES RESIDUE COORDINATES
+    INPUT:
+        x(list) x coordinates of residues
+        y(list) y coordinates of residues
+        z(list) z coordinates of residues
+        grid_parameters(tuple) output of get_grid_parameters() function
+    OUTPUT:
+        coords(np.ndarray) coordinates of residues scaled to 0-nb_cells
+    """
+
     coords = np.array((x, y, z), dtype=int)
     coords[0] = np.interp(coords[0], [grid_parameters[1], grid_parameters[2]], [
                           0, grid_parameters[0]])
