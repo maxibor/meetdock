@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import sys
 
 
-def read_pdb(filename):
+def read_pdb(filename, calc_depth = True):
     parser = PDBParser(PERMISSIVE=1)
     pdbid = filename.split(".")[0]
     """
@@ -25,7 +25,8 @@ def read_pdb(filename):
     x = []
     y = []
     z = []
-    resdepth = []
+    if calc_depth:
+        resdepth = []
     structure = parser.get_structure(pdbid, filename)
     for model in structure:
         for chain in model:
@@ -39,7 +40,8 @@ def read_pdb(filename):
                             y.append(posy)
                             posz = int(atom.get_coord()[2])
                             z.append(posz)
-                            resdepth.append(0)
+                            if calc_depth:
+                                resdepth.append(0)
                 else:
                     for atom in residue:
                         if atom.get_name() == "CB":
@@ -49,8 +51,12 @@ def read_pdb(filename):
                             y.append(posy)
                             posz = int(atom.get_coord()[2])
                             z.append(posz)
-                            resdepth.append(0)
-    coords = (x, y, z, resdepth)
+                            if calc_depth:
+                                resdepth.append(0)
+    if calc_depth :
+        coords = (x, y, z, resdepth)
+    else :
+        coords = (x, y, z)
     return(coords)
 
 
