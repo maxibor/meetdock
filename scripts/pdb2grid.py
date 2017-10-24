@@ -95,7 +95,7 @@ def read_pdb(filename, calc_depth = False):
     return(df)
 
 
-def get_grid_parameters(x, y, z, resolution):
+def get_grid_parameters(x, y, z):
     """
         COMPUTES GRID PARAMETERS FOR FFT
         INPUT:
@@ -111,8 +111,7 @@ def get_grid_parameters(x, y, z, resolution):
     Lmax = max(max(x), max(y), max(z))
     Lmin = min(min(x), min(y), min(z))
     L = math.ceil(Lmax) - math.floor(Lmin)
-    nb_cells = math.ceil(L / resolution)
-    parameters = (nb_cells, Lmin, Lmax)
+    parameters = (L, Lmin, Lmax)
     return(parameters)
 
 
@@ -136,16 +135,16 @@ def scale_coords(df, grid_parameters, margin = 5):
 
 
 if __name__ == "__main__":
-    resolution = 1
+    resolution = 9.2
     # filename = "./2ZA4.pdb"
     filename = sys.argv[1]
     mypdb = read_pdb(filename=filename, calc_depth = True)
-    grid_parameters=get_grid_parameters(x=mypdb.iloc[:,0], y=mypdb.iloc[:,1], z=mypdb.iloc[:,2], resolution=resolution)
+    grid_parameters=get_grid_parameters(x=mypdb.iloc[:,0], y=mypdb.iloc[:,1], z=mypdb.iloc[:,2])
     coords = scale_coords(mypdb, grid_parameters= grid_parameters)
-    mygrid = init_grid(grid_parameters[0])
+    mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
     print(grid_parameters)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
-    ax.scatter(xs=mygrid.iloc[:,0], ys=mygrid.iloc[:,1], zs=mygrid.iloc[:,2], c = "blue", alpha = 0.01)
+    ax.scatter(xs=mygrid.iloc[:,0], ys=mygrid.iloc[:,1], zs=mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
     ax.scatter(xs=coords.iloc[:,0], ys=coords.iloc[:,1], zs=coords.iloc[:,2], c = "red")
     plt.show()

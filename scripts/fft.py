@@ -4,20 +4,21 @@ import numpy as np
 import pandas as pd
 
 
-def init_grid(N):
+def init_grid(N, mesh_size = 1):
     """
         INITIALIZES GRID FOR FFT
         INPUT :
             N(int) size of the grid
+            mesh_size(float) mesh size
         OUTPUT :
             grid(pandas dataframe) 4 columns (x,y,z, resloc)
     """
     x = []
     y = []
     z = []
-    for i in range(0,N+1):
-        for j in range(0,N+1):
-            for k in range(0,N+1):
+    for i in np.arange(0,N+1, mesh_size):
+        for j in np.arange(0,N+1, mesh_size):
+            for k in np.arange(0,N+1, mesh_size):
                 x.append(i)
                 y.append(j)
                 z.append(k)
