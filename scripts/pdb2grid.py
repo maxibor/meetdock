@@ -3,12 +3,13 @@
 
 from Bio.PDB.PDBParser import PDBParser
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import sys, math
 
 
-def read_pdb(filename, calc_depth = True):
+def read_pdb(filename, calc_depth = False):
     parser = PDBParser(PERMISSIVE=1)
     pdbid = filename.split(".")[0]
     """
@@ -16,15 +17,36 @@ def read_pdb(filename, calc_depth = True):
         INPUT :
             PDB path/filename(str)
         OUTPUT :
-            coords(tuple) positions of CB/CA and RESIDUE DEPTH (to add)
+            df(pandas dataframe) positions of CB/CA and RESIDUE DEPTH (to add)
                 x(list) x position of residues (CA or CB)
                 y(list) y position of residues (CA or CB)
                 z(list) z position of residues (CA or CB)
                 resdepth(list) residue depth (to add)
     """
+    amino = [
+        "ALA",
+        "ILE",
+        "LEU",
+        "PRO",
+        "VAL",
+        "PHE",
+        "TRP",
+        "TYR",
+        "ASP",
+        "GLU",
+        "ARG",
+        "HIS",
+        "LYS",
+        "SER",
+        "THR",
+        "CYS",
+        "MET",
+        "ASN",
+        "GLN"]
     x = []
     y = []
     z = []
+    resname = []
     if calc_depth:
         resdepth = []
     structure = parser.get_structure(pdbid, filename)
@@ -32,32 +54,44 @@ def read_pdb(filename, calc_depth = True):
         for chain in model:
             for residue in chain:
                 if "GLY" in residue.get_resname():
+                    if calc_depth:
+                        resdepth.append(0)
+                    resname.append(residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2])
                     for atom in residue:
                         if atom.get_name() == "CA":
-                            posx = int(atom.get_coord()[0])
+                            posx = atom.get_coord()[0]
                             x.append(posx)
-                            posy = int(atom.get_coord()[1])
+                            posy = atom.get_coord()[1]
                             y.append(posy)
-                            posz = int(atom.get_coord()[2])
+                            posz = atom.get_coord()[2]
                             z.append(posz)
-                            if calc_depth:
-                                resdepth.append(0)
-                else:
+
+                elif residue.get_resname() in amino:
+                    if calc_depth:
+                        resdepth.append(0)
+                    resname.append(residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2])
                     for atom in residue:
                         if atom.get_name() == "CB":
-                            posx = int(atom.get_coord()[0])
+                            posx = atom.get_coord()[0]
                             x.append(posx)
-                            posy = int(atom.get_coord()[1])
+                            posy = atom.get_coord()[1]
                             y.append(posy)
-                            posz = int(atom.get_coord()[2])
+                            posz = atom.get_coord()[2]
                             z.append(posz)
-                            if calc_depth:
-                                resdepth.append(0)
+
+
     if calc_depth :
-        coords = (x, y, z, resdepth)
+        df = pd.DataFrame(x, columns = ["x"], index = resname)
+        df["y"] = y
+        df["z"] = z
+        df["resdepth"] = resdepth
+
     else :
-        coords = (x, y, z)
-    return(coords)
+        df = pd.DataFrame(x, columns = ["x"], index = resname)
+        df["y"] = y
+        df["z"] = z
+
+    return(df)
 
 
 def get_grid_parameters(x, y, z, resolution):
@@ -75,45 +109,39 @@ def get_grid_parameters(x, y, z, resolution):
 
     Lmax = max(max(x), max(y), max(z))
     Lmin = min(min(x), min(y), min(z))
-    L = Lmax - Lmin
+    L = math.ceil(Lmax) - math.floor(Lmin)
     nb_cells = math.ceil(L / resolution)
     parameters = (nb_cells, Lmin, Lmax)
     return(parameters)
 
 
-def map_to_range(x, y, z, resdepth, grid_parameters):
+def scale_coords(df, grid_parameters, margin = 5):
     """
     SCALES RESIDUE COORDINATES
     INPUT:
-        x(list) x coordinates of residues
-        y(list) y coordinates of residues
-        z(list) z coordinates of residues
+        df(pandas dataframe) output of read_pdb() function
         grid_parameters(tuple) output of get_grid_parameters() function
     OUTPUT:
-        coords(np.ndarray) coordinates of residues scaled to 0-nb_cells
+        df(pandas dataframe) scaled output of read_pdb()
     """
+    df.iloc[:,0] = np.interp(df.iloc[:,0], [grid_parameters[1], grid_parameters[2]], [
+                          0+margin, grid_parameters[0] - margin])
+    df.iloc[:,1] = np.interp(df.iloc[:,1], [grid_parameters[1], grid_parameters[2]], [
+                          0+margin, grid_parameters[0] - margin])
+    df.iloc[:,2] = np.interp(df.iloc[:,2], [grid_parameters[1], grid_parameters[2]], [
+                          0+margin, grid_parameters[0] - margin])
+    return(df)
 
-    coords = np.array((x, y, z, resdepth), dtype=int)
-    coords[0] = np.interp(coords[0], [grid_parameters[1], grid_parameters[2]], [
-                          0, grid_parameters[0]])
-    coords[1] = np.interp(coords[1], [grid_parameters[1], grid_parameters[2]], [
-                          0, grid_parameters[0]])
-    coords[2] = np.interp(coords[2], [grid_parameters[1], grid_parameters[2]], [
-                          0, grid_parameters[0]])
-    return(coords)
 
 
 if __name__ == "__main__":
     resolution = 1
-    filename = sys.argv[1]
-    mypdb = read_pdb(filename=filename)
-    coords = map_to_range(x=mypdb[0], y=mypdb[1], z=mypdb[2], resdepth=mypdb[3], grid_parameters=get_grid_parameters(
-        x=mypdb[0], y=mypdb[1], z=mypdb[2], resolution=resolution))
-    print(coords.shape)
-
-    print(mypdb[3])
-
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.scatter(xs=coords[0], ys=coords[1], zs=coords[2])
-    plt.show()
+    filename = "./2ZA4.pdb"
+    mypdb = read_pdb(filename=filename, calc_depth = True)
+    grid_parameters=get_grid_parameters(x=mypdb.iloc[:,0], y=mypdb.iloc[:,1], z=mypdb.iloc[:,2], resolution=resolution)
+    coords = scale_coords(mypdb, grid_parameters= grid_parameters)
+    print(grid_parameters)
+    # fig = plt.figure()
+    # ax = fig.gca(projection='3d')
+    # ax.scatter(xs=coords[0], ys=coords[1], zs=coords[2])
+    # plt.show()
