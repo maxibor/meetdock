@@ -5,7 +5,7 @@ from Bio.PDB.PDBParser import PDBParser
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-import sys
+import sys, math
 
 
 def read_pdb(filename, calc_depth = True):
@@ -76,7 +76,7 @@ def get_grid_parameters(x, y, z, resolution):
     Lmax = max(max(x), max(y), max(z))
     Lmin = min(min(x), min(y), min(z))
     L = Lmax - Lmin
-    nb_cells = int(L / resolution)
+    nb_cells = math.ceil(L / resolution)
     parameters = (nb_cells, Lmin, Lmax)
     return(parameters)
 
