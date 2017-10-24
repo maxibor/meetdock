@@ -7,6 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import sys, math
+from fft import init_grid
 
 
 def read_pdb(filename, calc_depth = False):
@@ -136,12 +137,15 @@ def scale_coords(df, grid_parameters, margin = 5):
 
 if __name__ == "__main__":
     resolution = 1
-    filename = "./2ZA4.pdb"
+    # filename = "./2ZA4.pdb"
+    filename = sys.argv[1]
     mypdb = read_pdb(filename=filename, calc_depth = True)
     grid_parameters=get_grid_parameters(x=mypdb.iloc[:,0], y=mypdb.iloc[:,1], z=mypdb.iloc[:,2], resolution=resolution)
     coords = scale_coords(mypdb, grid_parameters= grid_parameters)
+    mygrid = init_grid(grid_parameters[0])
     print(grid_parameters)
-    # fig = plt.figure()
-    # ax = fig.gca(projection='3d')
-    # ax.scatter(xs=coords[0], ys=coords[1], zs=coords[2])
-    # plt.show()
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    ax.scatter(xs=mygrid.iloc[:,0], ys=mygrid.iloc[:,1], zs=mygrid.iloc[:,2], c = "blue", alpha = 0.01)
+    ax.scatter(xs=coords.iloc[:,0], ys=coords.iloc[:,1], zs=coords.iloc[:,2], c = "red")
+    plt.show()
