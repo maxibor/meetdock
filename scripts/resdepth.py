@@ -26,4 +26,9 @@ print (mydict)
 
 def calc_depth(depth_dict, residue, thresh):
     depth = depth_dict[residue.get_full_id()[2:4]][1]
+    if depth < thresh :
+        return(-1)
+    else :
+        return(1)
+
     return(depth)

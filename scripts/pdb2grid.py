@@ -10,7 +10,7 @@ import sys, math
 from fft import init_grid
 
 
-def read_pdb(filename, calc_depth = False):
+def read_pdb(filename, depth_dict, calc_depth = False ):
     parser = PDBParser(PERMISSIVE=1)
     pdbid = filename.split(".")[0]
     """
