@@ -1,14 +1,12 @@
-from Bio.PDB import *
+#!/usr/bin/env python3
+
+
+from Bio.PDB.PDBParser import PDBParser
 import os
 
-
-def calculate_resdepth(pdb_filename):
-
-    p = PDBParser(pdb_filename)
-    structure = p.get_structure('X', pdb_filename)
+def calculate_resdepth(structure, pdb_filename):
     model = structure[0]
     rd = ResidueDepth(model, pdb_filename)
-
     mydict = {}
 
     for item in rd.property_list:
@@ -21,12 +19,12 @@ def calculate_resdepth(pdb_filename):
                 )
         result = item[1]                        # (ResidueDepth, CalphaDepth)
 
-    
+
 
         # Stores everything in a dict
 
         mydict[residue] = result
-    
+
     return mydict
 
 def bfactor_to_resdepth(mydict):
@@ -49,9 +47,9 @@ def bfactor_to_resdepth(mydict):
 def delete_hetatm(pdb_filename):
     command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
     os.system(command)
-    
+
 def resdepth_to_fft(residue, cutoff, mydict):
-    
+
     res = (residue.get_parent().id, # Chain
            residue.get_resname(),   # 3 letter code
            residue.get_id()[1]      # Position in chain
@@ -59,9 +57,9 @@ def resdepth_to_fft(residue, cutoff, mydict):
     if mydict[res][0] < cutoff:        # test on ResidueDepth
         return 1
     else:
-        return -1                
-    
+        return -1
+
 #delete_hetatm("2za4.pdb")
-dico_res = calculate_resdepth('clean_2za4.pdb')
+# dico_res = calculate_resdepth('clean_2za4.pdb')
 #bfactor_to_resdepth(dico_res)
-#resdepth_to_fft('D', 'SER', 89, 4, dico_res)				
+#resdepth_to_fft('D', 'SER', 89, 4, dico_res)
