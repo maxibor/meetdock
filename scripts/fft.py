@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-import math as mat
+import math
 
 
 def init_grid(N, mesh_size = 1):
@@ -42,7 +42,7 @@ def dist_cal(x1, y1, z1, x2, y2, z2):
         OUTPUT :
             dist(float)
     """
-    dist = mat.sqrt((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)
+    dist = math.sqrt((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)
     return(dist)
 
 def fill_grid(grid, coords, thresh):

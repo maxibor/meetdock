@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-
-from Bio.PDB.PDBParser import PDBParser
+from Bio.PDB import *
 import os
 
 def calculate_resdepth(structure, pdb_filename):
