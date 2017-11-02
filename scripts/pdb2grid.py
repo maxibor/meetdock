@@ -191,11 +191,12 @@ if __name__ == "__main__":
     data = pdb_fft(filename = filename, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff)
     receptor = data[0]
     ligand = data[1]
+    theComplex = pd.concat([receptor, ligand])
     # receptor
-    rec_grid_parameters=get_grid_parameters(x=receptor.iloc[:,0], y=receptor.iloc[:,1], z=receptor.iloc[:,2])
-    rec_coords = scale_coords(receptor, grid_parameters= rec_grid_parameters)
-    rec_mygrid = init_grid(N=rec_grid_parameters[0], mesh_size = resolution)
-    print(rec_grid_parameters)
+    grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
+    rec_coords = scale_coords(receptor, grid_parameters= grid_parameters)
+    rec_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
+    print(grid_parameters)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     ax.scatter(xs=rec_mygrid.iloc[:,0], ys=rec_mygrid.iloc[:,1], zs=rec_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
@@ -204,10 +205,10 @@ if __name__ == "__main__":
 
     #ligand
 
-    lig_grid_parameters=get_grid_parameters(x=ligand.iloc[:,0], y=ligand.iloc[:,1], z=ligand.iloc[:,2])
-    lig_coords = scale_coords(ligand, grid_parameters= lig_grid_parameters)
-    lig_mygrid = init_grid(N=lig_grid_parameters[0], mesh_size = resolution)
-    print(lig_grid_parameters)
+    grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
+    lig_coords = scale_coords(ligand, grid_parameters= grid_parameters)
+    lig_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
+    print(grid_parameters)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     ax.scatter(xs=lig_mygrid.iloc[:,0], ys=lig_mygrid.iloc[:,1], zs=lig_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
