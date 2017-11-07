@@ -54,9 +54,9 @@ def resdepth_to_fft(residue, cutoff, mydict):
            residue.get_id()[1]      # Position in chain
           )
     if mydict[res][0] < cutoff:        # test on ResidueDepth
-        return 1
+        return(1)
     else:
-        return -1
+        return(9j)
 
 #delete_hetatm("2za4.pdb")
 # dico_res = calculate_resdepth('clean_2za4.pdb')

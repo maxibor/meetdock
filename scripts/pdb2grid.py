@@ -4,9 +4,11 @@ from Bio.PDB.PDBParser import PDBParser
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
 import sys, math
-from fft import init_grid
+from fft import init_grid, fill_grid, fill_grid2
 import pdb_resdepth
 
 def read_pdb(filename):
@@ -67,28 +69,34 @@ def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff):
             if chain.get_id() == chainId :
                 for residue in chain:
                     if "GLY" in residue.get_resname():
-                        resdepth.append(pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict))
-                        resname.append(residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2])
+                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict)
+                        thisResname = residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2]
+
                         for atom in residue:
-                            if atom.get_name() == "CA":
-                                posx = atom.get_coord()[0]
-                                x.append(posx)
-                                posy = atom.get_coord()[1]
-                                y.append(posy)
-                                posz = atom.get_coord()[2]
-                                z.append(posz)
+                            # if atom.get_name() == "CA":
+                            posx = int(atom.get_coord()[0])
+                            x.append(posx)
+                            posy = int(atom.get_coord()[1])
+                            y.append(posy)
+                            posz = int(atom.get_coord()[2])
+                            z.append(posz)
+                            resdepth.append(thisDepth)
+                            resname.append(thisResname)
 
                     elif residue.get_resname() in amino:
-                        resdepth.append(pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict))
-                        resname.append(residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2])
+                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict)
+                        thisResname = residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2]
+
                         for atom in residue:
-                            if atom.get_name() == "CB":
-                                posx = atom.get_coord()[0]
-                                x.append(posx)
-                                posy = atom.get_coord()[1]
-                                y.append(posy)
-                                posz = atom.get_coord()[2]
-                                z.append(posz)
+                            # if atom.get_name() == "CB":
+                            posx = int(atom.get_coord()[0])
+                            x.append(posx)
+                            posy = int(atom.get_coord()[1])
+                            y.append(posy)
+                            posz = int(atom.get_coord()[2])
+                            z.append(posz)
+                            resdepth.append(thisDepth)
+                            resname.append(thisResname)
 
     df = pd.DataFrame(x, columns = ["x"], index = resname)
     df["y"] = y
@@ -174,12 +182,77 @@ def scale_coords(df, grid_parameters, margin = 5):
                           0+margin, grid_parameters[0] - margin])
     df.iloc[:,2] = np.interp(df.iloc[:,2], [grid_parameters[1], grid_parameters[2]], [
                           0+margin, grid_parameters[0] - margin])
+    df["x"] = df["x"].map(int)
+    df["y"] = df["y"].map(int)
+    df["z"] = df["z"].map(int)
     return(df)
 
+def init_dict(L):
+    """
+        INITIALIZE A DICT OF KEYS (X,Y,Z) OF ZEROS OF LENGTH L
+        INPUT:
+            L(int) length of the grid of size L*L*L
+        OUPUT:
+            thisDict(dict) of keys (X,Y,Z) initialized at 0
 
+    """
+    thisDict = {}
+    for x in np.arange(0,L):
+        for y in np.arange(0,L):
+            for z in np.arange(0,L):
+                thisDict[(x,y,z)] = 0
+    return(thisDict)
+
+def coords_to_dict(coords):
+    """
+        TRANSFORMS COORDS TO DICT
+        INPUT:
+            coords(pd.dataframe) of columns (x,y,z, depth)
+        OUPUT:
+            thisDict(dict) of keys(X,Y,Z) of value depth
+    """
+    thisDict = {}
+    for i in range(0,len(coords.index)):
+        thisDict[(coords.iloc[i,0],coords.iloc[i,1],coords.iloc[i,2])] = coords.iloc[i,3]
+    return(thisDict)
+
+def match_dict(zero_dict, coord_dict):
+    """
+        FILL DICT FROM init_dict() WITH DEPTH VALUES
+        INPUT:
+            zero_dict(dict) of keys (X,Y,Z) initialized at 0
+            coord_dict(dict) of keys(X,Y,Z) of value depth
+        OUTPUT:
+            zero_dict(dict) of keys (X,Y,Z) of value depth
+    """
+    for akey in coord_dict.keys():
+        # print(akey)
+        zero_dict[akey] = coord_dict[akey]
+    return(zero_dict)
+
+def dict_to_mat(grid_dict):
+    """
+        TRANSFORM DICT FROM match_dict() FUNCTION TO NUMPY ARRAY
+        INPUT:
+            grid_dict(dict) of keys(X,Y,Z) of value depth
+        OUTPUT:
+            grid(np.array) of columns (x,y,z,depth)
+    """
+    x = []
+    y = []
+    z = []
+    resloc = []
+
+    for key in coord_dict.keys():
+        x.append(key[0])
+        y.append(key[1])
+        z.append(key[2])
+        resloc.append(coord_dict[key])
+    grid = np.array((x, y, z, resloc), dtype=complex)
+    return(grid)
 
 if __name__ == "__main__":
-    resolution = 9.2
+    resolution = 5
     depthCutoff = 4
     recepChain = ["A","B"]
     ligChain = ["C","D"]
@@ -194,23 +267,33 @@ if __name__ == "__main__":
     theComplex = pd.concat([receptor, ligand])
     # receptor
     grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
-    rec_coords = scale_coords(receptor, grid_parameters= grid_parameters)
-    rec_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
-    print(grid_parameters)
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.scatter(xs=rec_mygrid.iloc[:,0], ys=rec_mygrid.iloc[:,1], zs=rec_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
-    ax.scatter(xs=rec_coords.iloc[:,0], ys=rec_coords.iloc[:,1], zs=rec_coords.iloc[:,2], c = "red")
-    plt.show()
+    rec_coords = scale_coords(receptor, grid_parameters= grid_parameters, margin = resolution)
+    zero_dict = init_dict(L=grid_parameters[0])
+    coord_dict = coords_to_dict(rec_coords)
+    grid_dict = match_dict(zero_dict=zero_dict, coord_dict=coord_dict)
+    rec_grid = dict_to_mat(grid_dict=grid_dict)
+
+
+
+    # print(grid_parameters)
+    # cmap = cm.get_cmap(name='bwr')
+    # colors = ['white','green','red']
+    # fig = plt.figure()
+    # ax = fig.gca(projection='3d')
+    # ax.scatter(xs=rec_grid.iloc[:,0], ys=rec_grid.iloc[:,1], zs=rec_grid.iloc[:,2], color = cmap(rec_grid.iloc[:,3]), alpha = resolution/100)
+    # ax.scatter(xs=rec_grid.iloc[:,0], ys=rec_grid.iloc[:,1], zs=rec_grid.iloc[:,2], cmap = matplotlib.colors.ListedColormap(colors), alpha = resolution/100)
+
+    # ax.scatter(xs=rec_coords.iloc[:,0], ys=rec_coords.iloc[:,1], zs=rec_coords.iloc[:,2], c = "red")
+    # plt.show()
 
     #ligand
 
-    grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
-    lig_coords = scale_coords(ligand, grid_parameters= grid_parameters)
-    lig_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
-    print(grid_parameters)
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.scatter(xs=lig_mygrid.iloc[:,0], ys=lig_mygrid.iloc[:,1], zs=lig_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
-    ax.scatter(xs=lig_coords.iloc[:,0], ys=lig_coords.iloc[:,1], zs=lig_coords.iloc[:,2], c = "green")
-    plt.show()
+    # grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
+    # lig_coords = scale_coords(ligand, grid_parameters= grid_parameters)
+    # lig_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
+    # print(grid_parameters)
+    # fig = plt.figure()
+    # ax = fig.gca(projection='3d')
+    # ax.scatter(xs=lig_mygrid.iloc[:,0], ys=lig_mygrid.iloc[:,1], zs=lig_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
+    # ax.scatter(xs=lig_coords.iloc[:,0], ys=lig_coords.iloc[:,1], zs=lig_coords.iloc[:,2], c = "green")
+    # plt.show()
