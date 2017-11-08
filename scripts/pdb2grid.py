@@ -7,9 +7,11 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
+from collections import OrderedDict
 import sys, math
-from fft import init_grid, fill_grid, fill_grid2
+from fft import init_grid, fill_grid, fill_grid2, make_fft
 import pdb_resdepth
+
 
 def read_pdb(filename):
     """
@@ -112,7 +114,7 @@ def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff):
 
 
 
-def pdb_fft(filename, recepChain, ligChain, depth_dict, depthCutoff):
+def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff):
     """
         READs PDB FILE AND COMPUTES RESIDUE POSITIONS AND DEPTH
         INPUT :
@@ -129,9 +131,6 @@ def pdb_fft(filename, recepChain, ligChain, depth_dict, depthCutoff):
                 z(list) z position of residues (CA or CB)
                 resdepth(list) residue depth, 1 if at surface, else -1
     """
-
-
-    structure = read_pdb(filename=filename)
     receptor = []
     ligand = []
     for model in structure:
@@ -196,7 +195,7 @@ def init_dict(L):
             thisDict(dict) of keys (X,Y,Z) initialized at 0
 
     """
-    thisDict = {}
+    thisDict = OrderedDict()
     for x in np.arange(0,L):
         for y in np.arange(0,L):
             for z in np.arange(0,L):
@@ -230,7 +229,7 @@ def match_dict(zero_dict, coord_dict):
         zero_dict[akey] = coord_dict[akey]
     return(zero_dict)
 
-def dict_to_mat(grid_dict):
+def dict_to_mat(grid_dict, L):
     """
         TRANSFORM DICT FROM match_dict() FUNCTION TO NUMPY ARRAY
         INPUT:
@@ -242,13 +241,9 @@ def dict_to_mat(grid_dict):
     y = []
     z = []
     resloc = []
-
-    for key in coord_dict.keys():
-        x.append(key[0])
-        y.append(key[1])
-        z.append(key[2])
-        resloc.append(coord_dict[key])
-    grid = np.array((x, y, z, resloc), dtype=complex)
+    grid = np.zeros((L,L,L), dtype=complex)
+    for key in grid_dict.keys():
+        grid[key[0]][key[1]][key[2]] = grid_dict[key]
     return(grid)
 
 if __name__ == "__main__":
@@ -261,17 +256,34 @@ if __name__ == "__main__":
     pdb_structure = read_pdb(filename)
     depth_dict = pdb_resdepth.calculate_resdepth(structure=pdb_structure, pdb_filename=filename)
 
-    data = pdb_fft(filename = filename, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff)
+    data = pdb_fft(structure=pdb_structure, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff)
     receptor = data[0]
     ligand = data[1]
     theComplex = pd.concat([receptor, ligand])
     # receptor
     grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
+
     rec_coords = scale_coords(receptor, grid_parameters= grid_parameters, margin = resolution)
+    lig_coords = scale_coords(ligand, grid_parameters= grid_parameters, margin = resolution)
+
     zero_dict = init_dict(L=grid_parameters[0])
-    coord_dict = coords_to_dict(rec_coords)
-    grid_dict = match_dict(zero_dict=zero_dict, coord_dict=coord_dict)
-    rec_grid = dict_to_mat(grid_dict=grid_dict)
+
+    rec_dict = coords_to_dict(rec_coords)
+    lig_dict = coords_to_dict(lig_coords)
+
+    rec_grid_dict = match_dict(zero_dict=zero_dict, coord_dict=rec_dict)
+    lig_grid_dict = match_dict(zero_dict=zero_dict, coord_dict=lig_dict)
+
+
+    rec_grid = dict_to_mat(grid_dict=rec_grid_dict, L=grid_parameters[0])
+    # df = pd.Dataframe, rec_grid
+    lig_grid = dict_to_mat(grid_dict=lig_grid_dict, L=grid_parameters[0])
+    # print(grid_parameters[0][1][0])
+    # print(lig_grid)
+    print("computing FFT")
+    score_matrix = make_fft(rec_grid=rec_grid, lig_grid=lig_grid, L=grid_parameters[0])
+    print(score_matrix)
+    # print(score_matrix.shape)
 
 
 
