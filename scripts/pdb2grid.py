@@ -186,7 +186,7 @@ def scale_coords(df, grid_parameters, margin = 5):
     df["z"] = df["z"].map(int)
     return(df)
 
-def init_dict(L):
+def init_dict(L, resolution):
     """
         INITIALIZE A DICT OF KEYS (X,Y,Z) OF ZEROS OF LENGTH L
         INPUT:
@@ -196,9 +196,9 @@ def init_dict(L):
 
     """
     thisDict = OrderedDict()
-    for x in np.arange(0,L):
-        for y in np.arange(0,L):
-            for z in np.arange(0,L):
+    for x in xrange(0,L, resolution):
+        for y in xrange(0,L, resolution):
+            for z in xrange(0,L, resolution):
                 thisDict[(x,y,z)] = 0
     return(thisDict)
 
@@ -247,7 +247,7 @@ def dict_to_mat(grid_dict, L):
     return(grid)
 
 if __name__ == "__main__":
-    resolution = 5
+    resolution = 1
     depthCutoff = 4
     recepChain = ["A","B"]
     ligChain = ["C","D"]
@@ -260,13 +260,12 @@ if __name__ == "__main__":
     receptor = data[0]
     ligand = data[1]
     theComplex = pd.concat([receptor, ligand])
-    # receptor
     grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
 
     rec_coords = scale_coords(receptor, grid_parameters= grid_parameters, margin = resolution)
     lig_coords = scale_coords(ligand, grid_parameters= grid_parameters, margin = resolution)
 
-    zero_dict = init_dict(L=grid_parameters[0])
+    zero_dict = init_dict(L=grid_parameters[0], resolution= resolution)
 
     rec_dict = coords_to_dict(rec_coords)
     lig_dict = coords_to_dict(lig_coords)
@@ -276,36 +275,8 @@ if __name__ == "__main__":
 
 
     rec_grid = dict_to_mat(grid_dict=rec_grid_dict, L=grid_parameters[0])
-    # df = pd.Dataframe, rec_grid
     lig_grid = dict_to_mat(grid_dict=lig_grid_dict, L=grid_parameters[0])
-    # print(grid_parameters[0][1][0])
-    # print(lig_grid)
+
     print("computing FFT")
     score_matrix = make_fft(rec_grid=rec_grid, lig_grid=lig_grid, L=grid_parameters[0])
     print(score_matrix)
-    # print(score_matrix.shape)
-
-
-
-    # print(grid_parameters)
-    # cmap = cm.get_cmap(name='bwr')
-    # colors = ['white','green','red']
-    # fig = plt.figure()
-    # ax = fig.gca(projection='3d')
-    # ax.scatter(xs=rec_grid.iloc[:,0], ys=rec_grid.iloc[:,1], zs=rec_grid.iloc[:,2], color = cmap(rec_grid.iloc[:,3]), alpha = resolution/100)
-    # ax.scatter(xs=rec_grid.iloc[:,0], ys=rec_grid.iloc[:,1], zs=rec_grid.iloc[:,2], cmap = matplotlib.colors.ListedColormap(colors), alpha = resolution/100)
-
-    # ax.scatter(xs=rec_coords.iloc[:,0], ys=rec_coords.iloc[:,1], zs=rec_coords.iloc[:,2], c = "red")
-    # plt.show()
-
-    #ligand
-
-    # grid_parameters=get_grid_parameters(x=theComplex.iloc[:,0], y=theComplex.iloc[:,1], z=theComplex.iloc[:,2])
-    # lig_coords = scale_coords(ligand, grid_parameters= grid_parameters)
-    # lig_mygrid = init_grid(N=grid_parameters[0], mesh_size = resolution)
-    # print(grid_parameters)
-    # fig = plt.figure()
-    # ax = fig.gca(projection='3d')
-    # ax.scatter(xs=lig_mygrid.iloc[:,0], ys=lig_mygrid.iloc[:,1], zs=lig_mygrid.iloc[:,2], c = "blue", alpha = resolution/100)
-    # ax.scatter(xs=lig_coords.iloc[:,0], ys=lig_coords.iloc[:,1], zs=lig_coords.iloc[:,2], c = "green")
-    # plt.show()
