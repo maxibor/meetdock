@@ -196,9 +196,9 @@ def init_dict(L, resolution):
 
     """
     thisDict = OrderedDict()
-    for x in xrange(0,L, resolution):
-        for y in xrange(0,L, resolution):
-            for z in xrange(0,L, resolution):
+    for x in range(0,L, resolution):
+        for y in range(0,L, resolution):
+            for z in range(0,L, resolution):
                 thisDict[(x,y,z)] = 0
     return(thisDict)
 
