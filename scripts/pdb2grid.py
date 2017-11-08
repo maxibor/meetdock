@@ -9,7 +9,7 @@ import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
 from collections import OrderedDict
 import sys, math
-from fft import init_grid, fill_grid, fill_grid2, make_fft
+from fft import make_fft
 import pdb_resdepth
 
 
@@ -200,6 +200,9 @@ def init_dict(L, resolution):
         for y in range(0,L, resolution):
             for z in range(0,L, resolution):
                 thisDict[(x,y,z)] = 0
+    print("L")
+    print(len(thisDict.keys()))
+    # print(thisDict.keys())
     return(thisDict)
 
 def coords_to_dict(coords):
@@ -210,9 +213,9 @@ def coords_to_dict(coords):
         OUPUT:
             thisDict(dict) of keys(X,Y,Z) of value depth
     """
-    thisDict = {}
+    thisDict = OrderedDict()
     for i in range(0,len(coords.index)):
-        thisDict[(coords.iloc[i,0],coords.iloc[i,1],coords.iloc[i,2])] = coords.iloc[i,3]
+        thisDict[(int(coords.iloc[i,0]),int(coords.iloc[i,1]),int(coords.iloc[i,2]))] = coords.iloc[i,3]
     return(thisDict)
 
 def match_dict(zero_dict, coord_dict):
@@ -225,8 +228,9 @@ def match_dict(zero_dict, coord_dict):
             zero_dict(dict) of keys (X,Y,Z) of value depth
     """
     for akey in coord_dict.keys():
+        if akey in zero_dict.keys():
         # print(akey)
-        zero_dict[akey] = coord_dict[akey]
+            zero_dict[akey] = coord_dict[akey]
     return(zero_dict)
 
 def dict_to_mat(grid_dict, L):
@@ -237,17 +241,18 @@ def dict_to_mat(grid_dict, L):
         OUTPUT:
             grid(np.array) of columns (x,y,z,depth)
     """
-    x = []
-    y = []
-    z = []
     resloc = []
-    grid = np.zeros((L,L,L), dtype=complex)
+    msize = math.ceil(L/resolution)+1
+    grid = np.zeros((msize,msize,msize), dtype=complex)
     for key in grid_dict.keys():
-        grid[key[0]][key[1]][key[2]] = grid_dict[key]
+        x = int(key[0]/resolution)
+        y = int(key[1]/resolution)
+        z = int(key[2]/resolution)
+        grid[x][y][z] = grid_dict[key]
     return(grid)
 
 if __name__ == "__main__":
-    resolution = 1
+    resolution = 2
     depthCutoff = 4
     recepChain = ["A","B"]
     ligChain = ["C","D"]
@@ -272,10 +277,13 @@ if __name__ == "__main__":
 
     rec_grid_dict = match_dict(zero_dict=zero_dict, coord_dict=rec_dict)
     lig_grid_dict = match_dict(zero_dict=zero_dict, coord_dict=lig_dict)
-
-
+    #
+    #
     rec_grid = dict_to_mat(grid_dict=rec_grid_dict, L=grid_parameters[0])
     lig_grid = dict_to_mat(grid_dict=lig_grid_dict, L=grid_parameters[0])
+
+    print(rec_grid.shape)
+    # print(rec_grid)
 
     print("computing FFT")
     score_matrix = make_fft(rec_grid=rec_grid, lig_grid=lig_grid, L=grid_parameters[0])
