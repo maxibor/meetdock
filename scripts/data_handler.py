@@ -11,7 +11,7 @@ import logging
 #import parsing
 
 logging.basicConfig(filename='datahandler.log',level=logging.DEBUG, format='%(asctime)s %(message)s')
-system.debug('Datahandler loading...')
+logging.debug('Datahandler loading...')
 
 #import script_francois
     # --> Needed to have so that we can use both methods that need splitted .pdb for ligand and receptor and methods that need a unified .pdb of the whole complexe
@@ -33,13 +33,31 @@ class DataHandlerObject:
 
 def get_default_samplings():
 
+    logging.debug("Beginning to get the default samplings")
     samplings = []
     
     base_path = os.getcwd()
     
-    os.chdir('./Data')
-    list_types_sampling = os.listdir()
+    logging.debug("Current directory is setted to"+str(base_path))
+    logging.debug("Moving to default Data Directory")
     
+    try:
+        os.chdir('./Data')
+        logging.debug("Moved successfully to Data directory")
+    except:
+        logging.critical("Failed to move to default data directory ! Fatal error")
+        exit(-1)
+    
+    logging.debug("Listing the different types of samplings")
+    try:
+        list_types_sampling = os.listdir()
+        logging.debug("Listing succeeded: Here is the list")
+        logging.debug(str(list_types_sampling))
+        logging.debug("PLease check that this list is correct !")
+    except:
+        logging.critical("Could not list the directories. Process failed. Exit, returning -1")
+        exit(-1)
+        
     for type_sampling in list_types_sampling:
 
         os.chdir('./'+str(type_sampling)+"/sampling/")
@@ -50,7 +68,7 @@ def get_default_samplings():
 
             sampling = {} 
             
-            sampling['sampling_path']= './Data/'+str(type_sampling)+"/sampling/"+str(name_sampling))
+            sampling['sampling_path']= './Data/'+str(type_sampling)+"/sampling/"+str(name_sampling)
             sampling['receptor_path'] = './Data/'+str(type_sampling)+"/structures_natives"
             sampling['ligand_path'] = './Data/'+str(type_sampling)+"/structures_natives"
         
@@ -74,13 +92,16 @@ def get_default_samplings():
     return samplings
         
 def default_fft():
-    system.debug("Applying default FFT")
+    logging.debug("...Applying default FFT")
+    logging.debug("FFT done")
     
 def default_rmsd():
-    system.debug("Applying default RMSD")
+    logging.debug("...Applying default RMSD")
+    logging.debug("RMSD done")
 
 def default_foldx():
-    system.debug("Applying default foldx")        
+    logging.debug("...Applying default foldx")
+    logging.debug("foldx done")        
             
 #**********************************************************#           
 
@@ -95,26 +116,38 @@ class Dataset(DataHandlerObject):
         #Same, but for storing the intermediate files
     resultats = None 
     
-    def __init__(self, DataPath = "DEFAself.methods_lists = [default_fft, default_rmsd, default_foldx]ULT", sampling_list ="DEFAULT", outputref='DEFAULT', temp_list='DEFAULT', List_methods='DEFAULT', Translator = None, clean_temp = True, clean_resultats = True):
+    def __init__(self, DataPath = "DEFAULT", methods_lists = "DEFAULT", sampling_list ="DEFAULT", outputref='DEFAULT', temp_list='DEFAULT', List_methods='DEFAULT', Translator = None, clean_temp = True, clean_resultats = True):
     #For now only default behaviour is implemented
-        if DataPath == "DEFAULT" and sampling_list == "DEFAULT" and outputref == 'DEFAULT' and temp_list == 'DEFAULT' and list_methods == 'DEFAULT' and Translator == None and clean_temp == True and clean_resultats == True:
+        if DataPath == "DEFAULT" and sampling_list == "DEFAULT" and outputref == 'DEFAULT' and temp_list == 'DEFAULT' and List_methods == 'DEFAULT' and Translator == None and clean_temp == True and clean_resultats == True:
+        
+            logging.debug("Creating a default dataset")
         
             try:
                 self.sampling_list = get_default_samplings()
                 self.output_diretory = './output/'
                 self.temp_rep = './temp'
-                system.debug('Getting default samplings succeeded')
+                logging.debug('Getting default samplings succeeded, as follows:')
+                
+                for sampling in self.sampling_list:
+                    for attrib in self.sapling_list[str(sampling)]:
+                        logging.debug(str(attrib))
+                
+                logging.debug('Methods are loaded for default usage, as follow:')        
                 self.methods_list = [default_fft, default_rmsd, default_foldx]
+                for elt in self.methods_list:
+                    logging.debug(elt)
+                    
             except:
-                system.error('Couldn\'t get the default samplings')
+                logging.error('Couldn\'t get the default samplings')
             
                                            
         else:
-            system.critical('Getting other samplings than default hasn\'t been implemented yet')
+            logging.critical('Getting other samplings than default hasn\'t been implemented yet')
             print('Getting other samplings than default ones hasn\'t been implemented yet')
 
     def apply_default_methods(self):
         for elt in self.methods_list:
+            logging.debug('Calling the function '+str(elt))
             elt()
             
  
