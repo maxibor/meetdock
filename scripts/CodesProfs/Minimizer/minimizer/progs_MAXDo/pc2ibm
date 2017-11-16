@@ -1,0 +1,24 @@
+mv particles.f90 particles.f
+mv format_declaration.f90 format_declaration.f
+mv random.f90 random.f
+mv run_parameter.f90 run_parameter.f
+mv compute_distance.f90 compute_distance.f
+mv korobov.f90 korobov.f
+mv microb.f90 microb.f
+mv proteins.f90 proteins.f
+mv constrain.f90 constrain.f
+mv zacharias.f90 zacharias.f
+mv lj_red.f90 lj_red.f
+mv born.f90 born.f
+mv springs.f90 springs.f
+mv energa.f90 energa.f
+mv cl_mc11a.f90 cl_mc11a.f
+mv cl_minfor.f90 cl_minfor.f
+mv getmin.f90 getmin.f
+mv mapping.f90 mapping.f
+mv simulmain.f90 simulmain.f
+
+rm *.f90~
+
+make -f Makefile.AIX clean
+
