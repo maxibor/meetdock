@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#Paula
+
 import pdb2grid as pdbg
 import pdb_resdepth as resd
 import re
@@ -67,9 +69,10 @@ def get_coord(aa, pdb):
     return  
 
 ###### MAIN ########
+if __name__ == '__main__': #I added this line so that your code can be imported in other modules (Guillaume) <3
 
-structure = pdbg.read_pdb("1a2k.pdb")
-depth = resd.calculate_resdepth(structure, "1a2k.pdb")
-dist_matrix = calc_distance_matrix("1a2k.pdb", depth, ["A", "B"],["C", "D", "E"])
+    structure = pdbg.read_pdb("1a2k.pdb")
+    depth = resd.calculate_resdepth(structure, "1a2k.pdb")
+    dist_matrix = calc_distance_matrix("1a2k.pdb", depth, ["A", "B"],["C", "D", "E"])
 
 
