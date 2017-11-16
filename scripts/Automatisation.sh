@@ -14,4 +14,4 @@ cd '../Outputs/foldx_analysis'
 ls *.fxout > ../Noms.txt
 
 cd '../../'
-python3 parcing.py
+python3 parsing.py
