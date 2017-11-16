@@ -63,8 +63,10 @@ def parse_foldx_output(filename):
             print("Erreur:"+str(ligne))    
     return output_dict
     
-filename = "test.dat"
+if __name__ == '__main__':    
 
-dict_sortie = parse_foldx_output(filename)
-for cle in dict_sortie.keys():
-    print(cle, dict_sortie[cle])
+    filename = "test.dat"
+
+    dict_sortie = parse_foldx_output(filename)
+    for cle in dict_sortie.keys():
+        print(cle, dict_sortie[cle])
