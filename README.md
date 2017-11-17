@@ -35,6 +35,12 @@ The environment file is available here as [environment.yml](./environment.yml).
 
 `source activate meetu`
 
+## Usage
+
+```
+TODO
+```
+
 ## Documentation
 
 TODO
