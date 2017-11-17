@@ -8,7 +8,7 @@ from numpy.fft import *
 
 def make_fft(rec_grid, lig_grid):
     L = rec_grid.shape[0]
-    tmp = ((1/L**3) *ifftn(np.matmul(ifftn(rec_grid),fftn(lig_grid))))
+    tmp = ((1/L**3) * ifftn(np.matmul(np.conjugate(fftn(rec_grid)),fftn(lig_grid))))
     # tmp = ((1/L**3) *ifftn(np.dot(ifftn(rec_grid),fftn(lig_grid))))
     sc = tmp.real - tmp.imag
     sc = sc.sum()
