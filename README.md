@@ -1,6 +1,6 @@
 # 2017-2018_Equipe1 Scoring
 
-**Scoring method** developped by Guillaume Delevoye, François Gravey, Paula Milan Rodriguez, and Maxime Borry.
+**Scoring method for protein protein docking** developed by Guillaume Delevoye, François Gravey, Paula Milan Rodriguez, and Maxime Borry.
 
 ## Introduction
 
