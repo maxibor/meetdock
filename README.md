@@ -6,12 +6,10 @@
 
 This scoring method uses the following steps:
 
-- Fast Fourier Transform for filtering on Shape complementarity and Steric clashes
-
-<img src="./images/fft.png" width="300"/>
-
-- Knowledge based scoring on amino-acids interactions
+- Checking for shape complementarity and steric clashes.
+- Knowledge based scoring on amino-acids interactions.
 - Electrostatic and Van der Waals interactions scoring.
+- Adjusting the weights of the different scoring functions by machine learning.
 
 ## Quick start
 
