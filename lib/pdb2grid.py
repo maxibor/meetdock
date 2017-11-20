@@ -134,11 +134,6 @@ def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff, resScale):
 
 
 
-
-
-
-
-
 def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff, resScale):
     """
         READs PDB FILE AND COMPUTES RESIDUE POSITIONS AND DEPTH
