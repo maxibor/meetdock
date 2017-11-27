@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
-#Paula
-
 import pdb2grid as pdbg
 import pdb_resdepth as resd
 import re
 import math
+from Bio.PDB.PDBParser import PDBParser
 
-
-def calc_distance_matrix(pdb, depth, chain_R, chain_L):
+def calc_distance_matrix(structure, depth, chain_R, chain_L):
 
     ''' Creation of a distance matrix which contais 
         the couples of residues that interacts in de complex 
@@ -23,12 +21,12 @@ def calc_distance_matrix(pdb, depth, chain_R, chain_L):
     for key,val in depth.items():
         if val[0] <= 4:            
             if key[0] in chain_R:
-                coord = get_coord(key, pdb)
-                if coord != None:
+                coord = struct_coord(key, structure)
+                if type(coord) != str:
                     recepteur[key] = coord
             else:
-                coord = get_coord(key, pdb)
-                if coord != None:
+                coord = struct_coord(key, structure)
+                if type(coord) != str:
                     ligand[key] = coord
 
     #Calculating distances
@@ -38,41 +36,33 @@ def calc_distance_matrix(pdb, depth, chain_R, chain_L):
             if dist <= 8.6:
                 pair = (rkey, lkey)
                 interactions[pair] = dist      
-    
+    print(interactions)
     return interactions
 
 
-def get_coord(aa, pdb):
+def struct_coord(aa, structure):
 
-    ''' Parse a PDB file to get the atoms coordinates
+    ''' Searching one atom coordinates
+
     '''
-
-    file_ = open(pdb)
     chain = aa[0]
     code= aa[1]
     position = aa[2]
     coord = None
-    
-    if code == "GLY":
-        for line in file_:
-            res = re.match(r'ATOM.*CA.*'+code+'.*'+chain+'.*'+str(position)+'.*', line)
-            if res != None:
-                coord = [float(line[30:38].strip()),float(line[38:46].strip()),float(line[46:54].strip())]
-    else:
-        for line in file_:
-            res = re.match(r'ATOM.*CB.*'+code+'.*'+chain+'.*'+str(position)+'.*', line)
-            if res != None:
-                coord = [float(line[30:38].strip()),float(line[38:46].strip()),float(line[46:54].strip())]
-    file_.close()
-    if coord != None:
-        return coord
-    return  
+
+    if code == 'GLY':
+        atom = structure[0][chain][int(position)]['CA']
+
+        return atom.get_coord()
+    elif code in ['PRO','ALA','VAL','LEU','ILE','MET','CYS','PHE','TYR','TRP','HIS','LYS','ARG','GLN','ASN','GLU','ASP','SER','THR']:
+        atom = structure[0][chain][position]['CB']
+        return atom.get_coord()
+    return 'Error'
+ 
 
 ###### MAIN ########
-if __name__ == '__main__': #I added this line so that your code can be imported in other modules (Guillaume) <3
-
-    structure = pdbg.read_pdb("1a2k.pdb")
-    depth = resd.calculate_resdepth(structure, "1a2k.pdb")
-    dist_matrix = calc_distance_matrix("1a2k.pdb", depth, ["A", "B"],["C", "D", "E"])
+structure = pdbg.read_pdb("1a2k.pdb")
+depth = resd.calculate_resdepth(structure, "1a2k.pdb")
+dist_matrix = calc_distance_matrix(structure, depth, ["A", "B"],["C", "D", "E"])
 
 
