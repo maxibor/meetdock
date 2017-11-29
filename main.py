@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, "./lib/")
+
 import pdb2grid
 import pdb_resdepth
 import fft
@@ -41,3 +44,4 @@ def get_args():
 
 if __name__ == "__main__":
      # do something
+     pass
