@@ -59,10 +59,10 @@ def struct_coord(aa, structure):
         return atom.get_coord()
     return 'Error'
  
-
+if __name__=='__main__':
 ###### MAIN ########
-structure = pdbg.read_pdb("1a2k.pdb")
-depth = resd.calculate_resdepth(structure, "1a2k.pdb")
-dist_matrix = calc_distance_matrix(structure, depth, ["A", "B"],["C", "D", "E"])
+    structure = pdbg.read_pdb("1a2k.pdb")
+    depth = resd.calculate_resdepth(structure, "1a2k.pdb")
+    dist_matrix = calc_distance_matrix(structure, depth, ["A", "B"],["C", "D", "E"])
 
 
