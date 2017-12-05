@@ -58,7 +58,8 @@ def resdepth_to_fft(residue, cutoff, mydict):
     else:
         return(9j)
 
-#delete_hetatm("2za4.pdb")
-# dico_res = calculate_resdepth('clean_2za4.pdb')
-#bfactor_to_resdepth(dico_res)
-#resdepth_to_fft('D', 'SER', 89, 4, dico_res)
+if __name__=='__main__':
+    #delete_hetatm("2za4.pdb")
+    # dico_res = calculate_resdepth('clean_2za4.pdb')
+    #bfactor_to_resdepth(dico_res)
+    #resdepth_to_fft('D', 'SER', 89, 4, dico_res)
