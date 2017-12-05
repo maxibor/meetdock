@@ -4,6 +4,11 @@ from Bio.PDB import *
 import os
 
 def calculate_resdepth(structure, pdb_filename):
+    '''Takes as argument a structure object for parsing and a pdb file.
+        Returns a dictionnary containing a key (tuple) composed of the
+        chain, three letter code and position in chain of a given residue;
+        and its value which is the residue depth.
+    '''
     model = structure[0]
     rd = ResidueDepth(model, pdb_filename)
     mydict = {}
@@ -27,6 +32,13 @@ def calculate_resdepth(structure, pdb_filename):
     return mydict
 
 def bfactor_to_resdepth(mydict):
+    '''Takes as argument the dictionnary containing residue depth for
+       a given residue.
+       Edit the bfactor column of a pdb file which is replaced with
+       the residue depth of the corresponding residue (calculated in
+       the function calculate_resdepth.      
+    '''
+    
     with open('2za4.pdb', 'r') as input:
         with open('2za4_modified.pdb', 'w') as output:
             for line in input:
@@ -44,6 +56,9 @@ def bfactor_to_resdepth(mydict):
 
 
 def delete_hetatm(pdb_filename):
+    ''' Takes as argument a pdb file.
+        Removes HETATM lines.
+    '''
     command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
     os.system(command)
 
