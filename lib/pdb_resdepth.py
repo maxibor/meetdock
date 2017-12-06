@@ -4,11 +4,18 @@ from Bio.PDB import *
 import os
 
 def calculate_resdepth(structure, pdb_filename):
-    '''Takes as argument a structure object for parsing and a pdb file.
-        Returns a dictionnary containing a key (tuple) composed of the
-        chain, three letter code and position in chain of a given residue;
-        and its value which is the residue depth.
     '''
+        Computes the residue depth for a residue of a PDB from
+        Structure object.
+        INPUT:
+            structure(BioPython Structure object)
+            pdb_filename(str) PDB for which it calculates residue depth for each residue.
+        OUTPUT:
+            mydict(dict) that contains keys which are composed of the chain, three letter code
+            and position in chain (all in tuple) for a given residue. Values are comosed of the
+            residue depth calculated.
+    '''
+
     model = structure[0]
     rd = ResidueDepth(model, pdb_filename)
     mydict = {}
@@ -32,13 +39,17 @@ def calculate_resdepth(structure, pdb_filename):
     return mydict
 
 def bfactor_to_resdepth(mydict):
-    '''Takes as argument the dictionnary containing residue depth for
-       a given residue.
+    '''
        Edit the bfactor column of a pdb file which is replaced with
        the residue depth of the corresponding residue (calculated in
        the function calculate_resdepth.
+       INPUT:
+           mydict(dict) which contains a residue (chain, three letter code, position in chain - tuple format)
+           and its corresponding residue depth. 
+       OUTPUT:
+           
     '''
-
+    
     with open('2za4.pdb', 'r') as input:
         with open('2za4_modified.pdb', 'w') as output:
             for line in input:
