@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import pdb2grid as pdbg
+import pdbtools as pdbt
 import pdb_resdepth as resd
 import re
 import math
@@ -8,12 +8,24 @@ import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
 
-def calc_distance_matrix(structure, depth, chain_R, chain_L):
+def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
 
-    ''' Creation of a distance matrix which contais 
+    """ 
+        Creation of a distance dictionary which contains 
         the couples of residues that interacts in de complex 
 
-    '''
+        INPUT:
+               input1 (BioPDB Structure): Complex's structure
+               input2 (Dictionary): output of calculate_resdepth() function
+               input3 (List): Receptor's chains
+               input4 (List): Ligand's chains
+               input5 (Float): maximum distance between two residues to consider that they interact. Default value: 8.6 A
+                
+        OUPUT:
+               result(Dictionary): keys (List): Amino acid couples that interacts in the complex
+                                   values (int): distance between the two residues
+    """
+
    
     recepteur = {}
     ligand = {}
@@ -35,7 +47,7 @@ def calc_distance_matrix(structure, depth, chain_R, chain_L):
     for rkey, rval in recepteur.items():
         for lkey, lval in ligand.items():
             dist = math.sqrt(pow((rval[0]-lval[0]),2)+pow((rval[1]-lval[1]),2)+pow((rval[2]-lval[2]),2))
-            if dist <= 8.6:
+            if dist <= dist_max:
                 pair = (rkey, lkey)
                 interactions[pair] = dist      
     #print(interactions)
@@ -97,9 +109,16 @@ def parse_distance_mat(interaction, method):
 
 def struct_coord(aa, structure):
 
-    ''' Searching one atom coordinates
+    """ 
+        Searching one atom coordinates
+  
+        INPUT:
+               input1(List): information for one residue
+               input2 (BioPDB Structure): Complex's structure
+        OUPUT:
+               result(List): atom coordinates
+    """
 
-    '''
     chain = aa[0]
     code= aa[1]
     position = aa[2]
@@ -116,9 +135,8 @@ def struct_coord(aa, structure):
  
 if __name__=='__main__':
     
-    structure = pdbg.read_pdb("2za4_modified.pdb")
+    structure = pdbt.read_pdb("2za4_modified.pdb")
     depth = resd.calculate_resdepth(structure, "2za4_modified.pdb")
     dist_matrix = calc_distance_matrix(structure, depth, ["A"],["B"])
     parse_distance_mat(dist_matrix, ['glaser', 'pons_surf'])
-
 
