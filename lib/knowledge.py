@@ -53,9 +53,9 @@ def parse_distance_mat(interaction, method):
                     score = mat[dico[resiRec]][dico[resiLig]]
                     score_tot = score_tot + score
                     #output.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(resiRec,
-                        chainRec, num_resiRec, resiLig, chainLig, num_resiLig))
+                    # chainRec, num_resiRec, resiLig, chainLig, num_resiLig))
                 #output.write('Total statistical potential : {}\n'.format(score_tot))
                 #output.close()
-            return score_tot
             else:
                sys.exit("Enter a valid method")
+        return(score_tot)

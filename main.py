@@ -10,37 +10,66 @@ import argparse
 def get_args():
     '''This function parses and return arguments passed in'''
     parser = argparse.ArgumentParser(
-        prog='protDocker',
-        description='Docks two protein')
-    parser.add_argument('file', help=".pdb entry file")
+        prog='MeetDockOne',
+        description='MeetDockOne scores a protein complex docking',
+        version=0.9)
+    parser.add_argument('file', help=".pdb complex file")
     parser.add_argument(
-        '-argument1',
+        '-shape',
         action="store_true",
-        help="what argument1 does")
+        help="compute shape complementarity")
     parser.add_argument(
-        '-argument2',
+        '-electro',
         action="store_true",
-        help="what argument2 does")
+        help="compute Electrostatic interactions")
+
     parser.add_argument(
-        '-argument3',
-        default=0,
+        '-jones',
+        action="store_true",
+        help="compute Lennard-Jones interactions")
+
+    parser.add_argument(
+        '-proba',
+        action="store_true",
+        help="Compute knowledge based interactions")
+
+    parser.add_argument(
+        '-foldx',
+        action="store_true",
+        help="Scores with FoldX")
+
+    parser.add_argument(
+        '-pH',
+        default=7,
         type=int,
-        help="non binary argument description")
+        help="pH for electrostatic interactions. Default = 7")
+
     parser.add_argument(
-        '-argument4',
-        default=5.0,
+        '-depth',
+        default=4,
         type=float,
-        help="non binary argument description")
+        help="Threshold for surface residue determination (Angstrom). Default = 4")
+
+    parser.add_argument(
+        '-dist',
+        default=8.5,
+        type=float,
+        help="Threshold for interface determination (Angstrom). Default = 8.5")
     args = parser.parse_args()
 
     myfile = args.file
-    arg1 = args.argument1
-    arg2 = args.argument2
-    arg3 = args.argument3
-    arg4 = args.argument4
+    shape = shape
+    electro = args.electro
+    jones = args.jones
+    proba = args.proba
+    foldx = args.foldx
+    pH = args.pH
+    depth = args.depth
+    dist = args.dist
 
 
-    return(myfile, arg1, arg2, arg3, arg4)
+
+    return(myfile, shape, electro, jones, proba, foldx, pH, depth, dist)
 
 if __name__ == "__main__":
      # do something
