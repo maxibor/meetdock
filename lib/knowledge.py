@@ -44,17 +44,18 @@ def parse_distance_mat(interaction, method):
         for m in method:
             if m in ['glaser', 'mezei', 'pons', 'pons_surf', 'cips']:
                 mat = get_matrix_aa_propensions(m)
-                output_filename = 'score_'+m+'.txt'
-                output = open(output_filename, 'a')
+                #output_filename = 'score_'+m+'.txt'
+                #output = open(output_filename, 'a')
                 score_tot = 0
                 for inter in interaction:
                     chainRec, resiRec, num_resiRec = inter[0]
                     chainLig, resiLig, num_resiLig = inter[1]
                     score = mat[dico[resiRec]][dico[resiLig]]
                     score_tot = score_tot + score
-                    output.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(resiRec,
+                    #output.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(resiRec,
                         chainRec, num_resiRec, resiLig, chainLig, num_resiLig))
-                output.write('Total statistical potential : {}\n'.format(score_tot))
-                output.close()
+                #output.write('Total statistical potential : {}\n'.format(score_tot))
+                #output.close()
+            return score_tot
             else:
                sys.exit("Enter a valid method")
