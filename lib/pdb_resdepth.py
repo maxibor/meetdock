@@ -40,14 +40,13 @@ def calculate_resdepth(structure, pdb_filename):
 
 def bfactor_to_resdepth(mydict):
     '''
+       This function is a procedure.
        Edit the bfactor column of a pdb file which is replaced with
        the residue depth of the corresponding residue (calculated in
        the function calculate_resdepth.
        INPUT:
            mydict(dict) which contains a residue (chain, three letter code, position in chain - tuple format)
            and its corresponding residue depth. 
-       OUTPUT:
-           
     '''
     
     with open('2za4.pdb', 'r') as input:
@@ -67,8 +66,11 @@ def bfactor_to_resdepth(mydict):
 
 
 def delete_hetatm(pdb_filename):
-    ''' Takes as argument a pdb file.
+    ''' This function is a procedure.
         Removes HETATM lines.
+        INPUT:
+            pdb_filename(str) PDB file for which HETATM lines 
+            (water molecules) need to be removed.
     '''
     command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
     os.system(command)
