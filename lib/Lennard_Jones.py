@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import pdb2grid as pdbg
+import pdbtools as pdbt
 import pdb_resdepth as resd
 import matrice_distances as distm
 
@@ -9,7 +9,7 @@ import matrice_distances as distm
 
 def lennard_jones(dist_matrix, sigma=3.9, epsilon=10):
 
-    ''' 
+    '''
         Calculating Lennard-Jones potential
 
         INPUT:
@@ -29,7 +29,7 @@ def lennard_jones(dist_matrix, sigma=3.9, epsilon=10):
         energy += part_energy
 
     return energy
-        
+
 
 if __name__ == "__main__":
 
