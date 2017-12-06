@@ -1,19 +1,13 @@
-import sys
-sys.path.insert(0, "./lib/")
-
-import pdb2grid
-import pdb_resdepth
-import fft
-import electrostatic
-import argparse
+#!/usr/bin/env python3
+import sys, argparse
+from lib import electrostatic
 
 def get_args():
     '''This function parses and return arguments passed in'''
     parser = argparse.ArgumentParser(
         prog='MeetDockOne',
-        description='MeetDockOne scores a protein complex docking',
-        version=0.9)
-    parser.add_argument('file', help=".pdb complex file")
+        description='MeetDockOne scores a protein complex docking')
+    parser.add_argument('pdbfile', help=".pdb complex file")
     parser.add_argument(
         '-shape',
         action="store_true",
@@ -57,7 +51,7 @@ def get_args():
         help="Threshold for interface determination (Angstrom). Default = 8.5")
     args = parser.parse_args()
 
-    myfile = args.file
+    myfile = args.pdbfile
     shape = shape
     electro = args.electro
     jones = args.jones
@@ -73,4 +67,5 @@ def get_args():
 
 if __name__ == "__main__":
      # do something
-     pass
+     myfile, shape, electro, jones, proba, foldx, pH, depth, dist = get_args()
+     print("hello")

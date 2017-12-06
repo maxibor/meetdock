@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import pdbtools as pdbt
-import pdb_resdepth as resd
+from lib import pdbtools as pdbt
+from lib import pdb_resdepth as resd
 import re
 import math
 import sys
@@ -10,9 +10,9 @@ from Bio.PDB.PDBParser import PDBParser
 
 def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
 
-    """ 
-        Creation of a distance dictionary which contains 
-        the couples of residues that interacts in de complex 
+    """
+        Creation of a distance dictionary which contains
+        the couples of residues that interacts in de complex
 
         INPUT:
                input1 (BioPDB Structure): Complex's structure
@@ -20,20 +20,20 @@ def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
                input3 (List): Receptor's chains
                input4 (List): Ligand's chains
                input5 (Float): maximum distance between two residues to consider that they interact. Default value: 8.6 A
-                
+
         OUPUT:
                result(Dictionary): keys (List): Amino acid couples that interacts in the complex
                                    values (int): distance between the two residues
     """
 
-   
+
     recepteur = {}
     ligand = {}
     interactions = {}
 
-    # Searching for surface residues 
+    # Searching for surface residues
     for key,val in depth.items():
-        if val[0] <= 4:            
+        if val[0] <= 4:
             if key[0] in chain_R:
                 coord = struct_coord(key, structure)
                 if type(coord) != str:
@@ -49,17 +49,17 @@ def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
             dist = math.sqrt(pow((rval[0]-lval[0]),2)+pow((rval[1]-lval[1]),2)+pow((rval[2]-lval[2]),2))
             if dist <= dist_max:
                 pair = (rkey, lkey)
-                interactions[pair] = dist      
+                interactions[pair] = dist
     #print(interactions)
-    
+
     return interactions
 
 def get_matrix_aa_propensions(method):
-    ''' Reads a file containing the propensity value for a given method and 
+    ''' Reads a file containing the propensity value for a given method and
         returns its matrix.
     '''
 
-    # Path to change according after having set the final folder containing 
+    # Path to change according after having set the final folder containing
     # propensity values from the different methods.
     path_file = "/Users/ilyesabdelhamid/Desktop/M2/Meet-U/contact_propensities/"+method
     mat = []
@@ -67,14 +67,14 @@ def get_matrix_aa_propensions(method):
         for i,line in enumerate(input):
             if i > 2:
                 mat.append([float(val) for val in line.split()])
-    
+
     arr_aa = numpy.array(mat)
-    
+
     return arr_aa
 
 def parse_distance_mat(interaction, method):
 
-    ''' Parse the set of interactions between a residue from the receptor and 
+    ''' Parse the set of interactions between a residue from the receptor and
         a residue from the ligand. Write and attribute in a file a propensity
         value (coming from different method) for each interaction. The user has
         to enter the list of interaction with at least one method.
@@ -109,9 +109,9 @@ def parse_distance_mat(interaction, method):
 
 def struct_coord(aa, structure):
 
-    """ 
+    """
         Searching one atom coordinates
-  
+
         INPUT:
                input1(List): information for one residue
                input2 (BioPDB Structure): Complex's structure
@@ -132,11 +132,10 @@ def struct_coord(aa, structure):
         atom = structure[0][chain][position]['CB']
         return atom.get_coord()
     return 'Error'
- 
+
 if __name__=='__main__':
-    
+
     structure = pdbt.read_pdb("2za4_modified.pdb")
     depth = resd.calculate_resdepth(structure, "2za4_modified.pdb")
     dist_matrix = calc_distance_matrix(structure, depth, ["A"],["B"])
     parse_distance_mat(dist_matrix, ['glaser', 'pons_surf'])
-
