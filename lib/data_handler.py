@@ -5,6 +5,9 @@ import logging
 import os
 import sys
 
+from combine_methods import *
+from TMscore_RMSD import *
+
 os.system('rm ./appliqueur.log')
 logging.basicConfig(filename='./appliqueur.log',level=logging.DEBUG, format='%(asctime)s %(message)s')    
 logging.debug('Initialisation')
@@ -12,35 +15,10 @@ logging.debug('Initialisation')
 lib_path = os.getcwd()
 print(lib_path)
 
+def delete_hetatm(pdb_filename):
+    command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
+    os.system(command)
 
-#Les méthodes prennent la localisation du .pdb en argument et doivent retourner un dict {paramètre1:valeur1, paramètres2:valeur2 ...}
-#Notamment pour rmscore, maxdo et foldx qui renvoient plusieurs paramètres
-#POur les autres, juste {nom_méthode:valeur}
-
-def fft(pdb_path):
-    logging.debug('Applying fft to PDB : {}'.format(pdb_path))
-    logging.debug('Result = 1')
-    return {'fft':1}
-def rmsd(pdb_path, ref_path):
-    logging.debug('Applying rmsd beetween PDB : {} and PDB_Ref : {}'.format(pdb_path,ref_path))
-    logging.debug('Result = 4')
-    return {'rmsd':4}
-def tmscore(pdb_path, ref_path):
-    logging.debug('Applying tmscore beetween PDB : {} and PDB_Ref : {}'.format(pdb_path,ref_path))
-    logging.debug('Result = 8.64')    
-    return {'tmscore':8.64}
-def lenardjones(pdb_path):
-    logging.debug('Applying lenard_jones to PDB : {}'.format(pdb_path))
-    logging.debug('Result = 12')
-    return {'lenardjones':12}
-def maxdo(pdb_path):
-    logging.debug('Applying maxdo to PDB : {}'.format(pdb_path))
-    logging.debug('Result =7.82')
-    return {'maxdo':7.82}    
-def foldx(pdb_path):
-    logging.debug('Applying foldx to PDB : {}'.format(pdb_path))
-    logging.debug('Result = 12 , 64 , 12')
-    return {'foldx1':12,'foldx2':64,'foldx3':12}
   
 def rebuild_pdb(receptor_path, ligand_path, output_path='./merged_pdb.pdb'):
 
@@ -220,7 +198,7 @@ class Dataset:
         for element in self.liste_samplings:
             logging.debug(str(element))     
             
-        self.liste_techniques = [fft, rmsd, foldx, tmscore, maxdo, lenardjones]
+        self.liste_techniques = [zang_scores_calculs,combine_score]
         logging.debug('Liste des techniques à appliquer sur ce dataset')
         
         for element in self.liste_techniques:
@@ -400,13 +378,14 @@ class Dataset:
     def _write_resultats(self,prefix):
         fichier = open(str(self.output_dir+prefix+'_resultats.out'), 'w')
         
-        liste = 'PDB_name\tType_sampling\tIsNative\trmsd\tfoldx1\tfoldx2\tfoldx3\ttmscore\tmaxdo\tfft\tlenardjones'
+        liste = 'PDB_name\tType_sampling\tIsNative\tstatpot\tvdw\telectro\tshape\trmsd\trmsd_align\ttmscore'
         fichier.write(liste)
         fichier.write('\n')
         del(liste)
         
         for resultat in self.liste_resultats:
-            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['foldx1']) + '\t' + str(resultat.valeurs['foldx2']) + '\t' + str(resultat.valeurs['foldx3']) + '\t' + str(resultat.valeurs['tmscore']) + '\t' + str(resultat.valeurs['maxdo']) + '\t' + str(resultat.valeurs['fft']) + '\t' + str(resultat.valeurs['lenardjones']) + '\n')
+            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['statpot']) + '\t' + str(resultat.valeurs['']) + '\t' + str(resultat.valeurs['vdw']) + '\t' + str(resultat.valeurs['electro']) + '\t'+ str(resultat.valeurs['shape']) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['rmsd_align']) + '\t' + str(resultat.valeurs['tmscore']) + '\t'
+
             fichier.write(chaine)
                 
         fichier.close()    
