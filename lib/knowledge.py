@@ -7,12 +7,16 @@ import numpy
 from Bio.PDB.PDBParser import PDBParser
 
 def get_matrix_aa_propensions(method):
-    ''' Reads a file containing the propensity value for a given method and
+    ''' Reads a file containing the interface propensities for a given method and
         returns its matrix.
+        INPUT:
+            method(str) The method could be one of them : glaser, mezei, pons, pons_surf,
+            and cips. Each method gives a matrix 20x20 where each cell contains a propensity value,
+            that is, a value that indicates the preference of amino acids i and j to be one in front of the other.
+        OUTPUT:
+            arr_aa(numpy array) The matrix of interface propensities. 
     '''
 
-    # Path to change according after having set the final folder containing
-    # propensity values from the different methods.
     path_file = "../potentiel/"+method
     mat = []
     with open(path_file, 'r') as input:
@@ -30,6 +34,13 @@ def parse_distance_mat(interaction, method):
         a residue from the ligand. Write and attribute in a file a propensity
         value (coming from different method) for each interaction. The user has
         to enter the list of interaction with at least one method.
+        INPUT:
+            interaction(dict) dictionary storing the distance (Angstrom) based 
+            on a cutoff (8.6 Angstroms) between a residue from the receptor and
+            a residue from the ligand (keys).
+            method(str list) method listed above (cf get_matrix_aa_propensions)
+        OUTPUT:
+            score_tot(int) sum of all propensity values of each pair of residues
     '''
 
     aa_key = ['ILE', 'VAL', 'LEU', 'PHE', 'CYS', 'MET', 'ALA', 'GLY', 'THR',
