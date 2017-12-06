@@ -36,9 +36,9 @@ def bfactor_to_resdepth(mydict):
        a given residue.
        Edit the bfactor column of a pdb file which is replaced with
        the residue depth of the corresponding residue (calculated in
-       the function calculate_resdepth.      
+       the function calculate_resdepth.
     '''
-    
+
     with open('2za4.pdb', 'r') as input:
         with open('2za4_modified.pdb', 'w') as output:
             for line in input:
@@ -74,7 +74,7 @@ def resdepth_to_fft(residue, cutoff, mydict):
         return(9j)
 
 if __name__=='__main__':
-    #delete_hetatm("2za4.pdb")
-    # dico_res = calculate_resdepth('clean_2za4.pdb')
-    #bfactor_to_resdepth(dico_res)
-    #resdepth_to_fft('D', 'SER', 89, 4, dico_res)
+    delete_hetatm("2za4.pdb")
+    dico_res = calculate_resdepth('clean_2za4.pdb')
+    bfactor_to_resdepth(dico_res)
+    resdepth_to_fft('D', 'SER', 89, 4, dico_res)
