@@ -152,6 +152,7 @@ def runshape(pdbfile, structure, recepChain, ligChain, resolution=2, depthCutoff
     """
     Wrapper function for the shape complementarity
     INPUT:
+        - pbdfile(string) path to pdb complex file
         - structure(BioPython Bio.pdb structure object) Containing receptor and ligand complex
         - recepChain(list) List of receptor chain ids. Ex: ["A","B"]
         - ligChain(list) List of ligand chain ids. Ex: ["C","B"]
