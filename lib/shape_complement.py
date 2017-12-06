@@ -148,7 +148,7 @@ def multi_mat(rec_grid, lig_grid):
     res = res.real
     return(res)
 
-def runshape(pdbfile, structure, recepChain, ligChain, resolution=2, depthCutoff = 4, resScale = "atom"):
+def runshape(pdbfile, structure, recepChain, ligChain, depth_dict, resolution=2, depthCutoff = 4, resScale = "atom"):
     """
     Wrapper function for the shape complementarity
     INPUT:
@@ -156,6 +156,7 @@ def runshape(pdbfile, structure, recepChain, ligChain, resolution=2, depthCutoff
         - structure(BioPython Bio.pdb structure object) Containing receptor and ligand complex
         - recepChain(list) List of receptor chain ids. Ex: ["A","B"]
         - ligChain(list) List of ligand chain ids. Ex: ["C","B"]
+        - depth_dict(dictionary) Residue depth dictionary
         - resolution(int) Resolution of the shape complementarity grid in Angstrom. Default = 2
         - depthCutoff(float) Cutoff for defining surface residue in Angstrom. Default = 4
         - resScale(string) Either "atom" or "residue". Scale at which to perform shape complementarity. Default = "atom"
@@ -163,7 +164,6 @@ def runshape(pdbfile, structure, recepChain, ligChain, resolution=2, depthCutoff
         - result(int) Shape complementarity score
     """
     filename = pdbfile.split("/")[-1]
-    depth_dict = pdb_resdepth.calculate_resdepth(structure=structure, pdb_filename=pdbfile)
 
     data = pdb_fft(structure=structure, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff, resScale= resScale)
     receptor = data[0]
@@ -198,5 +198,6 @@ if __name__ == "__main__":
     recepChain = sys.argv[2].split(",")
     ligChain = sys.argv[3].split(",")
     my_struct = pdbtools.read_pdb(myfile)
-    tmp = runshape(pdbfile = myfile ,structure = my_struct, recepChain = recepChain, ligChain = ligChain, resolution=2, depthCutoff = 4, resScale = "atom")
+    depth_dict = pdb_resdepth.calculate_resdepth(structure=my_struct, pdb_filename=myfile)
+    tmp = runshape(pdbfile = myfile ,structure = my_struct, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, resolution=2, depthCutoff = 4, resScale = "atom")
     print(tmp)
