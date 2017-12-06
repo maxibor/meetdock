@@ -4,11 +4,21 @@ import pdb2grid as pdbg
 import pdb_resdepth as resd
 import matrice_distances as distm
 
+
 # The function takes the distance matrix as argument and gives the Lennard-Jones potential as result
 
 def lennard_jones(dist_matrix, sigma=3.9, epsilon=10):
 
-    ''' Calculating Lennard-Jones potential
+    ''' 
+        Calculating Lennard-Jones potential
+
+        INPUT:
+               input1(Dictionary): Distances dictionary. Output of calc_distance_matrix() function
+               input2 (Float): sigma value for Lennard-Jones function. Default value: 3.9
+               input3 (Int): epsilon value for Lennard-Jones function. Default value: 10
+        OUPUT:
+               result(Float): Lennard-Jones energy value for the complex
+
     '''
 
     energy = 0
