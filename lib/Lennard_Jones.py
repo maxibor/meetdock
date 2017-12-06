@@ -34,7 +34,7 @@ def lennard_jones(dist_matrix, sigma=3.9, epsilon=10):
 if __name__ == "__main__":
 
     filename = sys.argv[1]
-    structure = pdbg.read_pdb(filename)
+    structure = pdbt.read_pdb(filename)
     depth = resd.calculate_resdepth(structure, filename)
     dist_matrix = distm.calc_distance_matrix(structure, depth, chain_recp, chain_lig)
     lennard_jones(dist_matrix)
