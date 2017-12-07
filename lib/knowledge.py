@@ -20,7 +20,7 @@ def get_matrix_aa_propensions(method):
             arr_aa(numpy array) The matrix of interface propensities. 
     '''
 
-    path_file = lib_path+"../potentiel/"+method
+    path_file = lib_path+"/../potentiel/"+method
     mat = []
     with open(path_file, 'r') as input:
         for i,line in enumerate(input):
