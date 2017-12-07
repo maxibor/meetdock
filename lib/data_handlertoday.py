@@ -253,6 +253,7 @@ class Dataset:
             
             #On reconstruit la structure native
             rebuild_pdb(receptor_path = recepteurpath, ligand_path = ligandpath, output_path = rebuilt_pdb_path)
+            logging.debug('Rebuilding native from: \n\treceptor {} \n\t ligand {}'.format(recepteur_path, ligand_path)
             
             resultats_de_ce_pdb = PDB_Analysis(isnative = True)
             resultats_de_ce_pdb.pdb_name = rebuilt_pdb_path.split('/')[-1].split('.')[0]
@@ -294,14 +295,14 @@ class Dataset:
             liste_pdb = os.listdir()
             
             pdb_natif_path = self.temp_dir+'/'+sampling.sampling_name+'_native.pdb'
-            print('pdb_natif_path = {}'.format(str(pdb_natif_path)))
+            logging.debug('pdb_natif_path = {}'.format(str(pdb_natif_path)))
             #On repère l'emplacement de la structure native pour faire le tmscore et le rmsd
             
             for pdb in liste_pdb:
                 #Sur chaque pdb on applique toutes les techniques
             
                 rebuilt_pdb_path = self.temp_dir+sampling.sampling_name+pdb
-                print('rebuilt_pdb_path = {}'.format(str(rebuilt_pdb_path)))
+                logging.debug('rebuilt_pdb_path = {}'.format(str(rebuilt_pdb_path)))
                 recepteurpath = sampling.receptor_path
                 ligandpath = os.getcwd()+'/'+pdb
             

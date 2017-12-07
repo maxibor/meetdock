@@ -1,26 +1,26 @@
-2017-12-07 04:34:55,653 Initialisation
-2017-12-07 04:34:55,654 Création du dataset
-2017-12-07 04:34:55,654 Récupération des samplings
-2017-12-07 04:34:55,654 Chargement du dataset par défaut --> get_default_dataset()
-2017-12-07 04:34:55,654 Chemin courant: /home/pyxis/Documents/2017-2018_Equipe1/lib
-2017-12-07 04:34:55,654 Déplacement vers ../data/samplings/
-2017-12-07 04:34:55,654 Déplacement effectué
-2017-12-07 04:34:55,654 Liste des types de sampling: ['homomeres_c2', 'autrehomomeres_c2']
-2017-12-07 04:34:55,654 Début du parsing des noms du type homomeres_c2
-2017-12-07 04:34:55,654 Déplacement vers homomeres_c2/sampling
-2017-12-07 04:34:55,654 Déplacement réussi
-2017-12-07 04:34:55,654 Liste des noms de sampling pour le type homomeres_c2: 
-2017-12-07 04:34:55,654 1j5p_A_1j5p_B
-2017-12-07 04:34:55,654 Retour vers ../data/samplings/
-2017-12-07 04:34:55,654 Début du parsing des noms du type autrehomomeres_c2
-2017-12-07 04:34:55,654 Déplacement vers autrehomomeres_c2/sampling
-2017-12-07 04:34:55,655 Déplacement réussi
-2017-12-07 04:34:55,655 Liste des noms de sampling pour le type autrehomomeres_c2: 
-2017-12-07 04:34:55,655 1j5p_A_1j5p_B
-2017-12-07 04:34:55,655 Retour vers ../data/samplings/
-2017-12-07 04:34:55,655 Retour au PATH initial
-2017-12-07 04:34:55,655 Noms des samplings récupérés:
-2017-12-07 04:34:55,655 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
+2017-12-07 04:41:50,201 Initialisation
+2017-12-07 04:41:50,201 Création du dataset
+2017-12-07 04:41:50,201 Récupération des samplings
+2017-12-07 04:41:50,201 Chargement du dataset par défaut --> get_default_dataset()
+2017-12-07 04:41:50,202 Chemin courant: /home/pyxis/Documents/2017-2018_Equipe1/lib
+2017-12-07 04:41:50,202 Déplacement vers ../data/samplings/
+2017-12-07 04:41:50,202 Déplacement effectué
+2017-12-07 04:41:50,202 Liste des types de sampling: ['homomeres_c2', 'autrehomomeres_c2']
+2017-12-07 04:41:50,202 Début du parsing des noms du type homomeres_c2
+2017-12-07 04:41:50,202 Déplacement vers homomeres_c2/sampling
+2017-12-07 04:41:50,202 Déplacement réussi
+2017-12-07 04:41:50,202 Liste des noms de sampling pour le type homomeres_c2: 
+2017-12-07 04:41:50,202 1j5p_A_1j5p_B
+2017-12-07 04:41:50,202 Retour vers ../data/samplings/
+2017-12-07 04:41:50,202 Début du parsing des noms du type autrehomomeres_c2
+2017-12-07 04:41:50,202 Déplacement vers autrehomomeres_c2/sampling
+2017-12-07 04:41:50,202 Déplacement réussi
+2017-12-07 04:41:50,202 Liste des noms de sampling pour le type autrehomomeres_c2: 
+2017-12-07 04:41:50,202 1j5p_A_1j5p_B
+2017-12-07 04:41:50,202 Retour vers ../data/samplings/
+2017-12-07 04:41:50,202 Retour au PATH initial
+2017-12-07 04:41:50,202 Noms des samplings récupérés:
+2017-12-07 04:41:50,203 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
  SAMPLING_TYPE = homomeres_c2 
  SAMPLING_DIR = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B 
  LIGAND_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb 
@@ -29,7 +29,7 @@
  RECEPTOR_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb 
  RECEPTOR_NAME = 1j5p 
  RECEPTOR_CHAIN = A
-2017-12-07 04:34:55,655 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
+2017-12-07 04:41:50,203 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
  SAMPLING_TYPE = autrehomomeres_c2 
  SAMPLING_DIR = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/sampling/1j5p_A_1j5p_B 
  LIGAND_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_B.pdb 
@@ -38,61 +38,96 @@
  RECEPTOR_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb 
  RECEPTOR_NAME = 1j5p 
  RECEPTOR_CHAIN = A
-2017-12-07 04:34:55,655 Liste des techniques à appliquer sur ce dataset
-2017-12-07 04:34:55,655 <function zang_scores_calculs at 0x7f28b3910378>
-2017-12-07 04:34:55,655 <function combine_score at 0x7f28cc208c80>
-2017-12-07 04:34:55,655 ********APPLICATION DES METHODES EN COURS********
-2017-12-07 04:34:55,655 Application pour les structures natives: RMSD et tmscore ne seront pas effectués
-2017-12-07 04:34:55,655 APPLICATION DES TECHNIQUES POUR LES STRUCTURES NATIVES
-2017-12-07 04:34:55,655 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
-2017-12-07 04:34:55,661 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:34:55,661 On applique la technique <function zang_scores_calculs at 0x7f28b3910378> au sampling 1j5p_A_1j5p_B
-2017-12-07 04:34:55,661 Filling with NA for tmscore, rmsd and rmsd_align
-2017-12-07 04:34:55,661 Valeurs: rmsd , NA
-2017-12-07 04:34:55,661 Valeurs: rmsd_align , NA
-2017-12-07 04:34:55,661 Valeurs: tmscore , NA
-2017-12-07 04:34:55,661 On applique la technique <function combine_score at 0x7f28cc208c80> au sampling 1j5p_A_1j5p_B
-2017-12-07 04:35:13,656 Valeurs: statpot , 374.10999999999984
-2017-12-07 04:35:13,657 Valeurs: vdw , -307.5025254319218
-2017-12-07 04:35:13,657 Valeurs: electro , 1.1818632828591714e-24
-2017-12-07 04:35:13,657 Valeurs: shape , -1753.0
-2017-12-07 04:35:13,657 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
-2017-12-07 04:35:13,662 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:35:13,662 On applique la technique <function zang_scores_calculs at 0x7f28b3910378> au sampling 1j5p_A_1j5p_B
-2017-12-07 04:35:13,662 Filling with NA for tmscore, rmsd and rmsd_align
-2017-12-07 04:35:13,662 Valeurs: rmsd , NA
-2017-12-07 04:35:13,662 Valeurs: rmsd_align , NA
-2017-12-07 04:35:13,662 Valeurs: tmscore , NA
-2017-12-07 04:35:13,663 On applique la technique <function combine_score at 0x7f28cc208c80> au sampling 1j5p_A_1j5p_B
-2017-12-07 04:35:30,510 Valeurs: statpot , 374.10999999999984
-2017-12-07 04:35:30,510 Valeurs: vdw , -307.5025254319218
-2017-12-07 04:35:30,510 Valeurs: electro , 1.1818632828591714e-24
-2017-12-07 04:35:30,510 Valeurs: shape , -1753.0
-2017-12-07 04:35:30,511 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_3.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb
-2017-12-07 04:35:30,516 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:35:30,641 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb_tmscore.out , 0.74
-2017-12-07 04:35:48,883 Valeurs: statpot , 153.93
-2017-12-07 04:35:48,883 Valeurs: vdw , -65.91921556935748
-2017-12-07 04:35:48,883 Valeurs: electro , -2.9448394367129293e-25
-2017-12-07 04:35:48,883 Valeurs: shape , -519.0
-2017-12-07 04:35:48,883 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_2.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb
-2017-12-07 04:35:48,888 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:35:49,002 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb_tmscore.out , 0.51
-2017-12-07 04:36:06,778 Valeurs: statpot , 321.82999999999987
-2017-12-07 04:36:06,778 Valeurs: vdw , 176.62625052988483
-2017-12-07 04:36:06,778 Valeurs: electro , -1.3523257052147052e-24
-2017-12-07 04:36:06,778 Valeurs: shape , -321.0
-2017-12-07 04:36:06,778 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_4.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_4.pdb
-2017-12-07 04:36:06,783 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:36:06,891 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_4.pdb_tmscore.out , 0.00
-2017-12-07 04:36:25,004 Valeurs: statpot , 220.73000000000002
-2017-12-07 04:36:25,004 Valeurs: vdw , -143.38787993228624
-2017-12-07 04:36:25,005 Valeurs: electro , -3.352775653738957e-25
-2017-12-07 04:36:25,005 Valeurs: shape , -468.0
-2017-12-07 04:36:25,005 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_1.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb
-2017-12-07 04:36:25,010 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 04:36:25,104 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb_tmscore.out , 0.24
-2017-12-07 04:36:42,539 Valeurs: statpot , 388.10999999999996
-2017-12-07 04:36:42,540 Valeurs: vdw , -368.03773771041284
-2017-12-07 04:36:42,540 Valeurs: electro , 1.1889945992884464e-24
-2017-12-07 04:36:42,540 Valeurs: shape , -1935.0
+2017-12-07 04:41:50,203 Liste des techniques à appliquer sur ce dataset
+2017-12-07 04:41:50,203 <function zang_scores_calculs at 0x7f1fbc548378>
+2017-12-07 04:41:50,203 <function combine_score at 0x7f1fd4e40c80>
+2017-12-07 04:41:50,203 ********APPLICATION DES METHODES EN COURS********
+2017-12-07 04:41:50,203 Application pour les structures natives: RMSD et tmscore ne seront pas effectués
+2017-12-07 04:41:50,203 APPLICATION DES TECHNIQUES POUR LES STRUCTURES NATIVES
+2017-12-07 04:41:50,203 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
+2017-12-07 04:41:50,209 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:41:50,209 On applique la technique <function zang_scores_calculs at 0x7f1fbc548378> au sampling 1j5p_A_1j5p_B
+2017-12-07 04:41:50,209 Filling with NA for tmscore, rmsd and rmsd_align
+2017-12-07 04:41:50,209 Valeurs: rmsd , NA
+2017-12-07 04:41:50,209 Valeurs: rmsd_align , NA
+2017-12-07 04:41:50,209 Valeurs: tmscore , NA
+2017-12-07 04:41:50,209 On applique la technique <function combine_score at 0x7f1fd4e40c80> au sampling 1j5p_A_1j5p_B
+2017-12-07 04:42:08,133 Valeurs: statpot , 374.10999999999984
+2017-12-07 04:42:08,133 Valeurs: vdw , -307.5025254319218
+2017-12-07 04:42:08,133 Valeurs: electro , 1.1818632828591714e-24
+2017-12-07 04:42:08,133 Valeurs: shape , -1753.0
+2017-12-07 04:42:08,133 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
+2017-12-07 04:42:08,139 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:42:08,139 On applique la technique <function zang_scores_calculs at 0x7f1fbc548378> au sampling 1j5p_A_1j5p_B
+2017-12-07 04:42:08,139 Filling with NA for tmscore, rmsd and rmsd_align
+2017-12-07 04:42:08,139 Valeurs: rmsd , NA
+2017-12-07 04:42:08,139 Valeurs: rmsd_align , NA
+2017-12-07 04:42:08,139 Valeurs: tmscore , NA
+2017-12-07 04:42:08,139 On applique la technique <function combine_score at 0x7f1fd4e40c80> au sampling 1j5p_A_1j5p_B
+2017-12-07 04:42:24,846 Valeurs: statpot , 374.10999999999984
+2017-12-07 04:42:24,847 Valeurs: vdw , -307.5025254319218
+2017-12-07 04:42:24,847 Valeurs: electro , 1.1818632828591714e-24
+2017-12-07 04:42:24,847 Valeurs: shape , -1753.0
+2017-12-07 04:42:24,847 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_3.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb
+2017-12-07 04:42:24,852 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:42:24,975 Valeurs: rmsd , 0.74
+2017-12-07 04:42:24,975 Valeurs: tmscore , 0.6025
+2017-12-07 04:42:24,975 Valeurs: rmsd_align , 0.74
+2017-12-07 04:42:43,189 Valeurs: statpot , 153.93
+2017-12-07 04:42:43,189 Valeurs: vdw , -65.91921556935748
+2017-12-07 04:42:43,189 Valeurs: electro , -2.9448394367129293e-25
+2017-12-07 04:42:43,189 Valeurs: shape , -519.0
+2017-12-07 04:42:43,189 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_2.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb
+2017-12-07 04:42:43,195 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:42:43,307 Valeurs: rmsd , 0.51
+2017-12-07 04:42:43,307 Valeurs: tmscore , 0.5486
+2017-12-07 04:42:43,307 Valeurs: rmsd_align , 0.51
+2017-12-07 04:43:01,177 Valeurs: statpot , 321.82999999999987
+2017-12-07 04:43:01,177 Valeurs: vdw , 176.62625052988483
+2017-12-07 04:43:01,177 Valeurs: electro , -1.3523257052147052e-24
+2017-12-07 04:43:01,177 Valeurs: shape , -321.0
+2017-12-07 04:43:01,177 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_4.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_4.pdb
+2017-12-07 04:43:01,182 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:43:01,296 Valeurs: rmsd , 0.00
+2017-12-07 04:43:01,296 Valeurs: tmscore , 0.5634
+2017-12-07 04:43:01,296 Valeurs: rmsd_align , 0.00
+2017-12-07 04:43:19,650 Valeurs: statpot , 220.73000000000002
+2017-12-07 04:43:19,650 Valeurs: vdw , -143.38787993228624
+2017-12-07 04:43:19,650 Valeurs: electro , -3.352775653738957e-25
+2017-12-07 04:43:19,650 Valeurs: shape , -468.0
+2017-12-07 04:43:19,650 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_1.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb
+2017-12-07 04:43:19,655 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:43:19,748 Valeurs: rmsd , 0.24
+2017-12-07 04:43:19,748 Valeurs: tmscore , 0.9991
+2017-12-07 04:43:19,748 Valeurs: rmsd_align , 0.24
+2017-12-07 04:43:36,980 Valeurs: statpot , 388.10999999999996
+2017-12-07 04:43:36,980 Valeurs: vdw , -368.03773771041284
+2017-12-07 04:43:36,981 Valeurs: electro , 1.1889945992884464e-24
+2017-12-07 04:43:36,981 Valeurs: shape , -1935.0
+2017-12-07 04:43:36,981 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/autrehomomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_3.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb
+2017-12-07 04:43:36,986 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:43:37,118 Valeurs: rmsd , 0.74
+2017-12-07 04:43:37,119 Valeurs: tmscore , 0.6025
+2017-12-07 04:43:37,119 Valeurs: rmsd_align , 0.74
+2017-12-07 04:43:55,592 Valeurs: statpot , 153.93
+2017-12-07 04:43:55,592 Valeurs: vdw , -65.91921556935748
+2017-12-07 04:43:55,592 Valeurs: electro , -2.9448394367129293e-25
+2017-12-07 04:43:55,592 Valeurs: shape , -519.0
+2017-12-07 04:43:55,593 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/autrehomomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_2.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb
+2017-12-07 04:43:55,598 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:43:55,714 Valeurs: rmsd , 0.51
+2017-12-07 04:43:55,714 Valeurs: tmscore , 0.5486
+2017-12-07 04:43:55,714 Valeurs: rmsd_align , 0.51
+2017-12-07 04:44:13,858 Valeurs: statpot , 321.82999999999987
+2017-12-07 04:44:13,858 Valeurs: vdw , 176.62625052988483
+2017-12-07 04:44:13,858 Valeurs: electro , -1.3523257052147052e-24
+2017-12-07 04:44:13,858 Valeurs: shape , -321.0
+2017-12-07 04:44:13,858 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/autrehomomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_1.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb
+2017-12-07 04:44:13,864 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:44:13,964 Valeurs: rmsd , 0.24
+2017-12-07 04:44:13,964 Valeurs: tmscore , 0.9991
+2017-12-07 04:44:13,964 Valeurs: rmsd_align , 0.24
+2017-12-07 04:44:31,181 Valeurs: statpot , 388.10999999999996
+2017-12-07 04:44:31,182 Valeurs: vdw , -368.03773771041284
+2017-12-07 04:44:31,182 Valeurs: electro , 1.1889945992884464e-24
+2017-12-07 04:44:31,182 Valeurs: shape , -1935.0
