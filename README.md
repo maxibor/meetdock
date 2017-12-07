@@ -1,14 +1,15 @@
-# MeetDockOne - Equipe1 Scoring
+# MeetDockOne: a scoring method for protein protein docking
+
 <img src="./images/logo.png" width="250">
 
-**MeetDockOne: a scoring method for protein protein docking**
+---
 
 ## Authors:  
-- Guillaume Delevoye  
-- François Gravey  
-- Ilyes Abdelhamid  
-- Paula Milan Rodriguez  
-- Maxime Borry  
+- [Guillaume Delevoye](https://github.com/GDelevoye)  
+- [François Gravey](https://github.com/fgravey)  
+- [Ilyes Abdelhamid](https://github.com/IlyesAbdelhamid)  
+- [Paula Milan Rodriguez](https://github.com/PaulaMilanRguez)  
+- [Maxime Borry](https://github.com/maxibor)  
 
 ## Introduction
 
@@ -21,7 +22,7 @@ This scoring method uses the following steps:
 
 ## Dependancies
 
-[Conda](https://conda.io/docs/)
+- [Conda](https://conda.io/docs/)
 
 ## Download
 
