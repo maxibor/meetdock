@@ -58,10 +58,14 @@ The environment file is available here as [environment.yml](./environment.yml).
 ```
 $ ./meetdock ./data -recChain A -ligChain B -shape -electro -jones -proba
 ```
-The folder ./data contained pdb complexes.  
-The receptor is Chain A (recChain A).  
-The ligand is Chain B (LigChain B).  
-The following methods will be apply on the files : shape complementarity (shape), electrostatic energy (electro), Leenard-Jones interactions (jones), and a knowledge based scoring function (proba)
+- The dictory `./data` contained pdb complexes.  
+- The receptor is Chain A (`-recChain A`).  
+- The ligand is Chain B (`-LigChain B`).  
+- The following methods will be computed on the complexes :    
+    - shape complementarity (`-shape`)
+    -electrostatic energy (`-electro`)
+    - Leenard-Jones interactions (`-jones`)
+    - A knowledge based scoring function (`-proba`)
 
 
 ## Documentation
