@@ -21,7 +21,7 @@ This scoring method uses the following steps:
 
 ## Quick start
 
-```python
+```
 $ ./meetdock pdbfile.pdb
 ```
 
