@@ -69,7 +69,6 @@ optional arguments:
   -electro            compute Electrostatic interactions
   -jones              compute Lennard-Jones interactions
   -proba              Compute knowledge based interactions
-  -foldx              Scores with FoldX
   -recChain RECCHAIN  receptor Chain ID. If there more than one, separate by a
                       ','. Default = 'A'
   -ligChain LIGCHAIN  ligand Chain ID. If there more than one, separate by a
