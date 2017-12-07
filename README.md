@@ -1,3 +1,5 @@
+<img src="./images/logo.png" width="300">
+
 # MeetDockOne - Equipe1 Scoring
 
 **MeetDockOne: a scoring method for protein protein docking** developed by Guillaume Delevoye, François Gravey, Ilyes Abdelhamid, Paula Milan Rodriguez, and Maxime Borry.
