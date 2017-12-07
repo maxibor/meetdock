@@ -6,6 +6,8 @@ import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
 
+lib_path = os.getcwd()
+
 def get_matrix_aa_propensions(method):
     ''' Reads a file containing the interface propensities for a given method and
         returns its matrix.
@@ -17,7 +19,7 @@ def get_matrix_aa_propensions(method):
             arr_aa(numpy array) The matrix of interface propensities. 
     '''
 
-    path_file = "../potentiel/"+method
+    path_file = lib_path+"../potentiel/"+method
     mat = []
     with open(path_file, 'r') as input:
         for i,line in enumerate(input):
