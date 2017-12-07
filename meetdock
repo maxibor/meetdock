@@ -28,11 +28,6 @@ def get_args():
         help="Compute knowledge based interactions")
 
     parser.add_argument(
-        '-foldx',
-        action="store_true",
-        help="Scores with FoldX")
-
-    parser.add_argument(
         '-recChain',
         default="A",
         help="receptor Chain ID. If there more than one, separate by a ','. Default = 'A'")
@@ -69,16 +64,15 @@ def get_args():
     recChain = args.recChain
     ligChain = args.ligChain
     proba = args.proba
-    foldx = args.foldx
     pH = args.pH
     depth = args.depth
     dist = args.dist
 
 
 
-    return(mypath, shape, electro, jones, recChain, ligChain, proba, foldx, pH, depth, dist)
+    return(mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist)
 
-def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, depth = 4, dist = 8.6):
+def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, pH = 7, depth = 4, dist = 8.6):
     pdbs = os.listdir(mypath)
     pdbs = [i for i in pdbs if ".pdb" in i]
 
@@ -91,7 +85,7 @@ def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = 
 
 
 if __name__ == "__main__":
-    mypath, shape, electro, jones, recChain, ligChain, proba, foldx, pH, depth, dist = get_args()
+    mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist = get_args()
     print("mypath",mypath)
     print("recChain",recChain)
     print("ligChain", ligChain,)
