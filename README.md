@@ -1,6 +1,6 @@
-# 2017-2018_Equipe1 Scoring
+# MeetDockOne - Equipe1 Scoring
 
-**Scoring method for protein protein docking** developed by Guillaume Delevoye, François Gravey, Ilyes Abdelhamid, Paula Milan Rodriguez, and Maxime Borry.
+**MeetDockOne: a scoring method for protein protein docking** developed by Guillaume Delevoye, François Gravey, Ilyes Abdelhamid, Paula Milan Rodriguez, and Maxime Borry.
 
 ## Introduction
 
@@ -13,7 +13,7 @@ This scoring method uses the following steps:
 
 ## Quick start
 
-```pythonM
+```python
 to complete
 ```
 
@@ -42,33 +42,3 @@ TODO
 ## Documentation
 
 TODO
-
-----
-
-# Notes relevant for the team 1
-
-## Architecture
-
-![](./images/architecture.png)
-
-## Documentation and docstrings
-
-Please document your function using **docstrings**:
-```python
-def myfunction(input1, input2):
-    """
-        WHAT THIS FUNCTION IS DOING
-        INPUT:
-               input1(type) what is input 1
-               input2(type) what is input 2
-        OUPUT:
-               result(type) what is result
-    """
-    result = input1 + input 2
-    return(result)
-```
-
-## Project Management HOW TO
-Go to projects Tab, click on `Scoring Soft` and add move tasks.  
-Convert tasks to issues for opening a discussion about the tasks and/or assign people to it.
-![](./images/screenshot.jpg)
