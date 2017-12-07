@@ -1,1 +1,3 @@
 PDB_name	Type_sampling	IsNative	statpot	vdw	electro	shape	rmsd	rmsd_align	tmscore
+1j5p_A_1j5p_B_native	homomeres_c2	True	374.11	-307.5025254319218	1.1818632828591714e-24	-1753.0	NA	NA	NA	
+1j5p_A_1j5p_B_native	autrehomomeres_c2	True	374.11	-307.5025254319218	1.1818632828591714e-24	-1753.0	NA	NA	NA	
