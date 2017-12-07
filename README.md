@@ -46,24 +46,29 @@ The environment file is available here as [environment.yml](./environment.yml).
 ```
 $ ./meetdock -h
 usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-foldx]
-                   [-pH PH] [-depth DEPTH] [-dist DIST]
-                   pdbfile
+                   [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-pH PH]
+                   [-depth DEPTH] [-dist DIST]
+                   pdbpath
 
 MeetDockOne scores a protein complex docking
 
 positional arguments:
-  pdbfile       .pdb complex file
+  pdbpath             path to pdb complex directory
 
 optional arguments:
-  -h, --help    show this help message and exit
-  -shape        compute shape complementarity
-  -electro      compute Electrostatic interactions
-  -jones        compute Lennard-Jones interactions
-  -proba        Compute knowledge based interactions
-  -foldx        Scores with FoldX
-  -pH PH        pH for electrostatic interactions. Default = 7
-  -depth DEPTH  Threshold for surface residue determination (Angstrom).
-                Default = 4
-  -dist DIST    Threshold for interface determination (Angstrom). Default =
-                8.5
+  -h, --help          show this help message and exit
+  -shape              compute shape complementarity
+  -electro            compute Electrostatic interactions
+  -jones              compute Lennard-Jones interactions
+  -proba              Compute knowledge based interactions
+  -foldx              Scores with FoldX
+  -recChain RECCHAIN  receptor Chain ID. If there more than one, separate by a
+                      ','. Default = 'A'
+  -ligChain LIGCHAIN  ligand Chain ID. If there more than one, separate by a
+                      ','. Default = 'A'
+  -pH PH              pH for electrostatic interactions. Default = 7
+  -depth DEPTH        Threshold for surface residue determination (Angstrom).
+                      Default = 4
+  -dist DIST          Threshold for interface determination (Angstrom).
+                      Default = 8.5
 ```
