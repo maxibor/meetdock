@@ -52,8 +52,8 @@ def get_default_dataset():
     
     script_path = os.getcwd()
     logging.debug('Chemin courant: {}'.format(str(script_path)))
-    logging.debug('Déplacement vers ../data')
-    os.chdir('../data')
+    logging.debug('Déplacement vers ../data/sampling/')
+    os.chdir('../data/sampling')
     logging.debug('Déplacement effectué')
     
     liste_types = os.listdir()
@@ -73,7 +73,7 @@ def get_default_dataset():
         
         for sampling_name in liste_sampling_names:
 
-            sampling_dir = '../data/'+str(sampling_type)+'/sampling/'+str(sampling_name)
+            sampling_dir = '../data/samplings/'+str(sampling_type)+'/sampling/'+str(sampling_name)
             
             receptor_name = str(sampling_name.split('_')[0])
             
@@ -81,8 +81,8 @@ def get_default_dataset():
             ligand_chain = str(sampling_name.split('_')[3])
             receptor_chain = str(sampling_name.split('_')[1])
             
-            ligand_path = '../data/'+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
-            receptor_path = '../data/'+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
+            ligand_path = '../data/samplings'+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
+            receptor_path = '../data/samplings'+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
                     
             current_sampling = Sampling(sampling_name, sampling_type, sampling_dir, ligand_path, ligand_name, ligand_chain, receptor_path, receptor_name, receptor_chain)
             
@@ -90,8 +90,8 @@ def get_default_dataset():
             del(current_sampling)
         
         os.chdir(origin_path)
-        logging.debug('Retour vers ../data')
-        os.chdir('../data')
+        logging.debug('Retour vers ../data/samplings')
+        os.chdir('../data/samplings')
         
     logging.debug('Retour au PATH initial')
     os.chdir(origin_path)        
