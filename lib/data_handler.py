@@ -12,8 +12,21 @@ os.system('rm ./appliqueur.log')
 logging.basicConfig(filename='./appliqueur.log',level=logging.DEBUG, format='%(asctime)s %(message)s')    
 logging.debug('Initialisation')
 
+
+#def autre(rebuilt_pdb_path, receptor_chain, ligand_chain):
+#    logging.debug('Applique autre methode')
+#    dico_resultats = {'statpot':12, 'vdw':42, 'electro': 66, 'shape':5}
+#    for cle in dico_resultats:
+#        logging.debug(str(dico_resultats[cle]))
+#    return dico_resultats
+
 lib_path = os.getcwd()
 print(lib_path)
+
+def delete_hetatm(pdb_filename):
+    command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
+    os.system(command)
+
   
 def rebuild_pdb(receptor_path, ligand_path, output_path='./merged_pdb.pdb'):
 
@@ -172,7 +185,7 @@ class Dataset:
     temp_dir = ''
     data_dir = ''
     
-    def __init__(self, liste_samplings = [], liste_techniques = [zang_scores_calculs, combine_score], default = 'YES'):
+    def __init__(self, liste_samplings = [], liste_techniques = [], default = 'YES'):
         if default == 'YES':
             self._init__default()
         else:
@@ -193,7 +206,8 @@ class Dataset:
         for element in self.liste_samplings:
             logging.debug(str(element))     
             
-        self.liste_techniques = [zang_scores_calculs,combine_score]
+        self.liste_techniques = [zang_scores_calculs, combine_score]
+        
         logging.debug('Liste des techniques à appliquer sur ce dataset')
         
         for element in self.liste_techniques:
@@ -228,6 +242,8 @@ class Dataset:
         logging.debug('Application pour les structures natives: RMSD et tmscore ne seront pas effectués')
         
         #En premier lieu on s'occupe des structures natives
+        
+        logging.debug('APPLICATION DES TECHNIQUES POUR LES STRUCTURES NATIVES')
         for sampling in self.liste_samplings:
         #... DE chacun des samplings
 
@@ -237,6 +253,7 @@ class Dataset:
             
             #On reconstruit la structure native
             rebuild_pdb(receptor_path = recepteurpath, ligand_path = ligandpath, output_path = rebuilt_pdb_path)
+            logging.debug('Rebuilding native from: \n\treceptor {} \n\t ligand {}'.format(recepteur_path, ligand_path)
             
             resultats_de_ce_pdb = PDB_Analysis(isnative = True)
             resultats_de_ce_pdb.pdb_name = rebuilt_pdb_path.split('/')[-1].split('.')[0]
@@ -245,14 +262,17 @@ class Dataset:
             #On y applique les techniques demandées
             for technique in self.liste_techniques:
                 dico_resultats = None
+                logging.debug('On applique la technique {} au sampling {}'.format(technique,sampling.sampling_name))
                 if technique != zang_scores_calculs:
+                    
                     dico_resultats = technique(rebuilt_pdb_path, list(str(sampling.receptor_chain)), list(str(sampling.ligand_chain)))
+
                 else:
-                    logging.debug('Filling with NA for tmscore of rmsd')
+                    logging.debug('Filling with NA for tmscore, rmsd and rmsd_align')
                     dico_resultats = {}
+                    dico_resultats['rmsd']='NA'
+                    dico_resultats['rmsd_align']='NA'
                     dico_resultats['tmscore']='NA'
-                    dico_resultats['rmsd'] = 'NA'
-                    dico_resultats['rmsd_align'] = 'NA'
                     
                 for cle in dico_resultats:
                     logging.debug('Valeurs: {} , {}'.format(cle, dico_resultats[cle]))
@@ -275,32 +295,37 @@ class Dataset:
             liste_pdb = os.listdir()
             
             pdb_natif_path = self.temp_dir+'/'+sampling.sampling_name+'_native.pdb'
+            logging.debug('pdb_natif_path = {}'.format(str(pdb_natif_path)))
             #On repère l'emplacement de la structure native pour faire le tmscore et le rmsd
             
             for pdb in liste_pdb:
                 #Sur chaque pdb on applique toutes les techniques
             
                 rebuilt_pdb_path = self.temp_dir+sampling.sampling_name+pdb
+                logging.debug('rebuilt_pdb_path = {}'.format(str(rebuilt_pdb_path)))
                 recepteurpath = sampling.receptor_path
                 ligandpath = os.getcwd()+'/'+pdb
             
                 rebuild_pdb(receptor_path = recepteurpath, ligand_path = ligandpath, output_path = rebuilt_pdb_path)
-                resultat_de_ce_pdb = PDB_Analysis(isnative = True)
+                resultat_de_ce_pdb = PDB_Analysis(isnative = False)
                 
-                resultats_de_ce_pdb = PDB_Analysis(isnative = True)
+                resultats_de_ce_pdb = PDB_Analysis(isnative = False)
                 resultats_de_ce_pdb.pdb_name = rebuilt_pdb_path.split('/')[-1].split('.')[0]
                 resultats_de_ce_pdb.type_sampling = sampling.sampling_type
                 
                 for technique in self.liste_techniques:
                     dico_resultats = None
                     if technique != zang_scores_calculs:
-                        dico_resultats = technique(rebuilt_pdb_path, list(str(sampling.receptor_chain)), list(str(sampling.ligand_chain)))
+                        dico_resultats = technique(rebuilt_pdb_path,list(str(sampling.receptor_chain)),list(str(sampling.ligand_chain))) 
+                                                                 
                     else:
                         dico_resultats = technique(rebuilt_pdb_path, pdb_natif_path)
+
                     for cle in dico_resultats:
                         logging.debug('Valeurs: {} , {}'.format(cle, dico_resultats[cle]))
                         resultats_de_ce_pdb.valeurs[cle]=dico_resultats[cle]
                     del(dico_resultats)    
+                    
                 self.liste_resultats.append(resultats_de_ce_pdb)
                 
                 del(resultats_de_ce_pdb)
@@ -318,7 +343,7 @@ class Dataset:
             #On enregistre tous les résultats du sampling et on passe au suivant !
 
         
-    def __add__(self, autre_dataset):
+    def __add__(self, autre_dataset): #Manque la fusion des résultats !
     
         fusion_techniques = self.liste_techniques  + [i for i in autre_dataset.liste_techniques if i not in self.liste_techniques]
         fusion_resultats = self.liste_resultats + [i for i in autre_dataset.liste_resultats if i not in self.liste_resultats]
@@ -376,15 +401,17 @@ class Dataset:
     def _write_resultats(self,prefix):
         fichier = open(str(self.output_dir+prefix+'_resultats.out'), 'w')
         
-        liste = 'PDB_name\tType_sampling\tIsNative\tstatpot\tvdw\telectro\tshape\trmsd\trmsd_align\ttmscore'
+        liste = 'PDB_name'+'\t'+'Type_sampling'+'\t'+'IsNative'+'\t'+'statpot'+'\t'+'vdw'+'\t'+'electro'+'\t'+'shape'+'\t'+'rmsd' +'\t'+'rmsd_align'+'\t'+'tmscore'
         fichier.write(liste)
         fichier.write('\n')
         del(liste)
         
         for resultat in self.liste_resultats:
-            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['statpot']) + '\t' + str(resultat.valeurs['']) + '\t' + str(resultat.valeurs['vdw']) + '\t' + str(resultat.valeurs['electro']) + '\t'+ str(resultat.valeurs['shape']) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['rmsd_align']) + '\t' + str(resultat.valeurs['tmscore']) + '\t')
+            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['statpot']) + '\t' + str(resultat.valeurs['vdw']) + '\t' + str(resultat.valeurs['electro']) + '\t'+ str(resultat.valeurs['shape']) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['rmsd_align']) + '\t' + str(resultat.valeurs['tmscore']) + '\t')
+            
 
             fichier.write(chaine)
+            fichier.write('\n')
                 
         fichier.close()    
         
@@ -394,5 +421,8 @@ class Dataset:
 
             
 if __name__ == '__main__':
+    print('Please check the log: tail -f ./Appliqueur.log\n')
     my_data = Dataset()
+    print('Dataset is loaded')
     my_data.apply_methods()
+    print('DONE')
