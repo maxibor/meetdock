@@ -35,7 +35,7 @@ def get_args():
     parser.add_argument(
         '-ligChain',
         default="B",
-        help="ligand Chain ID. If there more than one, separate by a ','. Default = 'A'")
+        help="ligand Chain ID. If there more than one, separate by a ','. Default = 'B'")
 
 
     parser.add_argument(

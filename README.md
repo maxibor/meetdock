@@ -91,7 +91,7 @@ optional arguments:
   -recChain RECCHAIN  receptor Chain ID. If there more than one, separate by a
                       ','. Default = 'A'
   -ligChain LIGCHAIN  ligand Chain ID. If there more than one, separate by a
-                      ','. Default = 'A'
+                      ','. Default = 'B'
   -pH PH              pH for electrostatic interactions. Default = 7
   -depth DEPTH        Threshold for surface residue determination (Angstrom).
                       Default = 4
