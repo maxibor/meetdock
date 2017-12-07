@@ -86,8 +86,4 @@ def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = 
 
 if __name__ == "__main__":
     mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist = get_args()
-    print("mypath",mypath)
-    print("recChain",recChain)
-    print("ligChain", ligChain,)
-    # print(os.path.dirname(os.path.realpath(__file__)))
     run_meetdock(mypath=mypath, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth)
