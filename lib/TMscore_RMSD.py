@@ -8,8 +8,11 @@ import re
 lib_path = os.getcwd()
 
 def parser_tmscore(fichier):
-	''' Function which parse the TMscore file and look for differents three scores, 
-	TMscore, RMSD
+	''' Function which parse the TMscore file and look for three different scores, 
+	TMscore, RMSD, RMSD post alignment.
+	Input : TMscore_result file
+	Output : Dictionnary which contain three keys 'tmscore', 'rmsd', 'rmsd_alig'. 
+	Each value is the specific score obtained.
 	'''
 
     dico_valeurs = {}
@@ -43,6 +46,9 @@ def parser_tmscore(fichier):
 # {'tmscore':valeur, 'rmsd avant alignement': valeur, 'rmsd apres alignement' : valeur }
 
 def zang_scores_calculs(pdbpath, nativepath):
+	'''Function which use the executable TMscore form https://zhanglab.ccmb.med.umich.edu/
+	Input : path of the native complex and path of the model that you want to evalue
+	Output : TMscore_result file'''
         
     output = str(lib_path)+'/../temp/'+str(pdbpath.split('/')[-1])+'_tmscore.out'
     command = ('TMscore -c {} {} > '.format(pdbpath, nativepath)+str(output))
