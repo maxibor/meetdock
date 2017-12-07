@@ -42,7 +42,7 @@ def rebuild_pdb(receptor_path, ligand_path, output_path='./merged_pdb.pdb'):
     if output_path != './merged_pdb.pdb':	
         logging.debug('PDB reconstruit ! Il est disponible dans ./temp/')  
 
-def get_default_dataset():
+def get_default_dataset(samplings_location='../data/samplings/'):
 #Retourne une liste de samplings
 #Les chemins des samplings sont les chemins relatifs par rapport au dossier lib !!
     origin_path = os.getcwd()
@@ -52,8 +52,8 @@ def get_default_dataset():
     
     script_path = os.getcwd()
     logging.debug('Chemin courant: {}'.format(str(script_path)))
-    logging.debug('Déplacement vers ../data/sampling/')
-    os.chdir('../data/sampling')
+    logging.debug('Déplacement vers ../data/samplings/')
+    os.chdir('../data/samplings')
     logging.debug('Déplacement effectué')
     
     liste_types = os.listdir()
@@ -81,8 +81,8 @@ def get_default_dataset():
             ligand_chain = str(sampling_name.split('_')[3])
             receptor_chain = str(sampling_name.split('_')[1])
             
-            ligand_path = '../data/samplings'+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
-            receptor_path = '../data/samplings'+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
+            ligand_path = '../data/samplings/'+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
+            receptor_path = '../data/samplings/'+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
                     
             current_sampling = Sampling(sampling_name, sampling_type, sampling_dir, ligand_path, ligand_name, ligand_chain, receptor_path, receptor_name, receptor_chain)
             
@@ -384,7 +384,7 @@ class Dataset:
         del(liste)
         
         for resultat in self.liste_resultats:
-            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['statpot']) + '\t' + str(resultat.valeurs['']) + '\t' + str(resultat.valeurs['vdw']) + '\t' + str(resultat.valeurs['electro']) + '\t'+ str(resultat.valeurs['shape']) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['rmsd_align']) + '\t' + str(resultat.valeurs['tmscore']) + '\t'
+            chaine = str(resultat.pdb_name + '\t' + str(resultat.type_sampling) + '\t' + str(resultat.isnative) + '\t' + str(resultat.valeurs['statpot']) + '\t' + str(resultat.valeurs['']) + '\t' + str(resultat.valeurs['vdw']) + '\t' + str(resultat.valeurs['electro']) + '\t'+ str(resultat.valeurs['shape']) + '\t' + str(resultat.valeurs['rmsd']) + '\t' + str(resultat.valeurs['rmsd_align']) + '\t' + str(resultat.valeurs['tmscore']) + '\t')
 
             fichier.write(chaine)
                 
