@@ -19,6 +19,22 @@ This scoring method uses the following steps:
 - Electrostatic and Van der Waals interactions scoring.
 - Adjusting the weights of the different scoring functions by machine learning.
 
+## Dependancies
+
+[Conda](https://conda.io/docs/)
+
+## Download
+
+#### 1- download the latest release of MeetDock [here](https://github.com/meetU-MasterStudents/2017-2018_Equipe1/releases/latest)
+
+#### 2- decompress the `.zip` file
+
+`unzip 2017-2018_Equipe1-*`
+
+#### 3- go to MeetDockOne folder
+
+`cd 2017-2018_Equipe1-*`
+
 ## Installation
 
 ### Environment - Conda
@@ -35,8 +51,6 @@ The environment file is available here as [environment.yml](./environment.yml).
 
 `source activate meetu`
 
-#### 3- go to MeetDockOne folder
-`cd 2017-2018_Equipe1-master`
 
 ## Quick start
 
