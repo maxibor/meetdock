@@ -32,6 +32,10 @@ def merge_pdb(receptor_path, ligand_path, outputpath='./merged_pdb'):
 	 Take two pdb as input and merge them into a third one using the specified
 	 PATH. In no path is specified, it is written in current working directory
 	 under "merged.pdb"
+	 Input : two pdb, a receptor and a ligand for example
+	 Output : Third pdb file which is the association of the two outputs.
+	 IMPORTANT : all chains are renamed !!!! Chain A for the first input pdb file
+	 and Chain B for the second pdb file
 	'''
 
 	# for fichier in onlyfiles: #Not needed if we're working on a single pdb
