@@ -27,18 +27,18 @@ def parser_tmscore(fichier):
 
             #Si les résultats sont trouvés alors on les print
             if TMscore != None:
-                dco_valeurs[str(fichier.split('/')[-1])] = TMscore.group(1)
+                dico_valeurs[str(fichier.split('/')[-1])] = TMscore.group(1)
             elif RMSD != None:
-                dco_valeurs[str(fichier.split('/')[-1])] = RMSD.group(1)
+                dico_valeurs[str(fichier.split('/')[-1])] = RMSD.group(1)
             elif RMSD_align != None:
-                dco_valeurs[str(fichier.split('/')[-1])] = RMSD_align.group(1)
+                dico_valeurs[str(fichier.split('/')[-1])] = RMSD_align.group(1)
 
     return dico_valeurs
 # {'tmscore':valeur, 'rmsd avant alignement': valeur, 'rmsd apres alignement' : valeur }
 
 def zang_scores_calculs(pdbpath, nativepath):
     output = str(lib_path)+'/../temp/'+str(pdbpath.split('/')[-1])+'_tmscore.out'
-    command = ('TMscore {} {} > '+str(output)).format(pdbpath,nativepath)
+    command = ('TMscore -c {} {} > '+str(output)).format(pdbpath,nativepath)
     os.system(command)
 
     resultat = parser_tmscore(str(output))

@@ -1,0 +1,34 @@
+
+ *****************************************************************************
+ *                                 TM-SCORE                                  *
+ * A scoring function to assess the similarity of protein structures         *
+ * Based on statistics:                                                      *
+ *       0.0 < TM-score < 0.17, random structural similarity                 *
+ *       0.5 < TM-score < 1.00, in about the same fold                       *
+ * Reference: Yang Zhang and Jeffrey Skolnick, Proteins 2004 57: 702-710     *
+ * For comments, please email to: zhng@umich.edu                             *
+ *****************************************************************************
+
+Structure1: /home/pyxi  Length=  470
+Structure2: /home/pyxi  Length=  470 (by which all scores are normalized)
+Number of residues in common=  470
+RMSD of  the common residues=   11.106
+
+TM-score    = 0.6025  (d0= 7.74)
+MaxSub-score= 0.5101  (d0= 3.50)
+GDT-TS-score= 0.5356 %(d<1)=0.5043 %(d<2)=0.5085 %(d<4)=0.5255 %(d<8)=0.6043
+GDT-HA-score= 0.5101 %(d<0.5)=0.5021 %(d<1)=0.5043 %(d<2)=0.5085 %(d<4)=0.5255
+
+ -------- rotation matrix to rotate Chain-1 to Chain-2 ------
+ i          t(i)         u(i,1)         u(i,2)         u(i,3)
+ 1     23.1826141643   0.4295802944   0.6745604124  -0.6003574108
+ 2      8.8453804505  -0.3291564850   0.7360553041   0.5915053657
+ 3    -28.8137309024   0.8409023600  -0.0564875141   0.5382307885
+
+Superposition in the TM-score: Length(d<5.0)=248  RMSD=  0.74
+(":" denotes the residue pairs of distance < 5.0 Angstrom)
+HHMTVLIIGMGNIGKKLVELGNFEKIYAYDRISKDIPGVVRLDEFQVPSDVSTVVECASPEAVKEYSLQILKNPVNYIIISTSAFADEVFRERFFSELKNSPARVFFPSGAIGGLDVLSSIKDFVKNVRIETIKPPKSLGLDLKGKTVVFEGSVEEASKLFPRNINVASTIGLIVGFEKVKVTIVADPAMDHNIHIVRISSAIGNYEFKIENISMLTVYSILRTLRNLESKIIFGHHMTVLIIGMGNIGKKLVELGNFEKIYAYDRISKDIPGVVRLDEFQVPSDVSTVVECASPEAVKEYSLQILKNPVNYIIISTSAFADEVFRERFFSELKNSPARVFFPSGAIGGLDVLSSIKDFVKNVRIETIKPPKSLGLDLKGKTVVFEGSVEEASKLFPRNINVASTIGLIVGFEKVKVTIVADPAMDHNIHIVRISSAIGNYEFKIENISMLTVYSILRTLRNLESKIIFG
+                                                                                                                            : :::                     :::                          :::                : : :                                :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+HHMTVLIIGMGNIGKKLVELGNFEKIYAYDRISKDIPGVVRLDEFQVPSDVSTVVECASPEAVKEYSLQILKNPVNYIIISTSAFADEVFRERFFSELKNSPARVFFPSGAIGGLDVLSSIKDFVKNVRIETIKPPKSLGLDLKGKTVVFEGSVEEASKLFPRNINVASTIGLIVGFEKVKVTIVADPAMDHNIHIVRISSAIGNYEFKIENISMLTVYSILRTLRNLESKIIFGHHMTVLIIGMGNIGKKLVELGNFEKIYAYDRISKDIPGVVRLDEFQVPSDVSTVVECASPEAVKEYSLQILKNPVNYIIISTSAFADEVFRERFFSELKNSPARVFFPSGAIGGLDVLSSIKDFVKNVRIETIKPPKSLGLDLKGKTVVFEGSVEEASKLFPRNINVASTIGLIVGFEKVKVTIVADPAMDHNIHIVRISSAIGNYEFKIENISMLTVYSILRTLRNLESKIIFG
+12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+

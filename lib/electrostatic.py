@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+import sys, math
+
 try:
     from lib import pdbtools
     from lib import matrice_distances
     from lib import pdb_resdepth
-    import sys, math
+
 except:
     import pdbtools
     import matrice_distances

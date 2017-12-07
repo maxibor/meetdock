@@ -11,9 +11,9 @@ from collections import OrderedDict
 import sys, math, os
 
 try:
-    from lib import pdb_resdepth
+    import lib.pdb_resdepth
 except:
-    from pdb_resdepth import *
+    import pdb_resdepth
 
 def read_pdb(filename):
     """

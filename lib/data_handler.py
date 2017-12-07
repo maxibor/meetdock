@@ -250,7 +250,9 @@ class Dataset:
                 else:
                     logging.debug('Filling with NA for tmscore of rmsd')
                     dico_resultats = {}
-                    dico_resultats[technique.__name__]='NA'
+                    dico_resultats['tmscore']='NA'
+                    dico_resultats['rmsd'] = 'NA'
+                    dico_resultats['rmsd_align'] = 'NA'
                     
                 for cle in dico_resultats:
                     logging.debug('Valeurs: {} , {}'.format(cle, dico_resultats[cle]))
@@ -294,8 +296,9 @@ class Dataset:
                     if technique != zang_scores_calculs:
                         dico_resultats = technique(rebuilt_pdb_path, list(str(sampling.receptor_chain)), list(str(sampling.ligand_chain)))
                     else:
-                        dico_resultats = technique(rebuilt_pdb_path)
+                        dico_resultats = technique(rebuilt_pdb_path, pdb_natif_path)
                     for cle in dico_resultats:
+                        logging.debug('Valeurs: {} , {}'.format(cle, dico_resultats[cle]))
                         resultats_de_ce_pdb.valeurs[cle]=dico_resultats[cle]
                     del(dico_resultats)    
                 self.liste_resultats.append(resultats_de_ce_pdb)

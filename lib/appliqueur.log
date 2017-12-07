@@ -1,26 +1,26 @@
-2017-12-07 03:55:27,447 Initialisation
-2017-12-07 03:55:27,447 Création du dataset
-2017-12-07 03:55:27,447 Récupération des samplings
-2017-12-07 03:55:27,447 Chargement du dataset par défaut --> get_default_dataset()
-2017-12-07 03:55:27,447 Chemin courant: /home/pyxis/Documents/2017-2018_Equipe1/lib
-2017-12-07 03:55:27,447 Déplacement vers ../data/samplings/
-2017-12-07 03:55:27,447 Déplacement effectué
-2017-12-07 03:55:27,447 Liste des types de sampling: ['homomeres_c2', 'autrehomomeres_c2']
-2017-12-07 03:55:27,447 Début du parsing des noms du type homomeres_c2
-2017-12-07 03:55:27,447 Déplacement vers homomeres_c2/sampling
-2017-12-07 03:55:27,447 Déplacement réussi
-2017-12-07 03:55:27,447 Liste des noms de sampling pour le type homomeres_c2: 
-2017-12-07 03:55:27,448 1j5p_A_1j5p_B
-2017-12-07 03:55:27,448 Retour vers ../data/samplings/
-2017-12-07 03:55:27,448 Début du parsing des noms du type autrehomomeres_c2
-2017-12-07 03:55:27,448 Déplacement vers autrehomomeres_c2/sampling
-2017-12-07 03:55:27,448 Déplacement réussi
-2017-12-07 03:55:27,448 Liste des noms de sampling pour le type autrehomomeres_c2: 
-2017-12-07 03:55:27,448 1j5p_A_1j5p_B
-2017-12-07 03:55:27,448 Retour vers ../data/samplings/
-2017-12-07 03:55:27,448 Retour au PATH initial
-2017-12-07 03:55:27,448 Noms des samplings récupérés:
-2017-12-07 03:55:27,448 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
+2017-12-07 04:26:30,571 Initialisation
+2017-12-07 04:26:30,572 Création du dataset
+2017-12-07 04:26:30,572 Récupération des samplings
+2017-12-07 04:26:30,572 Chargement du dataset par défaut --> get_default_dataset()
+2017-12-07 04:26:30,572 Chemin courant: /home/pyxis/Documents/2017-2018_Equipe1/lib
+2017-12-07 04:26:30,572 Déplacement vers ../data/samplings/
+2017-12-07 04:26:30,572 Déplacement effectué
+2017-12-07 04:26:30,572 Liste des types de sampling: ['homomeres_c2', 'autrehomomeres_c2']
+2017-12-07 04:26:30,572 Début du parsing des noms du type homomeres_c2
+2017-12-07 04:26:30,572 Déplacement vers homomeres_c2/sampling
+2017-12-07 04:26:30,573 Déplacement réussi
+2017-12-07 04:26:30,573 Liste des noms de sampling pour le type homomeres_c2: 
+2017-12-07 04:26:30,573 1j5p_A_1j5p_B
+2017-12-07 04:26:30,573 Retour vers ../data/samplings/
+2017-12-07 04:26:30,573 Début du parsing des noms du type autrehomomeres_c2
+2017-12-07 04:26:30,573 Déplacement vers autrehomomeres_c2/sampling
+2017-12-07 04:26:30,573 Déplacement réussi
+2017-12-07 04:26:30,573 Liste des noms de sampling pour le type autrehomomeres_c2: 
+2017-12-07 04:26:30,573 1j5p_A_1j5p_B
+2017-12-07 04:26:30,573 Retour vers ../data/samplings/
+2017-12-07 04:26:30,573 Retour au PATH initial
+2017-12-07 04:26:30,573 Noms des samplings récupérés:
+2017-12-07 04:26:30,573 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
  SAMPLING_TYPE = homomeres_c2 
  SAMPLING_DIR = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B 
  LIGAND_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb 
@@ -29,7 +29,7 @@
  RECEPTOR_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb 
  RECEPTOR_NAME = 1j5p 
  RECEPTOR_CHAIN = A
-2017-12-07 03:55:27,448 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
+2017-12-07 04:26:30,573 Caractéristiques de l'objet sampling: SAMPLING_NAME = 1j5p_A_1j5p_B 
  SAMPLING_TYPE = autrehomomeres_c2 
  SAMPLING_DIR = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/sampling/1j5p_A_1j5p_B 
  LIGAND_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_B.pdb 
@@ -38,12 +38,56 @@
  RECEPTOR_PATH = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb 
  RECEPTOR_NAME = 1j5p 
  RECEPTOR_CHAIN = A
-2017-12-07 03:55:27,448 Liste des techniques à appliquer sur ce dataset
-2017-12-07 03:55:27,448 <function zang_scores_calculs at 0x7f4a6062b378>
-2017-12-07 03:55:27,448 <function combine_score at 0x7f4a78f23c80>
-2017-12-07 03:55:27,448 ********APPLICATION DES METHODES EN COURS********
-2017-12-07 03:55:27,448 Application pour les structures natives: RMSD et tmscore ne seront pas effectués
-2017-12-07 03:55:27,448 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
-2017-12-07 03:55:27,454 PDB reconstruit ! Il est disponible dans ./temp/
-2017-12-07 03:55:27,454 Filling with NA for tmscore of rmsd
-2017-12-07 03:55:27,454 Valeurs: zang_scores_calculs , NA
+2017-12-07 04:26:30,573 Liste des techniques à appliquer sur ce dataset
+2017-12-07 04:26:30,573 <function zang_scores_calculs at 0x7f5f3ce3e378>
+2017-12-07 04:26:30,573 <function combine_score at 0x7f5f55734c80>
+2017-12-07 04:26:30,573 ********APPLICATION DES METHODES EN COURS********
+2017-12-07 04:26:30,573 Application pour les structures natives: RMSD et tmscore ne seront pas effectués
+2017-12-07 04:26:30,573 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
+2017-12-07 04:26:30,579 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:26:30,579 Filling with NA for tmscore of rmsd
+2017-12-07 04:26:30,579 Valeurs: tmscore , NA
+2017-12-07 04:26:30,579 Valeurs: rmsd , NA
+2017-12-07 04:26:30,579 Valeurs: rmsd_align , NA
+2017-12-07 04:26:48,541 Valeurs: statpot , 374.10999999999984
+2017-12-07 04:26:48,541 Valeurs: vdw , -307.5025254319218
+2017-12-07 04:26:48,542 Valeurs: electro , 1.1818632828591714e-24
+2017-12-07 04:26:48,542 Valeurs: shape , -1753.0
+2017-12-07 04:26:48,542 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/autrehomomeres_c2/structures-natives/1j5p_B.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp//1j5p_A_1j5p_B_native.pdb
+2017-12-07 04:26:48,547 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:26:48,547 Filling with NA for tmscore of rmsd
+2017-12-07 04:26:48,547 Valeurs: tmscore , NA
+2017-12-07 04:26:48,547 Valeurs: rmsd , NA
+2017-12-07 04:26:48,547 Valeurs: rmsd_align , NA
+2017-12-07 04:27:05,315 Valeurs: statpot , 374.10999999999984
+2017-12-07 04:27:05,316 Valeurs: vdw , -307.5025254319218
+2017-12-07 04:27:05,316 Valeurs: electro , 1.1818632828591714e-24
+2017-12-07 04:27:05,316 Valeurs: shape , -1753.0
+2017-12-07 04:27:05,316 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_3.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb
+2017-12-07 04:27:05,321 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:27:05,445 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_3.pdb_tmscore.out , 0.74
+2017-12-07 04:27:23,653 Valeurs: statpot , 153.93
+2017-12-07 04:27:23,653 Valeurs: vdw , -65.91921556935748
+2017-12-07 04:27:23,653 Valeurs: electro , -2.9448394367129293e-25
+2017-12-07 04:27:23,653 Valeurs: shape , -519.0
+2017-12-07 04:27:23,654 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_2.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb
+2017-12-07 04:27:23,659 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:27:23,768 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_2.pdb_tmscore.out , 0.51
+2017-12-07 04:27:41,466 Valeurs: statpot , 321.82999999999987
+2017-12-07 04:27:41,466 Valeurs: vdw , 176.62625052988483
+2017-12-07 04:27:41,466 Valeurs: electro , -1.3523257052147052e-24
+2017-12-07 04:27:41,466 Valeurs: shape , -321.0
+2017-12-07 04:27:41,466 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_4.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_4.pdb
+2017-12-07 04:27:41,471 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:27:41,577 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_4.pdb_tmscore.out , 0.00
+2017-12-07 04:27:59,796 Valeurs: statpot , 220.73000000000002
+2017-12-07 04:27:59,796 Valeurs: vdw , -143.38787993228624
+2017-12-07 04:27:59,796 Valeurs: electro , -3.352775653738957e-25
+2017-12-07 04:27:59,796 Valeurs: shape , -468.0
+2017-12-07 04:27:59,796 Merging de PDB, receptor_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../data/samplings/homomeres_c2/structures-natives/1j5p_A.pdb, ligand_path = /home/pyxis/Documents/2017-2018_Equipe1/data/samplings/homomeres_c2/sampling/1j5p_A_1j5p_B/1j5p_A_1j5p_B_1.pdb, output_path = /home/pyxis/Documents/2017-2018_Equipe1/lib/../temp/1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb
+2017-12-07 04:27:59,801 PDB reconstruit ! Il est disponible dans ./temp/
+2017-12-07 04:27:59,896 Valeurs: 1j5p_A_1j5p_B1j5p_A_1j5p_B_1.pdb_tmscore.out , 0.24
+2017-12-07 04:28:17,155 Valeurs: statpot , 388.10999999999996
+2017-12-07 04:28:17,155 Valeurs: vdw , -368.03773771041284
+2017-12-07 04:28:17,156 Valeurs: electro , 1.1889945992884464e-24
+2017-12-07 04:28:17,156 Valeurs: shape , -1935.0
