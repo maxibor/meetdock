@@ -253,7 +253,7 @@ class Dataset:
             
             #On reconstruit la structure native
             rebuild_pdb(receptor_path = recepteurpath, ligand_path = ligandpath, output_path = rebuilt_pdb_path)
-            logging.debug('Rebuilding native from: \n\treceptor {} \n\t ligand {}'.format(recepteur_path, ligand_path)
+            logging.debug('Rebuilding native from: \n\treceptor {} \n\t ligand {}'.format(recepteurpath, ligandpath))
             
             resultats_de_ce_pdb = PDB_Analysis(isnative = True)
             resultats_de_ce_pdb.pdb_name = rebuilt_pdb_path.split('/')[-1].split('.')[0]
