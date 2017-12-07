@@ -1,31 +1,6 @@
-#GRAVEY Francois
-
-#Commentaire de Guillaume: J'ai modifié ton code pour qu'il rentre dans une
-#..fonction
-#Il faudrait écrire un test et vérifier que ça marche :)
-
 import os
 from os import listdir
 from os.path import isfile, join
-
-
-# onlyfiles = [f for f in listdir('./Type_1/sampling') if isfile(join('./Type_1/sampling/', f))]
-# onlyfiles = onlyfiles[1:]
-# print(onlyfiles)
-#
-# #os.mkdir('./Type_1/pdb_merge')
-#
-#
-# recepteur = input('Entrez le nom du fichier à analyser : ')
-# while recepteur == '':
-# 	print('Merci de renseigner un nom de fichier pour l\'execution du programme')
-# 	recepteur = input('Entrez le nom du fichier à analyser : ')
-#
-# if os.path.exists(recepteur):
-# 	print("le fichier est présent")
-# else:
-# 	print('Le fichier que vous avez rentré n\'est pas sur votre disque dur')
-# 	recepteur = input('Entrez le nom du fichier à analyser : ')
 
 def merge_pdb(receptor_path, ligand_path, outputpath='./merged_pdb'):
 	'''
