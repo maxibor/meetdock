@@ -1,7 +1,7 @@
 # MeetDockOne - Equipe1 Scoring
 <img src="./images/logo.png" width="250">
 
-**MeetDockOne: a scoring method for protein protein docking** 
+**MeetDockOne: a scoring method for protein protein docking**
 
 ## Authors:  
 - Guillaume Delevoye  
@@ -22,7 +22,7 @@ This scoring method uses the following steps:
 ## Quick start
 
 ```python
-to complete
+$ ./meetdock pdbfile.pdb
 ```
 
 ## Installation
@@ -41,12 +41,29 @@ The environment file is available here as [environment.yml](./environment.yml).
 
 `source activate meetu`
 
-## Usage
-
-```
-TODO
-```
-
 ## Documentation
 
-TODO
+```
+$ ./meetdock -h
+usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-foldx]
+                   [-pH PH] [-depth DEPTH] [-dist DIST]
+                   pdbfile
+
+MeetDockOne scores a protein complex docking
+
+positional arguments:
+  pdbfile       .pdb complex file
+
+optional arguments:
+  -h, --help    show this help message and exit
+  -shape        compute shape complementarity
+  -electro      compute Electrostatic interactions
+  -jones        compute Lennard-Jones interactions
+  -proba        Compute knowledge based interactions
+  -foldx        Scores with FoldX
+  -pH PH        pH for electrostatic interactions. Default = 7
+  -depth DEPTH  Threshold for surface residue determination (Angstrom).
+                Default = 4
+  -dist DIST    Threshold for interface determination (Angstrom). Default =
+                8.5
+```
