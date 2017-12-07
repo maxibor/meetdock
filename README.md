@@ -46,7 +46,7 @@ The environment file is available here as [environment.yml](./environment.yml).
 
 #### 1- create the environment from the environment.yml file
 
-`conda env create -f ./path/to/environment.yml`
+`conda env create -f environment.yml`
 
 #### 2- activate the environment
 
