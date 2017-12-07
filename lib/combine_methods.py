@@ -23,7 +23,7 @@ import warnings
 from Bio import BiopythonWarning
 warnings.simplefilter('ignore', BiopythonWarning)
 
-def combine_score(pdbfile, recepChain, ligChain, statpotrun, vdwrun, electrorun, shaperun, pH, depth, dist):
+def combine_score(pdbfile, recepChain, ligChain, statpotrun = True, vdwrun = True, electrorun = True, shaperun = True, pH = True, depth = 4.5, dist = 8.6):
     combined_dict = {}
     my_struct = pdbtools.read_pdb(pdbfile)
     depth_dict = pdb_resdepth.calculate_resdepth(structure=my_struct, pdb_filename=pdbfile)
