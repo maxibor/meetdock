@@ -19,12 +19,6 @@ This scoring method uses the following steps:
 - Electrostatic and Van der Waals interactions scoring.
 - Adjusting the weights of the different scoring functions by machine learning.
 
-## Quick start
-
-```
-$ ./meetdock pdb_path -recChain A -ligChain B -shape -electro -jones -proba
-```
-
 ## Installation
 
 ### Environment - Conda
@@ -40,6 +34,20 @@ The environment file is available here as [environment.yml](./environment.yml).
 #### 2- activate the environment
 
 `source activate meetu`
+
+#### 3- go to MeetDockOne folder
+`cd 2017-2018_Equipe1-master`
+
+## Quick start
+
+```
+$ ./meetdock ./data -recChain A -ligChain B -shape -electro -jones -proba
+```
+The folder ./data contained pdb complexes.  
+The receptor is Chain A (recChain A).  
+The ligand is Chain B (LigChain B).  
+The following methods will be apply on the files : shape complementarity (shape), electrostatic energy (electro), Leenard-Jones interactions (jones), and a knowledge based scoring function (proba)
+
 
 ## Documentation
 
@@ -72,3 +80,5 @@ optional arguments:
   -dist DIST          Threshold for interface determination (Angstrom).
                       Default = 8.5
 ```
+## Warning  
+The file 'data_handler' has been developed in order to performed machine learning. Use ./meetdock for scoring
