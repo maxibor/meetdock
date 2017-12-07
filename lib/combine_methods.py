@@ -31,17 +31,20 @@ def combine_score(pdbfile, recepChain, ligChain, statpotrun, vdwrun, electrorun,
 
     if statpotrun == True:
         statpot = knowledge.parse_distance_mat(distmat, method=["glaser"])
+        combined_dict["statpot"] = statpot
     if vdwrun == True:
         vdw = Lennard_Jones.lennard_jones(dist_matrix=distmat)
+        combined_dict["vdw"] = vdw
     if electrorun == True:
         electro = electrostatic.electrostatic(inter_resid_dict=distmat, pH =pH)
+        combined_dict["electro"] = electro
     if shaperun == True:
         shape = shape_complement.runshape(structure=my_struct, recepChain=recepChain, depth_dict=depth_dict, ligChain=ligChain, depthCutoff =depth)
+        combined_dict["shape"] = shape
     # foldx = TOADD
-    combined_dict["statpot"] = statpot
-    combined_dict["vdw"] = vdw
-    combined_dict["electro"] = electro
-    combined_dict["shape"] = shape
+
+
+
 
     return(combined_dict)
 

@@ -84,8 +84,7 @@ def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = 
 
     for apdb in pdbs:
         thepdb = mypath+"/"+apdb
-        # print(thepdb)
-        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain)
+        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
         print(apdb, ":", res)
 
 
@@ -97,4 +96,4 @@ if __name__ == "__main__":
     print("recChain",recChain)
     print("ligChain", ligChain,)
     # print(os.path.dirname(os.path.realpath(__file__)))
-    run_meetdock(mypath=mypath, ligChain="A", recChain="B")
+    run_meetdock(mypath=mypath, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth)
