@@ -9,6 +9,11 @@ import electrostatic
 import shape_complement
 import knowledge
 
+#Shut up plz biopython
+import warnings
+from Bio import BiopythonWarning
+warnings.simplefilter('ignore', BiopythonWarning)
+
 def combine_score(pdbfile, recepChain, ligChain):
     combined_dict = {}
     my_struct = pdbtools.read_pdb(pdbfile)
