@@ -8,6 +8,9 @@ import re
 lib_path = os.getcwd()
 
 def parser_tmscore(fichier):
+	''' Function which parse the TMscore file and look for differents three scores, 
+	TMscore, RMSD
+	'''
 
     dico_valeurs = {}
 	
