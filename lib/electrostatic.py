@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
-from lib import pdbtools
-from lib import matrice_distances
-from lib import pdb_resdepth
-import sys, math
+try:
+    from lib import pdbtools
+    from lib import matrice_distances
+    from lib import pdb_resdepth
+    import sys, math
+except:
+    import pdbtools
+    import matrice_distances
+    import pdb_resdepth
 
 def amino3to1(resid):
     codes = {

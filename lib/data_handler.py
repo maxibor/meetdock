@@ -14,11 +14,6 @@ logging.debug('Initialisation')
 
 lib_path = os.getcwd()
 print(lib_path)
-
-def delete_hetatm(pdb_filename):
-    command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
-    os.system(command)
-
   
 def rebuild_pdb(receptor_path, ligand_path, output_path='./merged_pdb.pdb'):
 
@@ -52,8 +47,8 @@ def get_default_dataset(samplings_location='../data/samplings/'):
     
     script_path = os.getcwd()
     logging.debug('Chemin courant: {}'.format(str(script_path)))
-    logging.debug('Déplacement vers ../data/samplings/')
-    os.chdir('../data/samplings')
+    logging.debug('Déplacement vers {}'.format(str(samplings_location)))
+    os.chdir(samplings_location)
     logging.debug('Déplacement effectué')
     
     liste_types = os.listdir()
@@ -73,7 +68,7 @@ def get_default_dataset(samplings_location='../data/samplings/'):
         
         for sampling_name in liste_sampling_names:
 
-            sampling_dir = '../data/samplings/'+str(sampling_type)+'/sampling/'+str(sampling_name)
+            sampling_dir = str(samplings_location)+str(sampling_type)+'/sampling/'+str(sampling_name)
             
             receptor_name = str(sampling_name.split('_')[0])
             
@@ -81,8 +76,8 @@ def get_default_dataset(samplings_location='../data/samplings/'):
             ligand_chain = str(sampling_name.split('_')[3])
             receptor_chain = str(sampling_name.split('_')[1])
             
-            ligand_path = '../data/samplings/'+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
-            receptor_path = '../data/samplings/'+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
+            ligand_path = str(samplings_location)+str(sampling_type)+'/structures-natives/'+str(ligand_name)+'_'+str(ligand_chain)+'.pdb'      
+            receptor_path = str(samplings_location)+str(sampling_type)+'/structures-natives/'+str(receptor_name)+'_'+str(receptor_chain)+'.pdb'   
                     
             current_sampling = Sampling(sampling_name, sampling_type, sampling_dir, ligand_path, ligand_name, ligand_chain, receptor_path, receptor_name, receptor_chain)
             
@@ -90,8 +85,8 @@ def get_default_dataset(samplings_location='../data/samplings/'):
             del(current_sampling)
         
         os.chdir(origin_path)
-        logging.debug('Retour vers ../data/samplings')
-        os.chdir('../data/samplings')
+        logging.debug('Retour vers {}'.format(samplings_location))
+        os.chdir(str(samplings_location))
         
     logging.debug('Retour au PATH initial')
     os.chdir(origin_path)        
@@ -177,7 +172,7 @@ class Dataset:
     temp_dir = ''
     data_dir = ''
     
-    def __init__(self, liste_samplings = [], liste_techniques = [foldx, fft, rmsd, tmscore, maxdo, lenardjones], default = 'YES'):
+    def __init__(self, liste_samplings = [], liste_techniques = [zang_scores_calculs, combine_score], default = 'YES'):
         if default == 'YES':
             self._init__default()
         else:
@@ -219,7 +214,7 @@ class Dataset:
         for element in self.liste_samplings:
             logging.debug(str(element))     
             
-        self.liste_techniques = [fft, rmsd, foldx, tmscore, maxdo, lenardjones]
+        self.liste_techniques = liste_techniques
         logging.debug('Liste des techniques à appliquer sur ce dataset')
         
         for element in self.liste_techniques:
@@ -250,8 +245,8 @@ class Dataset:
             #On y applique les techniques demandées
             for technique in self.liste_techniques:
                 dico_resultats = None
-                if technique != rmsd and technique != tmscore:
-                    dico_resultats = technique(rebuilt_pdb_path)
+                if technique != zang_scores_calculs:
+                    dico_resultats = technique(rebuilt_pdb_path, list(str(sampling.receptor_chain)), list(str(sampling.ligand_chain)))
                 else:
                     logging.debug('Filling with NA for tmscore of rmsd')
                     dico_resultats = {}
@@ -296,8 +291,8 @@ class Dataset:
                 
                 for technique in self.liste_techniques:
                     dico_resultats = None
-                    if technique == rmsd or technique == tmscore:
-                        dico_resultats = technique(rebuilt_pdb_path, pdb_natif_path)
+                    if technique != zang_scores_calculs:
+                        dico_resultats = technique(rebuilt_pdb_path, list(str(sampling.receptor_chain)), list(str(sampling.ligand_chain)))
                     else:
                         dico_resultats = technique(rebuilt_pdb_path)
                     for cle in dico_resultats:

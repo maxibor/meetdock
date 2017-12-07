@@ -9,7 +9,11 @@ import matplotlib
 from mpl_toolkits.mplot3d import Axes3D
 from collections import OrderedDict
 import sys, math, os
-from lib import pdb_resdepth
+
+try:
+    from lib import pdb_resdepth
+except:
+    from pdb_resdepth import *
 
 def read_pdb(filename):
     """

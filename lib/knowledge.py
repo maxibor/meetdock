@@ -6,6 +6,7 @@ import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
 
+import os
 lib_path = os.getcwd()
 
 def get_matrix_aa_propensions(method):

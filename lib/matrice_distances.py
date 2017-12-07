@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
-from lib import pdbtools as pdbt
-from lib import pdb_resdepth as resd
+try:
+    from lib import pdbtools as pdbt
+    from lib import pdb_resdepth as resd
+except:
+    import pdbtools as pdbt
+    import pdb_resdepth as resd
+
 import re
 import math
 import sys
