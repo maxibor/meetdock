@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+try:
+    from lib import pdbtools as pdbt
+    from lib import pdb_resdepth as resd
+    from lib import matrice_distances as distm
+except:
+    import pdbtools as pdbt
+    import pdb_resdepth as resd
+    import matrice_distances as distm
 
-import pdbtools as pdbt
-import pdb_resdepth as resd
-import matrice_distances as distm
 
 
 # The function takes the distance matrix as argument and gives the Lennard-Jones potential as result

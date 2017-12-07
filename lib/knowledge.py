@@ -1,10 +1,17 @@
-import pdbtools as pdbt
-import pdb_resdepth as resd
 import re
 import math
 import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
+
+try:
+    from lib import pdbtools as pdbt
+    from lib import pdb_resdepth as resd
+except:
+    import pdbtools as pdbt
+    import pdb_resdepth as resd
+
+
 
 import os
 lib_path = os.getcwd()
@@ -17,10 +24,11 @@ def get_matrix_aa_propensions(method):
             and cips. Each method gives a matrix 20x20 where each cell contains a propensity value,
             that is, a value that indicates the preference of amino acids i and j to be one in front of the other.
         OUTPUT:
-            arr_aa(numpy array) The matrix of interface propensities. 
+            arr_aa(numpy array) The matrix of interface propensities.
     '''
 
-    path_file = lib_path+"/../potentiel/"+method
+    script_path = os.path.dirname(os.path.realpath(__file__))
+    path_file = script_path+"/../potentiel/"+method
     mat = []
     with open(path_file, 'r') as input:
         for i,line in enumerate(input):
@@ -38,7 +46,7 @@ def parse_distance_mat(interaction, method):
         value (coming from different method) for each interaction. The user has
         to enter the list of interaction with at least one method.
         INPUT:
-            interaction(dict) dictionary storing the distance (Angstrom) based 
+            interaction(dict) dictionary storing the distance (Angstrom) based
             on a cutoff (8.6 Angstroms) between a residue from the receptor and
             a residue from the ligand (keys).
             method(str list) method listed above (cf get_matrix_aa_propensions)
@@ -73,4 +81,3 @@ def parse_distance_mat(interaction, method):
                 return(score_tot)
             else:
                sys.exit("Enter a valid method")
-        

@@ -1,13 +1,22 @@
 #!/usr/bin/env python3
 
 import sys
-import pdbtools
-import pdb_resdepth
-import matrice_distances
-import Lennard_Jones
-import electrostatic
-import shape_complement
-import knowledge
+try:
+    from lib import pdbtools
+    from lib import pdb_resdepth
+    from lib import matrice_distances
+    from lib import Lennard_Jones
+    from lib import electrostatic
+    from lib import shape_complement
+    from lib import knowledge
+except:
+    import pdbtools
+    import pdb_resdepth
+    import matrice_distances
+    import Lennard_Jones
+    import electrostatic
+    import shape_complement
+    import knowledge
 
 #Shut up plz biopython
 import warnings

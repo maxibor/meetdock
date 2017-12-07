@@ -11,7 +11,7 @@ from collections import OrderedDict
 import sys, math, os
 
 try:
-    import lib.pdb_resdepth
+    from lib import pdb_resdepth
 except:
     import pdb_resdepth
 

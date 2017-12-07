@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
+try:
+    from lib import pdb_resdepth
+    from lib import pdbtools
+
+except:
+    import pdb_resdepth
+    import pdbtools
 
 import numpy as np
 import pandas as pd
 import math, sys
-import pdb_resdepth
-import pdbtools
 from collections import OrderedDict
 
 def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff, resScale):

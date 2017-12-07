@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-import sys, argparse
-from lib import electrostatic
+import sys, argparse, os
+from lib import combine_methods as cm
 
 def get_args():
     '''This function parses and return arguments passed in'''
     parser = argparse.ArgumentParser(
         prog='MeetDockOne',
         description='MeetDockOne scores a protein complex docking')
-    parser.add_argument('pdbfile', help=".pdb complex file")
+    parser.add_argument('pdbpath', help="path to pdb complex directory")
     parser.add_argument(
         '-shape',
         action="store_true",
@@ -33,6 +33,17 @@ def get_args():
         help="Scores with FoldX")
 
     parser.add_argument(
+        '-recChain',
+        default="A",
+        help="receptor Chain ID. If there more than one, separate by a ','. Default = 'A'")
+
+    parser.add_argument(
+        '-ligChain',
+        default="B",
+        help="ligand Chain ID. If there more than one, separate by a ','. Default = 'A'")
+
+
+    parser.add_argument(
         '-pH',
         default=7,
         type=int,
@@ -51,10 +62,12 @@ def get_args():
         help="Threshold for interface determination (Angstrom). Default = 8.5")
     args = parser.parse_args()
 
-    myfile = args.pdbfile
-    shape = shape
+    mypath = args.pdbpath
+    shape = args.shape
     electro = args.electro
     jones = args.jones
+    recChain = args.recChain
+    ligChain = args.ligChain
     proba = args.proba
     foldx = args.foldx
     pH = args.pH
@@ -63,9 +76,25 @@ def get_args():
 
 
 
-    return(myfile, shape, electro, jones, proba, foldx, pH, depth, dist)
+    return(mypath, shape, electro, jones, recChain, ligChain, proba, foldx, pH, depth, dist)
+
+def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, depth = 4, dist = 8.6):
+    pdbs = os.listdir(mypath)
+    pdbs = [i for i in pdbs if ".pdb" in i]
+
+    for apdb in pdbs:
+        thepdb = mypath+"/"+apdb
+        # print(thepdb)
+        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain)
+        print(apdb, ":", res)
+
+
+
 
 if __name__ == "__main__":
-     # do something
-     myfile, shape, electro, jones, proba, foldx, pH, depth, dist = get_args()
-     print("hello")
+    mypath, shape, electro, jones, recChain, ligChain, proba, foldx, pH, depth, dist = get_args()
+    print("mypath",mypath)
+    print("recChain",recChain)
+    print("ligChain", ligChain,)
+    # print(os.path.dirname(os.path.realpath(__file__)))
+    run_meetdock(mypath=mypath, ligChain="A", recChain="B")
