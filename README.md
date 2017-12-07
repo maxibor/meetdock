@@ -22,7 +22,7 @@ This scoring method uses the following steps:
 ## Quick start
 
 ```
-$ ./meetdock pdbfile.pdb
+$ ./meetdock pdb_path -recChain A -ligChain B -shape -electro -jones -proba
 ```
 
 ## Installation
