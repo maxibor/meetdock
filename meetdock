@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 import sys, argparse, os
 from lib import combine_methods as cm
+try:
+    from joblib import Parallel, delayed
+    import multiprocessing
+except:
+    print("No MultiThreading available, running on single threadself.")
+
 
 def get_args():
     '''This function parses and return arguments passed in'''
@@ -55,6 +61,13 @@ def get_args():
         default=8.5,
         type=float,
         help="Threshold for interface determination (Angstrom). Default = 8.5")
+
+    parser.add_argument(
+        '-thread',
+        default=999,
+        type=int,
+        help="Number of threads for MultiThreading. Default: automatic detection")
+
     args = parser.parse_args()
 
     mypath = args.pdbpath
@@ -67,23 +80,35 @@ def get_args():
     pH = args.pH
     depth = args.depth
     dist = args.dist
+    thread = args.thread
 
 
 
-    return(mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist)
+    return(mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread)
 
-def run_meetdock(mypath, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, pH = 7, depth = 4, dist = 8.6):
+def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, depth = 4, dist = 8.6):
     pdbs = os.listdir(mypath)
-    pdbs = [i for i in pdbs if ".pdb" in i]
+    pdbs = [i for i in pdbs if i.endswith(".pdb")]
 
-    for apdb in pdbs:
-        thepdb = mypath+"/"+apdb
-        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-        print(apdb, ":", res)
+    try:
+        def runpdbs(apdb):
+            thepdb = mypath+"/"+apdb
+            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+            print(apdb, ":", res)
 
+        if thread == 999:
+            num_cores = multiprocessing.cpu_count()
+        else:
+            num_cores = thread
+        print("Running on",num_cores, "threads")
+        results = Parallel(n_jobs=num_cores)(delayed(runpdbs)(apdb) for apdb in pdbs)
 
-
+    except:
+        for apdb in pdbs:
+            thepdb = mypath+"/"+apdb
+            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+            print(apdb, ":", res)
 
 if __name__ == "__main__":
-    mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist = get_args()
-    run_meetdock(mypath=mypath, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth)
+    mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread = get_args()
+    run_meetdock(mypath=mypath, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth, thread=thread)
