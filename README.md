@@ -38,7 +38,7 @@ This scoring method uses the following steps:
 
 ## Installation
 
-### Environment - Conda
+### A- Environment - Conda
 
 To ensure the cross-platform reproducibility of this method, we choose to work with a [conda](https://conda.io) environment.
 
@@ -51,6 +51,19 @@ The environment file is available here as [environment.yml](./environment.yml).
 #### 2- activate the environment
 
 `source activate meetu`
+
+### B- MultiThreading (optional)
+
+We use the [Joblib](https://pythonhosted.org/joblib/) library for multiprocessing.
+However, because of a [bug](https://github.com/joblib/joblib/issues/543) in the current release of Joblib, it will not work with MeetDockOne.
+To fix it, you need to install Joblib from their [Github Master branch](https://github.com/joblib/joblib):
+
+```
+git clone https://github.com/joblib/joblib.git
+cd joblib
+python setup.py install
+cd ..
+```
 
 
 ## Quick start
