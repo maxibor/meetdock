@@ -72,9 +72,9 @@ $ ./meetdock ./data -recChain A -ligChain B -shape -electro -jones -proba
 
 ```
 $ ./meetdock -h
-usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-foldx]
+usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba]
                    [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-pH PH]
-                   [-depth DEPTH] [-dist DIST]
+                   [-depth DEPTH] [-dist DIST] [-thread THREAD]
                    pdbpath
 
 MeetDockOne scores a protein complex docking
@@ -97,6 +97,8 @@ optional arguments:
                       Default = 4
   -dist DIST          Threshold for interface determination (Angstrom).
                       Default = 8.5
+  -thread THREAD      Number of threads for MultiThreading. Default: automatic
+                      detection
 ```
 ## Warning  
 The file 'data_handler' has been developed in order to performed machine learning. Use ./meetdock for scoring
