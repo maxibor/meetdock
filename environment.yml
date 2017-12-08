@@ -1,4 +1,4 @@
-name: env_meetu
+name: meetu
 channels:
 - bioconda
 - salilab
