@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys, argparse, os
+import pandas as pd
 from lib import combine_methods as cm
 try:
     from joblib import Parallel, delayed
@@ -89,12 +90,16 @@ def get_args():
 def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, depth = 4, dist = 8.6):
     pdbs = os.listdir(mypath)
     pdbs = [i for i in pdbs if i.endswith(".pdb")]
-
+    all_res = []
     try:
         def runpdbs(apdb):
             thepdb = mypath+"/"+apdb
+            all_res.append(res)
+            print("Computing scores for ", apdb)
             res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-            print(apdb, ":", res)
+            all_res.append(res)
+
+            # print(apdb, ":", res)
 
         if thread == 999:
             num_cores = multiprocessing.cpu_count()
@@ -106,8 +111,14 @@ def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, rec
     except:
         for apdb in pdbs:
             thepdb = mypath+"/"+apdb
+            print("Computing scores for ", apdb)
             res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-            print(apdb, ":", res)
+            all_res.append(res)
+
+    mydf = pd.DataFrame(all_res)
+    mydf = mydf.set_index('pdb')
+    print(mydf.to_string())
+
 
 if __name__ == "__main__":
     mypath, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread = get_args()

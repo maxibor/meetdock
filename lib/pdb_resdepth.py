@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 
 from Bio.PDB import *
+# try:
+#     from lib import ResidueDepth
+#     from lib import naccess
+# except:
+#     import ResidueDepth
+#     import naccess
+
 import os
 
 def calculate_resdepth(structure, pdb_filename):
@@ -17,7 +24,11 @@ def calculate_resdepth(structure, pdb_filename):
     '''
 
     model = structure[0]
+    print("MSMS running")
     rd = ResidueDepth(model, pdb_filename)
+    # rd = ResidueDepth.ResidueDepth(model, pdb_filename)
+    # rd = naccess.run_naccess(model = model, pdb_file = pdb_filename)
+    print("MSMS finished")
     mydict = {}
 
     for item in rd.property_list:
@@ -46,9 +57,9 @@ def bfactor_to_resdepth(mydict):
        the function calculate_resdepth.
        INPUT:
            mydict(dict) which contains a residue (chain, three letter code, position in chain - tuple format)
-           and its corresponding residue depth. 
+           and its corresponding residue depth.
     '''
-    
+
     with open('2za4.pdb', 'r') as input:
         with open('2za4_modified.pdb', 'w') as output:
             for line in input:
@@ -69,7 +80,7 @@ def delete_hetatm(pdb_filename):
     ''' This function is a procedure.
         Removes HETATM lines.
         INPUT:
-            pdb_filename(str) PDB file for which HETATM lines 
+            pdb_filename(str) PDB file for which HETATM lines
             (water molecules) need to be removed.
     '''
     command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)

@@ -29,6 +29,7 @@ def combine_score(pdbfile, recepChain, ligChain, statpotrun = True, vdwrun = Tru
     depth_dict = pdb_resdepth.calculate_resdepth(structure=my_struct, pdb_filename=pdbfile)
     distmat = matrice_distances.calc_distance_matrix(structure=my_struct, depth= depth_dict, chain_R=recepChain, chain_L=ligChain, dist_max=dist)
 
+    combined_dict["pdb"] = pdbfile.split("/")[-1]
     if statpotrun == True:
         statpot = knowledge.parse_distance_mat(distmat, method=["glaser"])
         combined_dict["statpot"] = statpot
