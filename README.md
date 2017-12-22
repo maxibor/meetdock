@@ -58,6 +58,8 @@ We use the [Joblib](https://pythonhosted.org/joblib/) library for multiprocessin
 However, because of a [bug](https://github.com/joblib/joblib/issues/543) in the current release of Joblib, it will not work with MeetDockOne.
 To fix it, you need to install Joblib from their [Github Master branch](https://github.com/joblib/joblib):
 
+**You must install Joblib in the conda environment while it is activated**
+
 ```
 git clone https://github.com/joblib/joblib.git
 cd joblib
