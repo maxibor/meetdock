@@ -23,6 +23,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
+import pickle
 
 
 class CategoricalEncoder(BaseEstimator, TransformerMixin):
@@ -516,6 +517,7 @@ cvres = grid_search.cv_results_
 ################################################################################
 final_model = grid_search.best_estimator_
 
+
 #Préparation des données
 X_test = test_set.drop('tmscore', axis=1)
 X_test = X_test.drop('Type_sampling', axis=1)
@@ -532,11 +534,17 @@ print(np.sqrt(final_mse))
 #doit on utiliser le type de sampling ?
 #doit on diviser le statpot par la longueur du pdb ?
 
-final = test_set.assign(tm_score_predit=final_prediction)
-
-A = final.sort_values(by=['tm_score_predit'], ascending = False)
-
-A.iloc[:11].to_csv('final.csv', sep= ';', decimal = ',')
 
 
+#A = final.sort_values(by=['tm_score_predit'], ascending = False)
 
+#A.iloc[:11].to_csv('final.csv', sep= ';', decimal = ',')
+
+
+pickle_out = open('learning.pickle', 'wb')
+pickle.dump(final_model, pickle_out)
+pickle_out.close()
+
+pickle_out = open('data.pickle', 'wb')
+pickle.dump(X_test, pickle_out)
+pickle_out.close()
