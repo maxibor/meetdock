@@ -23,11 +23,11 @@ import warnings
 from Bio import BiopythonWarning
 warnings.simplefilter('ignore', BiopythonWarning)
 
-def combine_score(pdbfile, recepChain, ligChain, statpotrun = True, vdwrun = True, electrorun = True, shaperun = True, pH = True, depth = 4.5, dist = 8.6):
+def combine_score(pdbfile, recepChain, ligChain, statpotrun = True, vdwrun = True, electrorun = True, shaperun = True, pH = True, depth = "msms", dist = 8.6):
     combined_dict = {}
     my_struct = pdbtools.read_pdb(pdbfile)
-    depth_dict = pdb_resdepth.calculate_resdepth(structure=my_struct, pdb_filename=pdbfile)
-    distmat = matrice_distances.calc_distance_matrix(structure=my_struct, depth= depth_dict, chain_R=recepChain, chain_L=ligChain, dist_max=dist)
+    depth_dict = pdb_resdepth.calculate_resdepth(structure=my_struct, pdb_filename=pdbfile, method= depth)
+    distmat = matrice_distances.calc_distance_matrix(structure=my_struct, depth= depth_dict, chain_R=recepChain, chain_L=ligChain, dist_max=dist, method = depth)
 
     combined_dict["pdb"] = pdbfile.split("/")[-1]
     if statpotrun == True:
@@ -40,7 +40,7 @@ def combine_score(pdbfile, recepChain, ligChain, statpotrun = True, vdwrun = Tru
         electro = electrostatic.electrostatic(inter_resid_dict=distmat, pH =pH)
         combined_dict["electro"] = electro
     if shaperun == True:
-        shape = shape_complement.runshape(structure=my_struct, recepChain=recepChain, depth_dict=depth_dict, ligChain=ligChain, depthCutoff =depth)
+        shape = shape_complement.runshape(structure=my_struct, recepChain=recepChain, depth_dict=depth_dict, ligChain=ligChain, method = depth)
         combined_dict["shape"] = shape
     # foldx = TOADD
 

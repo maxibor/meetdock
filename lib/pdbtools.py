@@ -29,7 +29,7 @@ def read_pdb(filename):
     return(structure)
 
 
-def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff, resScale):
+def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff, resScale, method):
     """
     COMPUTES RESIDUE POSITIONS AND DEPTH from Structure object
     INPUT:
@@ -75,7 +75,7 @@ def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff, resScale):
             if chain.get_id() == chainId :
                 for residue in chain:
                     if "GLY" in residue.get_resname():
-                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict)
+                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict, method = method)
                         thisResname = residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2]
 
                         for atom in residue:
@@ -101,7 +101,7 @@ def pdb_data_extractor(structure, chainId, depth_dict, depthCutoff, resScale):
                                 resname.append(thisResname)
 
                     elif residue.get_resname() in amino:
-                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict)
+                        thisDepth = pdb_resdepth.resdepth_to_fft(residue = residue, cutoff = depthCutoff, mydict = depth_dict, method = method)
                         thisResname = residue.get_resname()+str(residue.get_full_id()[3][1])+residue.get_full_id()[2]
 
                         for atom in residue:

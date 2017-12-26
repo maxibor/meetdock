@@ -12,7 +12,7 @@ import pandas as pd
 import math, sys
 from collections import OrderedDict
 
-def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff, resScale):
+def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff, resScale, method):
     """
         READs PDB FILE AND COMPUTES RESIDUE POSITIONS AND DEPTH
         INPUT :
@@ -34,9 +34,9 @@ def pdb_fft(structure, recepChain, ligChain, depth_dict, depthCutoff, resScale):
     for model in structure:
         for chain in model:
             if chain.get_id() in recepChain:
-                receptor.append(pdbtools.pdb_data_extractor(structure = structure, chainId = chain.get_id(), depth_dict = depth_dict, depthCutoff = depthCutoff, resScale=resScale))
+                receptor.append(pdbtools.pdb_data_extractor(structure = structure, chainId = chain.get_id(), depth_dict = depth_dict, depthCutoff = depthCutoff, resScale=resScale, method = method))
             elif chain.get_id() in ligChain:
-                ligand.append(pdbtools.pdb_data_extractor(structure = structure, chainId = chain.get_id(), depth_dict = depth_dict, depthCutoff = depthCutoff, resScale=resScale))
+                ligand.append(pdbtools.pdb_data_extractor(structure = structure, chainId = chain.get_id(), depth_dict = depth_dict, depthCutoff = depthCutoff, resScale=resScale, method = method))
     receptorData = pd.concat(receptor)
     ligandData = pd.concat(ligand)
     return([receptorData, ligandData])
@@ -184,7 +184,7 @@ def multi_mat(rec_grid, lig_grid):
     res = res.real
     return(res)
 
-def runshape(structure, recepChain, ligChain, depth_dict, resolution=2, depthCutoff = 4, resScale = "atom"):
+def runshape(structure, method, recepChain, ligChain, depth_dict, resolution=2, depthCutoff = 4, resScale = "atom"):
     """
     Wrapper function for the shape complementarity
     INPUT:
@@ -199,7 +199,7 @@ def runshape(structure, recepChain, ligChain, depth_dict, resolution=2, depthCut
         - result(int) Shape complementarity score
     """
 
-    data = pdb_fft(structure=structure, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff, resScale= resScale)
+    data = pdb_fft(structure=structure, recepChain = recepChain, ligChain = ligChain, depth_dict = depth_dict, depthCutoff = depthCutoff, resScale= resScale, method = method)
     # pdb_fft(interface = interface, depth_dict = depth_dict, depthCutoff = depthCutoff, resScale= resScale)
     receptor = data[0]
     ligand = data[1]

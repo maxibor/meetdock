@@ -10,10 +10,10 @@ except:
 
 import os
 
-method = "naccess"
+# method = "naccess"
 # method = "msms"
 
-def calculate_resdepth(structure, pdb_filename):
+def calculate_resdepth(structure, pdb_filename, method):
     '''
         Computes the residue depth for a residue of a PDB from
         Structure object.
@@ -27,7 +27,6 @@ def calculate_resdepth(structure, pdb_filename):
     '''
 
     model = structure[0]
-
     if method == "msms":
         print("MSMS running for", pdb_filename)
         rd = msms.ResidueDepth(model, pdb_filename)
@@ -102,7 +101,7 @@ def delete_hetatm(pdb_filename):
     command = "grep -v 'HETATM' {} > clean_{}".format(pdb_filename, pdb_filename)
     os.system(command)
 
-def resdepth_to_fft(residue, cutoff, mydict):
+def resdepth_to_fft(residue, cutoff, mydict, method):
     if method == "msms":
         cutoff = 4
     elif method == "naccess":

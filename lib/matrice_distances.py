@@ -13,10 +13,10 @@ import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
 
-method = "naccess"
+# method = "naccess"
 # method = "msms"
 
-def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
+def calc_distance_matrix(structure, depth, chain_R, chain_L, method, dist_max=8.6):
 
     """
         Creation of a distance dictionary which contains

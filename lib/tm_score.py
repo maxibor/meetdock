@@ -215,7 +215,7 @@ class DataFrameSelector(BaseEstimator, TransformerMixin):
     def transform(self, X):
         return X[self.attribute_names].values
 
-def tm_score(score):
+def tm_score(score, outdir, execdir):
     """Function which predict the tm_score using machine learning algorithm
     Input : Pandas DataFrame made by MeetDockOne program
     Output :
@@ -237,7 +237,7 @@ def tm_score(score):
     #Modification of the numerical values which will be used for tm_score prediction
     score_prepared = num_pipeline.fit_transform(score_num)
     #Load the machine learning algorithm thanks to picke
-    final_model = pickle.load(open("lib/learning.pickle", "rb"))
+    final_model = pickle.load(open(execdir+"/lib/learning.pickle", "rb"))
     #prediction of the tm_score
     predictions = final_model.predict(score_prepared)
     #Adding interpretations:
@@ -258,13 +258,13 @@ def tm_score(score):
     final = final.sort_values(by=['tm_score_prediction'], ascending = False)
     print(final.to_string())
     #Writing the pandas DataFrame to a csv file
-    final.to_csv('MeetDockOne_results.csv', sep= ';', decimal = ',', index=True)
+    final.to_csv(outdir+'/MeetDockOne_results.csv', sep= ';', decimal = ',', index=True)
     #ploting all the data
     image = score_num.assign(tm_score_prediction=predictions)
     image.hist(figsize = (10,7))
-    plt.savefig('MeetDockOne_results.png', bbox_inches='tight')
+    plt.savefig(outdir+'/MeetDockOne_results.png', bbox_inches='tight')
     #Message
-    print('All right !!!!\nYou will find your results on the "MeetDockOne_results.csv" and the plots on the "MeetDockOne_results.png"\nThanks for using MeetDockOne !!!')
+    print('All right !!!!\nYou will find your results in the '+outdir+' directory.\n"MeetDockOne_results.csv" and the plots "MeetDockOne_results.png"\nThanks for using MeetDockOne !!!')
     #retrun
     return final
 
