@@ -52,28 +52,22 @@ The environment file is available here as [environment.yml](./environment.yml).
 
 `source activate meetu`
 
-### B- MultiThreading (optional)
+#### 3- solvant accessible surface (optional)
 
-We use the [Joblib](https://pythonhosted.org/joblib/) library for multiprocessing.
-However, because of a [bug](https://github.com/joblib/joblib/issues/543) in the current release of Joblib, it will not work with MeetDockOne.
-To fix it, you need to install Joblib from their [Github Master branch](https://github.com/joblib/joblib):
+The default method to compute the solvant accessible surface is [msms](http://mgltools.scripps.edu/packages/MSMS).  
+However, it is **really slow** and will **not work for big complexes, but it will run out of the box** and is included in *MeetDockOne*.  
 
-**You must install Joblib in the conda environment while it is activated**
+To solve this issue, it is also possible to run *MeetDockOne* with [Naccess](http://wolf.bms.umist.ac.uk/naccess/) (see Documentation section of this readme), a faster and more reliable method.  
+To do so, you will first need to [install](http://wolf.bms.umist.ac.uk/naccess/) Naccess yourself.    
 
-```
-git clone https://github.com/joblib/joblib.git
-cd joblib
-python setup.py install
-cd ..
-```
-
+The compilation of Naccess requires a special Fortran compiler  that is not available for OS X, therefore, it will only work on Linux (`sudo apt-get install gfortran`).
 
 ## Quick start
 
 ```
-$ ./meetdock ./data -recChain A -ligChain B -shape -electro -jones -proba
+(meetu) user@yourmachine:/home/maxime/meetdockone# ./meetdock  path/to/meetdockone/data -recChain A -ligChain B -shape -electro -jones -proba
 ```
-- The dictory `./data` contained pdb complexes.  
+- The dictory `path/to/meetdockone/data` contains pdb complexes to score.  
 - The receptor is Chain A (`-recChain A`).  
 - The ligand is Chain B (`-LigChain B`).  
 - The following methods will be computed on the complexes :    
@@ -86,16 +80,16 @@ $ ./meetdock ./data -recChain A -ligChain B -shape -electro -jones -proba
 ## Documentation
 
 ```
-$ ./meetdock -h
-usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba]
-                   [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-pH PH]
-                   [-depth DEPTH] [-dist DIST] [-thread THREAD]
+(meetu) user@yourmachine:/path/to/meetdockone# ./meetdock -h
+usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-outdir OUTDIR]
+                   [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-depth DEPTH]
+                   [-pH PH] [-dist DIST] [-thread THREAD]
                    pdbpath
 
 MeetDockOne scores a protein complex docking
 
 positional arguments:
-  pdbpath             path to pdb complex directory
+  pdbpath             absolute path to pdb complex directory
 
 optional arguments:
   -h, --help          show this help message and exit
@@ -103,17 +97,16 @@ optional arguments:
   -electro            compute Electrostatic interactions
   -jones              compute Lennard-Jones interactions
   -proba              Compute knowledge based interactions
+  -outdir OUTDIR      path to (existing) output directory
   -recChain RECCHAIN  receptor Chain ID. If there more than one, separate by a
                       ','. Default = 'A'
   -ligChain LIGCHAIN  ligand Chain ID. If there more than one, separate by a
                       ','. Default = 'B'
+  -depth DEPTH        Method for residue depth/solvant accessibility. [msms |
+                      naccess]. Default = msms
   -pH PH              pH for electrostatic interactions. Default = 7
-  -depth DEPTH        Threshold for surface residue determination (Angstrom).
-                      Default = 4
   -dist DIST          Threshold for interface determination (Angstrom).
                       Default = 8.5
   -thread THREAD      Number of threads for MultiThreading. Default: automatic
                       detection
 ```
-## Warning  
-The file 'data_handler' has been developed in order to performed machine learning. Use ./meetdock for scoring

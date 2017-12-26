@@ -16,7 +16,7 @@ def get_args():
     parser = argparse.ArgumentParser(
         prog='MeetDockOne',
         description='MeetDockOne scores a protein complex docking')
-    parser.add_argument('pdbpath', help="path to pdb complex directory")
+    parser.add_argument('pdbpath', help="absolute path to pdb complex directory")
     parser.add_argument(
         '-shape',
         action="store_true",
