@@ -24,7 +24,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
-import pickle 
+import pickle
 
 
 class CategoricalEncoder(BaseEstimator, TransformerMixin):
@@ -217,16 +217,17 @@ class DataFrameSelector(BaseEstimator, TransformerMixin):
 def tm_score(score):
     """Function which predict the tm_score using machine learning algorithm
     Input : Pandas DataFrame made by MeetDockOne program
-    Output : 
-            1° a .csv file with contains all the score regarding your pdbs and 
+    Output :
+            1° a .csv file with contains all the score regarding your pdbs and
             the tm_score_prediction
             2° a .png file in order to illustrate the repartition of all the data
             3° the output of the function is a pandas DataFrame that is easyest to
             analyse in details all your data
             """
-    
+
     #First of all, remove the column 'index' from the dataframe
-    score_num = score.drop('index', axis = 1)
+    # score_num = score.drop('', axis = 1)
+    score_num = score
     #list all the columns which contain numerical data
     num_attribs = list(score_num)
     #Definition of the sklearn pipeline which contains all the transformations
@@ -235,7 +236,7 @@ def tm_score(score):
     #Modification of the numerical values which will be used for tm_score prediction
     score_prepared = num_pipeline.fit_transform(score_num)
     #Load the machine learning algorithm thanks to picke
-    final_model = pickle.load(open("learning.pickle", "rb"))
+    final_model = pickle.load(open("lib/learning.pickle", "rb"))
     #prediction of the tm_score
     predictions = final_model.predict(score_prepared)
     #Adding interpretations:
@@ -254,8 +255,9 @@ def tm_score(score):
     final = final.assign(interpretations=interpretation)
     #Sorting pdb regarding the predict tm_score
     final = final.sort_values(by=['tm_score_prediction'], ascending = False)
+    print(final.to_string())
     #Writing the pandas DataFrame to a csv file
-    final.to_csv('MeetDockOne_results.csv', sep= ';', decimal = ',', index=False)
+    final.to_csv('MeetDockOne_results.csv', sep= ';', decimal = ',', index=True)
     #ploting all the data
     image = score_num.assign(tm_score_prediction=predictions)
     image.hist(figsize = (10,7))

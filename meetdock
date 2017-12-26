@@ -3,6 +3,8 @@ import sys, argparse, os
 import pandas as pd
 from sklearn import preprocessing
 from lib import combine_methods as cm
+from lib import tm_score as tm
+from multiprocessing.dummy import Pool as ThreadPool
 
 
 def get_args():
@@ -133,19 +135,21 @@ def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, rec
     mydf = mydf.set_index('pdb')
     mydf.loc[:,'electro'] *= -1
     mydf.loc[:,'vdw'] *= -1
-    print(mydf.to_string())
+    tm.tm_score(mydf)
+    # print(mydf.to_string())
 
 
-    x = mydf.values
-    min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-    x_scaled = min_max_scaler.fit_transform(x)
-    df = pd.DataFrame(x_scaled)
-    df.columns = mydf.columns
-    df.index = mydf.index
-    df["score"] = df.sum(axis=1) #sum by line
+    # x = mydf.values
+    # min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+    # x_scaled = min_max_scaler.fit_transform(x)
+    # df = pd.DataFrame(x_scaled)
+    # df.columns = mydf.columns
+    # df.index = mydf.index
+    # tm.tm_score(df)
+    # df["score"] = df.sum(axis=1) #sum by line
     # df['score'] = df.electro + df.shape + df.statpot + df.vdw
     # df = df.sort_values(by=['score'], ascending = False)
-    print(df.to_string())
+    # print(df.to_string())
 
 
 if __name__ == "__main__":
