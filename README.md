@@ -65,7 +65,7 @@ The compilation of Naccess requires a special Fortran compiler  that is not avai
 ## Quick start
 
 ```
-(meetu) user@yourmachine:/home/maxime/meetdockone# ./meetdock  path/to/meetdockone/data -recChain A -ligChain B -shape -electro -jones -proba
+(meetu)$ ./meetdock  path/to/meetdock/data -recChain A -ligChain B -shape -electro -jones -proba
 ```
 - The dictory `path/to/meetdockone/data` contains pdb complexes to score.  
 - The receptor is Chain A (`-recChain A`).  
@@ -80,7 +80,7 @@ The compilation of Naccess requires a special Fortran compiler  that is not avai
 ## Documentation
 
 ```
-(meetu) user@yourmachine:/path/to/meetdockone# ./meetdock -h
+(meetu)$ ./meetdock -h
 usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-outdir OUTDIR]
                    [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-depth DEPTH]
                    [-pH PH] [-dist DIST] [-thread THREAD]
