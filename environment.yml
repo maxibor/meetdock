@@ -1,4 +1,4 @@
-name: meetu
+name: test
 channels:
 - bioconda
 - salilab
