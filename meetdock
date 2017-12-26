@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 import sys, argparse, os
 import pandas as pd
+from sklearn import preprocessing
 from lib import combine_methods as cm
-try:
-    from joblib import Parallel, delayed
-    import multiprocessing
-except:
-    print("No MultiThreading available, running on single threadself.")
 
 
 def get_args():
@@ -91,7 +87,26 @@ def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, rec
     pdbs = os.listdir(mypath)
     pdbs = [i for i in pdbs if i.endswith(".pdb")]
     all_res = []
+    # try:
+    #     def runpdbs(apdb):
+    #         thepdb = mypath+"/"+apdb
+    #         all_res.append(res)
+    #         print("Computing scores for ", apdb)
+    #         res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+    #         all_res.append(res)
+    #
+    #         # print(apdb, ":", res)
+    #
+    #     if thread == 999:
+    #         num_cores = multiprocessing.cpu_count()
+    #     else:
+    #         num_cores = thread
+    #     print("Running on",num_cores, "threads")
+    #     results = Parallel(n_jobs=num_cores)(delayed(runpdbs)(apdb) for apdb in pdbs)
+
     try:
+        from multiprocessing.dummy import Pool as ThreadPool
+
         def runpdbs(apdb):
             thepdb = mypath+"/"+apdb
             all_res.append(res)
@@ -99,16 +114,15 @@ def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, rec
             res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
             all_res.append(res)
 
-            # print(apdb, ":", res)
-
         if thread == 999:
             num_cores = multiprocessing.cpu_count()
-        else:
-            num_cores = thread
-        print("Running on",num_cores, "threads")
-        results = Parallel(n_jobs=num_cores)(delayed(runpdbs)(apdb) for apdb in pdbs)
+        else :
+            pool = ThreadPool(num_cores)
+        print("MultiThreading available\nRunning on",num_cores, "threads")
+        pool.map(runpdbs, pdbs)
 
     except:
+        print("No MultiThreading available, running on a single thread.")
         for apdb in pdbs:
             thepdb = mypath+"/"+apdb
             print("Computing scores for ", apdb)
@@ -117,7 +131,21 @@ def run_meetdock(mypath, thread, shape = True, electro = True, jones = True, rec
 
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')
+    mydf.loc[:,'electro'] *= -1
+    mydf.loc[:,'vdw'] *= -1
     print(mydf.to_string())
+
+
+    x = mydf.values
+    min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+    x_scaled = min_max_scaler.fit_transform(x)
+    df = pd.DataFrame(x_scaled)
+    df.columns = mydf.columns
+    df.index = mydf.index
+    df["score"] = df.sum(axis=1) #sum by line
+    # df['score'] = df.electro + df.shape + df.statpot + df.vdw
+    # df = df.sort_values(by=['score'], ascending = False)
+    print(df.to_string())
 
 
 if __name__ == "__main__":

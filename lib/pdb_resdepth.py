@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
 from Bio.PDB import *
-# try:
-#     from lib import ResidueDepth
-#     from lib import naccess
-# except:
-#     import ResidueDepth
-#     import naccess
+try:
+    from lib import ResidueDepth as msms
+    from lib import naccess
+except:
+    import ResidueDepth as msms
+    import naccess
 
 import os
+
+method = "msms"
 
 def calculate_resdepth(structure, pdb_filename):
     '''
@@ -24,30 +26,39 @@ def calculate_resdepth(structure, pdb_filename):
     '''
 
     model = structure[0]
-    print("MSMS running")
-    rd = ResidueDepth(model, pdb_filename)
-    # rd = ResidueDepth.ResidueDepth(model, pdb_filename)
+
+    if method == "msms":
+        print("MSMS running")
+        rd = msms.ResidueDepth(model, pdb_filename)
+        print("MSMS finished")
+        mydict = {}
+
+        for item in rd.property_list:
+
+            # Create a tuple => (chain, residue3LetterCode, Id)
+            residue = (
+                        item[0].get_parent().id,    # Chain
+                        item[0].get_resname(),      # 3 letter code
+                        item[0].get_id()[1]         # Position in chain
+                    )
+            result = item[1]                        # (ResidueDepth, CalphaDepth)
+
+            mydict[residue] = result
+        return mydict
+            # Stores everything in a dict
+
+    elif method == "naccess":
+        rd = naccess.run_naccess(model = model, pdb_file = pdb_filename)
+        rd = process_asa_data(rd[1])
+        for key in rd.keys():
+            print(rd[key])
+            break
+    # mydict[residue] = result
+
     # rd = naccess.run_naccess(model = model, pdb_file = pdb_filename)
-    print("MSMS finished")
-    mydict = {}
-
-    for item in rd.property_list:
-
-        # Create a tuple => (chain, residue3LetterCode, Id)
-        residue = (
-                    item[0].get_parent().id,    # Chain
-                    item[0].get_resname(),      # 3 letter code
-                    item[0].get_id()[1]         # Position in chain
-                )
-        result = item[1]                        # (ResidueDepth, CalphaDepth)
 
 
-
-        # Stores everything in a dict
-
-        mydict[residue] = result
-
-    return mydict
+    # return mydict
 
 def bfactor_to_resdepth(mydict):
     '''
