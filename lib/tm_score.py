@@ -263,7 +263,7 @@ def tm_score(score):
     image.hist(figsize = (10,7))
     plt.savefig('MeetDockOne_results.png', bbox_inches='tight')
     #Message
-    print('All right !!!! You will found your results on the "MeetDockOne_results.csv" and the pictures on the "MeetDockOne_results.png" Thanks for using MeetDockOne !!!')
+    print('All right !!!!\nYou will find your results on the "MeetDockOne_results.csv" and the plots on the "MeetDockOne_results.png"\nThanks for using MeetDockOne !!!')
     #retrun
     return final
 
