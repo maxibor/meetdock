@@ -65,14 +65,14 @@ HOW TO RUN:
 
     #########################################
 
-      ---------------------------------------------------------------
-      |  ~$ source activate meetu                                   |
-      |  ~$ python                                                  |
-      |  >>> import meetdockone as mdo                              |
-      |  >>>                                                        |
-      |  >>> score = run_meetdock(mypath=ThePathToYourPDBToScore)   |
-      |  >>> print(score)                                           |
-      ---------------------------------------------------------------
+      -------------------------------------------------------------------
+      |  ~$ source activate meetu                                       |
+      |  ~$ python                                                      |
+      |  >>> from meetdockone import runmeetdock as rmd                 |
+      |  >>>                                                            |
+      |  >>> score = rmd.run_meetdock(mypath=ThePathToYourPDBToScore)   |
+      |  >>> print(score)                                               |
+      -------------------------------------------------------------------
 
     (Replace 'meetu' with the name you chosed during the installation)
     /!\ --> Congratulation, you are now using Meetdockone (genius level) /!\
