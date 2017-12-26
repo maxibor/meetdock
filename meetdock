@@ -132,12 +132,13 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
         pool.map(runpdbs, pdbs)
 
     except:
-        print("No MultiThreading available, running on a single thread.")
-        for apdb in pdbs:
-            thepdb = mypath+"/"+apdb
-            print("Computing scores for ", apdb)
-            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-            all_res.append(res)
+        print("...")
+        # print("No MultiThreading available, running on a single thread.")
+        # for apdb in pdbs:
+        #     thepdb = mypath+"/"+apdb
+        #     print("Computing scores for ", apdb)
+        #     res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+        #     all_res.append(res)
 
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')

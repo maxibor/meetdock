@@ -58,9 +58,19 @@ The default method to compute the solvant accessible surface is [msms](http://mg
 However, it is **really slow** and will **not work for big complexes, but it will run out of the box** and is included in *MeetDockOne*.  
 
 To solve this issue, it is also possible to run *MeetDockOne* with [Naccess](http://wolf.bms.umist.ac.uk/naccess/) (see Documentation section of this readme), a faster and more reliable method.  
-To do so, you will first need to [install](http://wolf.bms.umist.ac.uk/naccess/) Naccess yourself.    
+To do so, you will first need to install Naccess yourself.
 
-The compilation of Naccess requires a special Fortran compiler  that is not available for OS X, therefore, it will only work on Linux (`sudo apt-get install gfortran`).
+The compilation of Naccess requires a Fortran compiler.
+
+**Ubuntu/Debian Linux**
+- `sudo apt-get install gfortran`  
+- `csh lib/NACCESS/install.scr`  
+- `cp lib/NACCESS/* /usr/local/bin`  
+
+**OS X**
+- Download and install the fortran compiler for your system [here](https://gcc.gnu.org/wiki/GFortranBinaries#MacOS)
+- `csh lib/NACCESS/macinstall.scr`
+- `cp lib/NACCESS/* /usr/local/bin`  
 
 ## Quick start
 
