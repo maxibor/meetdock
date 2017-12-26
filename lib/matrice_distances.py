@@ -13,6 +13,9 @@ import sys
 import numpy
 from Bio.PDB.PDBParser import PDBParser
 
+method = "naccess"
+# method = "msms"
+
 def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
 
     """
@@ -36,9 +39,14 @@ def calc_distance_matrix(structure, depth, chain_R, chain_L, dist_max=8.6):
     ligand = {}
     interactions = {}
 
+    if method == "msms":
+        cutoff = 4
+    elif method == "naccess":
+        cutoff = 25
+
     # Searching for surface residues
     for key,val in depth.items():
-        if val[0] <= 4:
+        if (val[0] <= cutoff and method == "msms") or (val[0] >= cutoff and method == "naccess"):
             if key[0] in chain_R:
                 coord = struct_coord(key, structure)
                 if type(coord) != str:

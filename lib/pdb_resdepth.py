@@ -45,7 +45,7 @@ def calculate_resdepth(structure, pdb_filename):
             result = item[1]                        # (ResidueDepth, CalphaDepth)
 
             mydict[residue] = result
-            print(residue, mydict[residue])
+#             print(residue, mydict[residue])
         return mydict
             # Stores everything in a dict
 
@@ -55,14 +55,14 @@ def calculate_resdepth(structure, pdb_filename):
         rd = naccess.process_rsa_data(rd[0])
         mydict = {}
         for key in rd.keys():
-            print(key, rd[key], "\n")
+#             print(key, rd[key], "\n")
             residue = (
                  key[0],
                  rd[key]['res_name'],
                  key[1][1]
             )
             mydict[residue] = [float(rd[key]['all_atoms_rel']),float(rd[key]['all_atoms_rel'])]
-            print(residue, mydict[residue])
+#             print(residue, mydict[residue])
         return(mydict)
 
 def bfactor_to_resdepth(mydict):
@@ -106,12 +106,13 @@ def resdepth_to_fft(residue, cutoff, mydict):
     if method == "msms":
         cutoff = 4
     elif method == "naccess":
-        cutoff = 75
+        cutoff = 25
     res = (residue.get_parent().id, # Chain
            residue.get_resname(),   # 3 letter code
            residue.get_id()[1]      # Position in chain
           )
-    if mydict[res][0] < cutoff:        # test on ResidueDepth
+
+    if (mydict[res][0] <= cutoff and method == "msms") or (mydict[res][0] >= cutoff and method == "naccess"):
         return(1)
     else:
         return(9j)
