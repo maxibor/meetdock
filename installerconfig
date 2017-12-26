@@ -80,12 +80,13 @@ HOW TO RUN:
     ########################################
 
     If you want to use it like a standalone executable dirrectly from the command-line:
-    ------------------------------
-    |   $ source activate meetu  |
-    |   $ meetdock -h            |
-    ------------------------------
+    ----------------------------------
+    |   $ source activate meetu      |
+    |   $ cd YOUR_PATH_OF_MEETDOCK   |
+    |   $ ./meetdock -h              |
+    ----------------------------------
 
-    (Once again, replace 'meetu' with the name you chosed during the installation)
+    (Once again, replace 'YOUR_PATH_OF_MEETDOCK' with the root path of the github repo on your computer
 
     ########################################
 
