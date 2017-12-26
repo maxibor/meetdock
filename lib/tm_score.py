@@ -16,6 +16,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LinearRegression
 from scipy import sparse
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 from matplotlib.backends.backend_pdf import PdfPages
 from pandas.plotting import scatter_matrix
 from sklearn.base import BaseEstimator, TransformerMixin
