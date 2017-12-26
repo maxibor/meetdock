@@ -10,7 +10,8 @@ except:
 
 import os
 
-method = "msms"
+method = "naccess"
+# method = "msms"
 
 def calculate_resdepth(structure, pdb_filename):
     '''
@@ -44,21 +45,25 @@ def calculate_resdepth(structure, pdb_filename):
             result = item[1]                        # (ResidueDepth, CalphaDepth)
 
             mydict[residue] = result
+            print(residue, mydict[residue])
         return mydict
             # Stores everything in a dict
 
     elif method == "naccess":
+        mydict = {}
         rd = naccess.run_naccess(model = model, pdb_file = pdb_filename)
-        rd = process_asa_data(rd[1])
+        rd = naccess.process_rsa_data(rd[0])
+        mydict = {}
         for key in rd.keys():
-            print(rd[key])
-            break
-    # mydict[residue] = result
-
-    # rd = naccess.run_naccess(model = model, pdb_file = pdb_filename)
-
-
-    # return mydict
+            print(key, rd[key], "\n")
+            residue = (
+                 key[0],
+                 rd[key]['res_name'],
+                 key[1][1]
+            )
+            mydict[residue] = [float(rd[key]['all_atoms_rel']),float(rd[key]['all_atoms_rel'])]
+            print(residue, mydict[residue])
+        return(mydict)
 
 def bfactor_to_resdepth(mydict):
     '''
@@ -98,7 +103,10 @@ def delete_hetatm(pdb_filename):
     os.system(command)
 
 def resdepth_to_fft(residue, cutoff, mydict):
-
+    if method == "msms":
+        cutoff = 4
+    elif method == "naccess":
+        cutoff = 75
     res = (residue.get_parent().id, # Chain
            residue.get_resname(),   # 3 letter code
            residue.get_id()[1]      # Position in chain
