@@ -86,6 +86,29 @@ The compilation of Naccess requires a Fortran compiler.
     - Leenard-Jones interactions (`-jones`)
     - A knowledge based scoring function (`-proba`)
 
+## Output
+
+- `MeetDockOne_results.csv`: a .csv file summarizing your results, sorted by decreasing predicted Tm score.
+    - **pdb**: name of the pdb file
+    - **electrostatic**: Electrostatic energy
+    - **shape**: Shape complementarity, similar to [Chen et al.](http://dx.doi.org/10.1002/prot.10092)
+    - **vdw**: Van der Waals interactions
+    - **tm_score_prediction**: Predicted Tm score with our Machine learning model
+    - **interpretations**: Tm score > 0.8 Excellent || 0.8 > Tm score >= 0.6 Moyen || 0.6 > Tm score >= 0.4 Passable || 0.4 > Tm score mauvais
+
+**Example**:
+
+| pdb      | electro                 | shape    | statpot            | vdw                 | tm_score_prediction | interpretations |
+|----------|-------------------------|----------|--------------------|---------------------|---------------------|-----------------|
+| 4LW4.pdb | 1,2875610561314053e-25  | -15964,0 | 26,619999999999997 | -210,20280214660673 | 0,5681633333333332  | passable        |
+| 2za4.pdb | 1,5077200870763863e-25  | -1982,0  | 29,1               | 21,831874052394138  | 0,5578466666666666  | passable        |
+| 4H03.pdb | -3,2388259307234537e-26 | -3307,0  | 19,75              | 27,762327090226467  | 0,5353899999999999  | passable        |
+| 2IDO.pdb | -0,0                    | -4082,0  | 14,41              | -81,43243931391687  | 0,52383             | passable        |
+
+
+- `MeetDockOne_results.png`: a plot of the different scores distributions
+
+
 
 ## Documentation
 
