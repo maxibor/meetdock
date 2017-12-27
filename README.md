@@ -108,6 +108,10 @@ The compilation of Naccess requires a Fortran compiler.
 
 - `MeetDockOne_results.png`: a plot of the different scores distributions
 
+**Example:**
+
+<img src="./images/outplot.png" width="500">
+
 
 
 ## Documentation
