@@ -142,8 +142,6 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
 
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')
-    mydf.loc[:,'electro'] *= -1
-    mydf.loc[:,'vdw'] *= -1
     tm.tm_score(mydf, outdir = myoutdir, execdir = execdir)
     # print(mydf.to_string())
 
