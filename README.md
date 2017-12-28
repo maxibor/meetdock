@@ -126,7 +126,9 @@ usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-outdir OUTDIR]
 MeetDockOne scores a protein complex docking
 
 positional arguments:
-  pdbpath             absolute path to pdb complex directory
+  pdbpath             absolute path to pdb complex directory. Each pdb file
+                      must contain the receptor and the ligand as separated
+                      chains.
 
 optional arguments:
   -h, --help          show this help message and exit
