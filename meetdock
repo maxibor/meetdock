@@ -16,7 +16,7 @@ def get_args():
     parser = argparse.ArgumentParser(
         prog='MeetDockOne',
         description='MeetDockOne scores a protein complex docking')
-    parser.add_argument('pdbpath', help="absolute path to pdb complex directory. Each pdb file must contain the receptor and the ligand as separated chains.")
+    parser.add_argument('pdbpath', help="absolute path to pdb complex directory. Each pdb file must contain the receptor and the ligand as separated chains. If you set '-sampling' to true, meetdock will automatically generate its samplings in this directory")
     parser.add_argument(
         '-shape',
         action="store_true",
@@ -74,6 +74,21 @@ def get_args():
         type=int,
         help="Number of threads for MultiThreading. Default: automatic detection")
 
+    parser.add_argument(
+        '-sampling',
+        action="store_true",
+        help="Make a sampling before scoring with the naive method implemented by team6")
+
+    parser.add_argument(
+        '-receptorpath',
+        default="../data/receptor.pdb",
+        help="Must be provided if you've set -sampling to True")
+
+    parser.add_argument(
+        '-ligandpath',
+        default="../data/ligand.pdb",
+        help="Must be provided if you've set -sampling to True")
+
     args = parser.parse_args()
 
     mypath = args.pdbpath
@@ -88,12 +103,14 @@ def get_args():
     depth = args.depth
     dist = args.dist
     thread = args.thread
+    sampling = args.sampling
+    receptorpath = parser.receptorpath
+    ligandpath = parser.ligandpath
 
 
+    return(mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread, sampling, receptorpath, ligandpath)
 
-    return(mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread)
-
-def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, dist = 8.6):
+def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, dist = 8.6, sampling = False, receptorpath = "../data/receptor.pdb", ligandpath = "../data/ligand.pdb" ):
     pdbs = os.listdir(mypath)
     pdbs = [i for i in pdbs if i.endswith(".pdb")]
     all_res = []
@@ -160,5 +177,5 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
 
 
 if __name__ == "__main__":
-    mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread = get_args()
-    run_meetdock(mypath=mypath, myoutdir=myoutdir, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth, thread=thread)
+    mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread, sampling, receptorpath, ligandpath = get_args()
+    run_meetdock(mypath=mypath, myoutdir=myoutdir, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth, thread=thread, sampling=sampling, receptorpath=receptorpath, ligandpath=ligandpath)
