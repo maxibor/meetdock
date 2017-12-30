@@ -75,16 +75,16 @@ The compilation of Naccess requires a Fortran compiler.
 ## Quick start
 
 ```
-(meetu)$ ./meetdock  path/to/meetdock/data -recChain A -ligChain B -shape -electro -jones -proba
+(meetu)$ ./meetdock  path/to/meetdock/data -recChain A -ligChain B
 ```
 - The dictory `path/to/meetdockone/data` contains pdb complexes to score.  
 - The receptor is Chain A (`-recChain A`).  
 - The ligand is Chain B (`-LigChain B`).  
 - The following methods will be computed on the complexes :    
-    - shape complementarity (`-shape`)
-    -electrostatic energy (`-electro`)
-    - Leenard-Jones interactions (`-jones`)
-    - A knowledge based scoring function (`-proba`)
+    - shape complementarity
+    - electrostatic energy
+    - Leenard-Jones interactions
+    - A knowledge based scoring function
 
 ## Output
 
