@@ -2,6 +2,8 @@ name: meetu
 channels:
 - bioconda
 - salilab
+- msarahan
+- conda-forge
 - defaults
 dependencies:
 - msms
