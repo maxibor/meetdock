@@ -1,0 +1,74 @@
+MODEL 1
+ATOM      1  X   GEN     1       0.000   0.000  55.977  1.00  1.00 X X
+MODEL 2
+ATOM      1  X   GEN     1     -18.381   0.786  52.867  1.00  1.00 X X
+MODEL 3
+ATOM      1  X   GEN     1      19.630  16.501  49.757  1.00  1.00 X X
+MODEL 4
+ATOM      1  X   GEN     1      -4.014 -30.681  46.647  1.00  1.00 X X
+MODEL 5
+ATOM      1  X   GEN     1     -20.202  28.805  43.537  1.00  1.00 X X
+MODEL 6
+ATOM      1  X   GEN     1      37.805  -8.353  40.428  1.00  1.00 X X
+MODEL 7
+ATOM      1  X   GEN     1     -36.119 -20.885  37.318  1.00  1.00 X X
+MODEL 8
+ATOM      1  X   GEN     1      13.299  42.265  34.208  1.00  1.00 X X
+MODEL 9
+ATOM      1  X   GEN     1      19.693 -42.172  31.098  1.00  1.00 X X
+MODEL 10
+ATOM      1  X   GEN     1     -44.796  18.530  27.988  1.00  1.00 X X
+MODEL 11
+ATOM      1  X   GEN     1      47.113  17.171  24.879  1.00  1.00 X X
+MODEL 12
+ATOM      1  X   GEN     1     -23.795 -45.753  21.769  1.00  1.00 X X
+MODEL 13
+ATOM      1  X   GEN     1     -13.676  50.973  18.659  1.00  1.00 X X
+MODEL 14
+ATOM      1  X   GEN     1      45.360 -28.880  15.549  1.00  1.00 X X
+MODEL 15
+ATOM      1  X   GEN     1     -53.746  -9.489  12.439  1.00  1.00 X X
+MODEL 16
+ATOM      1  X   GEN     1      33.593  43.794   9.329  1.00  1.00 X X
+MODEL 17
+ATOM      1  X   GEN     1       4.854 -55.418   6.220  1.00  1.00 X X
+MODEL 18
+ATOM      1  X   GEN     1     -41.209  37.757   3.110  1.00  1.00 X X
+MODEL 19
+ATOM      1  X   GEN     1      55.977   0.000   0.000  1.00  1.00 X X
+MODEL 20
+ATOM      1  X   GEN     1     -41.209 -37.757  -3.110  1.00  1.00 X X
+MODEL 21
+ATOM      1  X   GEN     1       4.854  55.418  -6.220  1.00  1.00 X X
+MODEL 22
+ATOM      1  X   GEN     1      33.593 -43.794  -9.329  1.00  1.00 X X
+MODEL 23
+ATOM      1  X   GEN     1     -53.746   9.489 -12.439  1.00  1.00 X X
+MODEL 24
+ATOM      1  X   GEN     1      45.360  28.880 -15.549  1.00  1.00 X X
+MODEL 25
+ATOM      1  X   GEN     1     -13.676 -50.973 -18.659  1.00  1.00 X X
+MODEL 26
+ATOM      1  X   GEN     1     -23.795  45.753 -21.769  1.00  1.00 X X
+MODEL 27
+ATOM      1  X   GEN     1      47.113 -17.171 -24.879  1.00  1.00 X X
+MODEL 28
+ATOM      1  X   GEN     1     -44.796 -18.530 -27.988  1.00  1.00 X X
+MODEL 29
+ATOM      1  X   GEN     1      19.693  42.172 -31.098  1.00  1.00 X X
+MODEL 30
+ATOM      1  X   GEN     1      13.299 -42.265 -34.208  1.00  1.00 X X
+MODEL 31
+ATOM      1  X   GEN     1     -36.119  20.885 -37.318  1.00  1.00 X X
+MODEL 32
+ATOM      1  X   GEN     1      37.805   8.353 -40.428  1.00  1.00 X X
+MODEL 33
+ATOM      1  X   GEN     1     -20.202 -28.805 -43.537  1.00  1.00 X X
+MODEL 34
+ATOM      1  X   GEN     1      -4.014  30.681 -46.647  1.00  1.00 X X
+MODEL 35
+ATOM      1  X   GEN     1      19.630 -16.501 -49.757  1.00  1.00 X X
+MODEL 36
+ATOM      1  X   GEN     1     -18.381  -0.786 -52.867  1.00  1.00 X X
+MODEL 37
+ATOM      1  X   GEN     1       0.000   0.000 -55.977  1.00  1.00 X X

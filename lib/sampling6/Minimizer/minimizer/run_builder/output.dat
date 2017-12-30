@@ -1,0 +1,21 @@
+ building selected position           1
+ relocating ligand protein
+ Number of valid positions:            0
+ Minimum energy for position:            0   0.0000000000000000     
+ Average energy and standard deviation   0.0000000000000000        0.0000000000000000     
+ Receptor protein 2O8V_A
+ Ligand protein 2O8V_B
+ reading pdb           1
+ atoms in protein            1 :         1739
+ residues in protein            1 :          215 Ca         215
+ reading pdb           2
+ atoms in protein            2 :          822
+ residues in protein            2 :          108 Ca         108
+ Number of atoms :        2561
+ Number of residues :         323
+                        Receptor position      0.25906    -0.26724     0.09313
+                        ligand position      -23.89524   -13.56656    24.60964
+              ligand-receptor separation      36.89662
+    ligand-receptor orientation theta/phi      0.84402     3.64490
+
+         current angles alpha/beta/gamma:    150.50205    26.26506   100.88778

@@ -1,0 +1,215 @@
+package jet;
+
+import java.util.*;
+import java.io.*;
+import javax.vecmath.*;
+
+
+public class CVAnalysis {
+
+    jet.ConfigFile cf;	
+    float maxDist;
+
+
+    public CVAnalysis(jet.ConfigFile cf) 
+    { 		
+	this.cf=cf;
+	this.maxDist=(float)cf.getDoubleParam("CV","max_dist");if (maxDist==(float)-1) maxDist=(float)10.0;
+    }
+    
+    public void analyse(File pdbfile) throws jet.exception.NaccessException
+    {
+	/* Lecture du fichier pdb */
+    	jet.io.file.PdbFileReader pdb=new jet.io.file.PdbFileReader(pdbfile.getPath());
+	
+    	/* Recupération par le parseur des infos de structure 3D */
+    	Vector pdbInfo=jet.data.dataformat.parser.PDB.getSequenceInfo(pdb,false);
+
+	int i=0;
+	String chainID="";
+    	Vector cv=new Vector();
+	
+	while(i<pdbInfo.size())
+	    {
+		cv.clear();
+		jet.data.datatype.Sequence3D seq=((jet.data.dataformat.info.PdbSequenceInfo)pdbInfo.get(i)).getSequence();	
+		System.out.println(" circular variance analysis of sequence: "+seq.getSequenceName());	
+		
+		chainID=seq.getChainId();
+		
+		if((seq.size()>20) && (seq.isProtein())
+		   {
+		       jet.cluster.data.AtomDistanceMap dmAt= new jet.cluster.data.AtomDistanceMap(seq,maxDist);
+		       jet.cluster.data.ProxList plVoisin;
+		       int nb=0;
+
+		       for (int j=0;j<mdAt.getLength();j++)
+			   {
+			       plVoisin=dmAt.getProxListAt(j);
+			       Point3f vecI = (Point3f) ((jet.data.datatype.Atom) plVoisin.getAtom()).getCoordinates();
+			       Point3f sumI = new Point3f();
+			       
+			       while(j<plVoisin.getLength())
+				   {
+
+				       if( (plVoisin.getProxNode(j).getDistance()< maxDist) && (plVoisin.getProxNode(j).getDistance()> 2.0)  )
+					   {
+					       jet.data.datatype.Atom at=(jet.data.datatype.Atom) plVoisin.getProxNode(j);
+					       Point3f ri = new Point3f();
+					       ri.sub( ((Point3f) at.getCoordinates()), vecI);
+					       ri.scale(1.0/(ri.distance(new Point3f())));
+					       sumi.add(ri);
+					       nb++;
+					   }
+				   }
+			       // list of cv values  for every atom of a chain
+			       cv.add((double) 1 - ((sumi.distance(new Point3f()))/nb));
+			       
+			       
+
+
+
+
+   	/* Vecteurs contenant les informations sur le type et la position des 
+    	 * residus des differentes chaines. Ces vecteurs sont utilisés pour 
+    	 * ecrire en sortie les resultats de l'analyse des interfaces */
+    	Vector codes=new Vector(), positions=new Vector(), chains=new Vector();
+    	int nb=0;
+    	boolean dejaVuSeq=false;
+
+    	jet.io.file.PdbFileTransform pdbft;
+    	pdbft= new jet.io.file.PdbFileTransform(pdbfile.getPath(),"_cvAnalyseCutFilesTemp");
+
+	/* according to the type of analysis, cut the PDB file 
+         * if option chain then add all chains in vector cut
+         * if option complex then concatenate chains in cut vector */
+
+	Vector cut=new Vector();
+	
+	if (this.analType.equals("chain"))
+	    {
+		for (int h=0;h<pdbInfo.size();h++)
+		    {
+			cut.add(new Vector());
+			((Vector)cut.lastElement()).add(h);
+		    }
+	    }
+	
+	if (this.analType.equals("complex"))
+	    {
+		cut.add(new Vector());
+		for (int h=0;h<pdbInfo.size();h++)
+		    {
+			((Vector)cut.lastElement()).add(h);
+		    }
+	    }
+	/* end of cutting pdb file */
+
+	/* check for sequence length in case of complex */
+	File dir=pdbfile.getParentFile();
+	File[] dirFiles;
+	jet.data.datatype.Sequence3D seq;
+	
+	i=0;
+	j=0;
+	k=0;
+	
+	while(i<cut.size())
+	    {
+		for (j=0;j<((Vector)cut.get(i)).size();j++)
+		    {
+			// in the case of complex option (concatenated sequences) 
+			if (((Vector)cut.get(i)).size()>1)
+			    {
+				k=((Integer)((Vector)cut.get(i)).get(j));
+				seq=((jet.data.dataformat.info.PdbSequenceInfo)pdbInfo.get(k)).getSequence();
+				if(!((seq.size()>20) && (seq.isProtein())))
+				    {
+					cut.add(0,new Vector());
+					i++;
+					((Vector)cut.get(0)).add(((Vector)cut.get(i)).remove(j));
+					j--;
+				    }
+			    }
+		    }
+		i++;
+	    }
+	
+	i=0;
+	j=0;
+	k=0;
+	/* end of check for sequence length in case of complex */
+
+	
+    	/* Calcul des valeurs de CV et regroupement des informations des chaines identiques 
+    	 * Remarque : on conserve la plus grande valeur de CV parmi toutes les chaines identiques */
+	
+
+	/* parcours de chaines */
+	while(i<cut.size())
+	    {	
+		/* check for sequence length */
+		// in the case of chain option
+		if (((Vector)cut.get(i)).size()==1)
+		    {
+			seq=((jet.data.dataformat.info.PdbSequenceInfo)pdbInfo.get((Integer)((Vector)cut.get(i)).get(0))).getSequence();
+			if((seq.size()>20) && (seq.isProtein()))
+			    seq=null;
+		    }
+		// in the case of complex option
+		else seq=null;
+
+   		if(seq==null)
+		    {
+	    		dirFiles=dir.listFiles();
+	    		for (j=0;j<dirFiles.length;j++)
+			    {
+
+			/* recuperation de la sequence  */
+			seq=((jet.data.dataformat.info.PdbSequenceInfo)pdbInfo.get((Integer)((Vector)cut.get(i)).get(0))).getSequence();
+			/* calcul de la matrice de distance */
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			if((seq.size()>20) && (seq.isProtein()))
+			    seq=null;
+		    }
+		else seq=null;
+		
+    		if(seq==null)
+		    {
+    			/* quick and dirty hack, do not cut the files when complex is taken into account */
+    			if ( this.accessType.equals("chain") ) pdbft.cut((Vector)cut.get(i));
+
+	    		dirFiles=dir.listFiles();
+	    		for (j=0;j<dirFiles.length;j++)
+			    {
+				
+	    			/* quick and dirty hack to test chain vs. complex */
+	    			/* doing that we force to examine the complete pdb file instead of the cuts files */
+	    			boolean condition = this.accessType.equals("chain") ? dirFiles[j].getAbsolutePath().lastIndexOf("_cvAnalyseCutFilesTemp")!=-1
+				    : dirFiles[j].getAbsolutePath().equals(pdbfile.getAbsolutePath());
+				
+				if (condition)
+				    {
+					if (JET.DEBUG) System.out.println("File: "+dirFiles[j].getAbsolutePath());
+					
+					// perform CV calculation
+					jet.data.datatype.Sequence3D seqtmp=((jet.data.dataformat.info.PdbSequenceInfo)pdbInfo.get(i)).getSequence();
+
+
+
+
+}

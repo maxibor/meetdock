@@ -1,0 +1,65 @@
+package jet.cluster.data;
+
+import java.util.*;
+
+/** Classe associant à un résidu toutes ses distances aux dix résidus les plus proches (plist) */
+
+public class ProxListAt
+{
+    private ArrayList pList;
+    private jet.data.datatype.Atom atom;
+    
+    private int id;
+
+    public ProxListAt(jet.data.datatype.Atom atom, int id)
+    {
+	setId(id);
+	setAtom(atom);
+	
+	pList=new ArrayList(10);
+	
+    }
+
+    public int getId(){return id;}
+    
+    public void setId(int id){this.id=id;}
+    
+    public jet.data.datatype.Atom getAtom(){ return atom;}
+
+    public void setAtom(jet.data.datatype.Atom atom){this.atom=atom;}
+    
+    public void addProxNodeAt(jet.cluster.data.ProxNodeAt pn)
+    {
+	int i=0;
+
+	while(i<pList.size())
+	    {
+		if(getProxNodeAt(i).getDistance()>pn.getDistance()) break;
+		i++;
+	    }
+	
+	if(i==pList.size()) pList.add(pn);
+	else pList.add(i,pn);
+	    
+    }
+
+    public ProxNode getProxNodeAt(int index) { return (jet.cluster.data.ProxNodeAt) pList.get(index); }
+    
+    public int getLength(){ return pList.size(); }
+
+    public Vector getNeighbourResidues(float radius)
+    {
+	int i=0;
+	Vector neibs=new Vector(1,1);
+	//System.out.println(getProxNode(i).getDistance()+" --> "+radius);
+	while((i<pList.size())&&(getProxNode(i).getDistance()< radius )) 
+	    {
+		//System.out.print("hi ho");
+		//neibs.add(getProxNode(i++).getResidue());
+		neibs.add(getProxNode(i++));
+	    }
+	//System.out.print("\n");
+	return neibs;
+    }
+
+}
