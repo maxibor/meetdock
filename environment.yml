@@ -13,7 +13,6 @@ dependencies:
 - icu
 - intel-openmp
 - libcxx
-- libcxxabi
 - libgfortran
 - libiconv
 - libpng
