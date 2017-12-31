@@ -52,7 +52,10 @@ THIS INSTALLER:
         -Biopython
         -Pandas
         -Sklearn
+        -Team6 Sampling code
         -...
+
+Installation may take some time and requires an internet connexion to update the packages
 
 ********************************************************************************
                  PLEASE PRESS ANY KEY TO START THE INSTALLATION
@@ -68,11 +71,15 @@ HOW TO RUN:
       -------------------------------------------------------------------
       |  ~$ source activate meetu                                       |
       |  ~$ python                                                      |
-      |  >>> from meetdockone import runmeetdock as rmd                 |
+      |  >>> from meetdockone.runmeetdock import *                      |
       |  >>>                                                            |
-      |  >>> score = rmd.run_meetdock(mypath=ThePathToYourPDBToScore)   |
+      |  >>> score = run_meetdock(mypath=ThePathToYourDirectory )       |
       |  >>> print(score)                                               |
       -------------------------------------------------------------------
+
+    This will score you the whole targeted directory and return a dict
+
+    WARNING: If you have many installations of miniconda / anaconda, be sure to use the one which you used to setup meetdock
 
     (Replace 'meetu' with the name you chosed during the installation)
     /!\ --> Congratulation, you are now using Meetdockone (genius level) /!\
@@ -87,6 +94,8 @@ HOW TO RUN:
     ----------------------------------
 
     (Once again, replace 'YOUR_PATH_OF_MEETDOCK' with the root path of the github repo on your computer
+
+    WARNING: If you have many installations of miniconda / anaconda, be sure to use the one which you used to setup meetdock
 
     ########################################
 
