@@ -13,7 +13,7 @@ import os
 def do_samplings(receptorpath='./data/1j5prec.pdb', ligandpath='./data/1j5plig.pdb', outputdir='./out/', nbrot=10, nbx=3, nby=3, nbz=3):
 
     print('The sampling will be done using TEAM6 naive software')
-    print('Receptor: {} \n Ligand: {} \noutputdir: {}\nnbrot: {}\nnbx: {}\nnby: {}, nbz: {}'.format(receptorpath.split('/')[-1], ligandpath.split('/')[-1], outputdir, nbrot, nbx, nby, nbz))
+    print('Receptor: {}\nLigand: {}\noutputdir: {}\nnbrot: {}\nnbx: {}\nnby: {}\nnbz: {}'.format(receptorpath.split('/')[-1], ligandpath.split('/')[-1], outputdir, nbrot, nbx, nby, nbz))
 
     answer = ''
     current_path = os.getcwd()
@@ -71,6 +71,8 @@ if __name__ == '__main__':
             minimize = False
 
     #Whatever the choice
+
+    os.system('cd '+outdir+'\n'+'rm -rf *')
 
     os.system('mkdir -p '+outdir+'/sampling')
     os.system('mkdir -p '+outdir+'/results')
@@ -160,4 +162,4 @@ if __name__ == '__main__':
 
     os.chdir(current_path)
 
-    os.system('python meetdock '+str(outdir)+'sampling') #Lancer meetdock vers le répertoire
+    os.system('python meetdock ./out/sampling/'+' '+'-depth naccess') #Lancer meetdock vers le répertoire
