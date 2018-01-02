@@ -72,8 +72,26 @@ The compilation of Naccess requires a Fortran compiler.
 - `csh lib/NACCESS/macinstall.scr`
 - `cp lib/NACCESS/* /usr/local/bin`  
 
-## Quick start
+## Our two programs
 
+There are two programs you can use from the root directory of the project
+
+meetdock --> meetdock is our scoring-only program for the other teams
+meetdockAZ --> meetdockAZ is our full program that includes the work of team sampling n°6
+
+## Quick start with meetdockAZ
+
+meetdockAZ is our full implementation.
+Just type
+```
+(meetu)$ python meetdockAZ.py
+```
+
+The program will then ask you if you want to run a demo on a preconfigured ligand+receptor (without minimizer) and very little amount of ligand rotations
+
+If you say no, then it will ask you to manually specify your inputs (receptor, chain, outputdir, minimizer, nb of rotations) 
+
+## Quick start with meetdock
 ```
 (meetu)$ ./meetdock  path/to/meetdock/data -recChain A -ligChain B  -shape -electro -jones -proba
 ```
@@ -85,6 +103,7 @@ The compilation of Naccess requires a Fortran compiler.
     - electrostatic energy (``-electro`)
     - Leenard-Jones interactions  (`-jones`)
     - A knowledge based scoring function (`-proba`)
+    
 
 ## Output
 
