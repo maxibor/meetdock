@@ -76,23 +76,26 @@ The compilation of Naccess requires a Fortran compiler.
 
 There are two programs you can use from the root directory of the project
 
-#### meetdock --> meetdock is our scoring-only program for the other teams
-#### meetdockAZ --> meetdockAZ is our full program that includes the work of team sampling n°6
+#### `meetdock` : meetdock is our scoring-only program for the other teams.
+#### `meetdockAZ` : meetdockAZ is our full program that includes the work of team sampling n°6 and our scoring.
 
 ## Quick start with meetdockAZ
 
-meetdockAZ is our full implementation.
+meetdockAZ is our full implementation from sampling to scoring.
+
 Just type
+
 ```
 (meetu)$ python meetdockAZ.py
 ```
 
 The program will then ask you if you want to run a demo on a preconfigured ligand+receptor (without minimizer) and very little amount of ligand rotations
 
-If you say no, then it will ask you to manually specify your inputs (receptor, chain, outputdir, minimizer, nb of rotations) 
+If you say no, then it will ask you to manually specify your inputs (receptor, chain, outputdir, minimizer, nb of rotations)
 
 #### Default output
--By default, output is in ./out/ 
+
+- By default, output is in ./out/
 
 ## Quick start with meetdock
 ```
@@ -106,7 +109,7 @@ If you say no, then it will ask you to manually specify your inputs (receptor, c
     - electrostatic energy (``-electro`)
     - Leenard-Jones interactions  (`-jones`)
     - A knowledge based scoring function (`-proba`)
-    
+
 
 ## Output
 
