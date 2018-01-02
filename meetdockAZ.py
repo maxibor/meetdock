@@ -44,7 +44,7 @@ if __name__ == '__main__':
     print('*****WELCOME TO MEETDOCK AZ*****\n*This will do a naive sampling and then score it through our knowledge-based, electrostatic and VDW calculations altogether combined with machine learning (Random Forrest).\n*See our report for more details about how the model has been trained. \n>>> Be carefull: Parsing your arguments has not been implemented yet !\n\n')
 
     while choix != 'y' and choix != 'n':
-        choix = input('If you want to run the demo, press [y], else press [n]')
+        choix = input('If you want to run the demo, press [y], else press [n] (demo: ~ 10mn)')
 
     if choix == 'y':
         default = True
@@ -173,5 +173,5 @@ if __name__ == '__main__':
 
     os.system('python meetdock '+str(outdir)+'sampling/ '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
 
-    os.system('mv ./'+str(MeetDockOne_results.csv)+' '+outdir+str(MeetDockOne_results.csv))
-    os.system('mv ./'+str(MeetDockOne_results.png)+' '+outdir+str(MeetDockOne_results.png))
+    os.system('mv ./MeetDockOne_results.csv'+' '+outdir+str(MeetDockOne_results.csv))
+    os.system('mv ./MeetDockOne_results.png'+' '+outdir+str(MeetDockOne_results.png))
