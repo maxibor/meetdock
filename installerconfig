@@ -44,10 +44,9 @@ MeetdockOne:
 
 THIS INSTALLER:
     -WILL INSTALL MINICONDA IF NEEDED
-    -WILL INSTALL EVERY NEEDED DEPENDENCY, INCLUDING
+    -WILL CONFIGURE EVERY NEEDED DEPENDENCY, INCLUDING
         -MaxDo
         -Naccess
-        -Foldx
         -Numpy
         -Biopython
         -Pandas
