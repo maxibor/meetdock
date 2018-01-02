@@ -9,7 +9,8 @@ from multiprocessing.dummy import Pool as ThreadPool
 import warnings
 warnings.filterwarnings("ignore")
 
-
+# Change this to false to switch off MultiProcessing. Can be useful for debugging.
+MULTI = True
 
 def get_args():
     '''This function parses and return arguments passed in'''
@@ -98,51 +99,36 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
     pdbs = [i for i in pdbs if i.endswith(".pdb")]
     all_res = []
     execdir = os.path.dirname(os.path.realpath(__file__))
-    print(execdir)
-    # try:
-    #     def runpdbs(apdb):
-    #         thepdb = mypath+"/"+apdb
-    #         all_res.append(res)
-    #         print("Computing scores for ", apdb)
-    #         res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-    #         all_res.append(res)
-    #
-    #         # print(apdb, ":", res)
-    #
-    #     if thread == 999:
-    #         num_cores = multiprocessing.cpu_count()
-    #     else:
-    #         num_cores = thread
-    #     print("Running on",num_cores, "threads")
-    #     results = Parallel(n_jobs=num_cores)(delayed(runpdbs)(apdb) for apdb in pdbs)
+    if MULTI == True:
+        try:
+            def runpdbs(apdb):
+                thepdb = mypath+"/"+apdb
+                print("Computing scores for ", apdb)
+                res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+                all_res.append(res)
 
+            if thread == 999:
+                num_cores = multiprocessing.cpu_count()
 
-    print("No MultiThreading available, running on a single thread.")
-    for apdb in pdbs:
-        thepdb = mypath+"/"+apdb
-        print("Computing scores for ", apdb)
-        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-        print(res)
-        all_res.append(res)
+            pool = ThreadPool(num_cores)
 
+            print("MultiProcessing available\nRunning on",num_cores, "threads")
+            pool.map(runpdbs, pdbs)
+
+        except:
+            print("...")
+    else :
+        print("MultiProcessing turned off, running on a single thread.")
+        for apdb in pdbs:
+            thepdb = mypath+"/"+apdb
+            print("Computing scores for ", apdb)
+            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+            all_res.append(res)
 
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')
+    print(mydf.to_string())
     tm.tm_score(mydf, outdir = myoutdir, execdir = execdir)
-    # print(mydf.to_string())
-
-
-    # x = mydf.values
-    # min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-    # x_scaled = min_max_scaler.fit_transform(x)
-    # df = pd.DataFrame(x_scaled)
-    # df.columns = mydf.columns
-    # df.index = mydf.index
-    # tm.tm_score(df)
-    # df["score"] = df.sum(axis=1) #sum by line
-    # df['score'] = df.electro + df.shape + df.statpot + df.vdw
-    # df = df.sort_values(by=['score'], ascending = False)
-    # print(df.to_string())
 
 
 if __name__ == "__main__":
