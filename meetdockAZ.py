@@ -88,6 +88,8 @@ if __name__ == '__main__':
     elif default == False:
         do_samplings(receptorpath=receptorpath, ligandpath=ligandpath,outputdir=outputdir, nbrot=nbrot, nbx=nbx, nby=nby)
 
+    input('debug')
+
     receptorname = receptorpath.split('/')[-1]
     ligandname = ligandpath.split('/')[-1]
 
@@ -132,6 +134,7 @@ if __name__ == '__main__':
     elif minimize == False:
 
     #Si pas de minimiseur, juste déplacer vers la sortie
+        input('debug2')
         for elt in liste_samples:
             os.system('mv '+str(elt)+' '+str(outdir)+'sampling/'+str(elt))
 
@@ -168,7 +171,7 @@ if __name__ == '__main__':
 
     os.chdir(current_path)
 
-    os.system('python meetdock '+str(outdir)+' '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
+    os.system('python meetdock '+str(outdir)+'sampling/ '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
 
     os.system('mv ./'+str(MeetDockOne_results.csv)+' '+outdir+str(MeetDockOne_results.csv))
     os.system('mv ./'+str(MeetDockOne_results.png)+' '+outdir+str(MeetDockOne_results.png))

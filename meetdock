@@ -126,7 +126,6 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
         all_res.append(res)
 
 
-    print(all_res)
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')
     tm.tm_score(mydf, outdir = myoutdir, execdir = execdir)

@@ -1,2 +1,10 @@
 MODEL 1
+ATOM      1  X   GEN     1      29.099  18.254  92.274  1.00  1.00 X X
+MODEL 2
+ATOM      1  X   GEN     1     -14.750  58.430  57.938  1.00  1.00 X X
+MODEL 3
 ATOM      1  X   GEN     1      97.771  18.254  23.602  1.00  1.00 X X
+MODEL 4
+ATOM      1  X   GEN     1     -14.750 -21.922 -10.734  1.00  1.00 X X
+MODEL 5
+ATOM      1  X   GEN     1      29.099  18.254 -45.070  1.00  1.00 X X

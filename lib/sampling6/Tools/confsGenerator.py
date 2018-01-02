@@ -198,9 +198,9 @@ if __name__ == '__main__':
 					st.addPDB(ligand,cb,filout="%s/pdb/%s/%s_rota%s.pdb"%(pathResults,filename_rec.split("_")[0],filename_lig.split(".")[0],cb))
 					cb+=1
 					
-					print("%s/pdb/%s/%s"%(pathResults,filename_rec.split("_")[0],filename_rec))
+					print("*",end='')
 # 	st.writePDB(recepteur2,filout="%s/pdb/%s/%s"%(pathResults,filename_rec.split("_")[0],filename_rec)) 
-	print("%s/pdb/%s/%s"%(pathResults,filename_rec.split("_")[0],filename_rec))
+	#print("%s/pdb/%s/%s"%(pathResults,filename_rec.split("_")[0],filename_rec))
 	#ecrire fichier pdb pour les points de depart
 	st.ptDepartPDB(list_ptDepart,"%s/ptDepart/%s_ptDepart.pdb"%(pathResults,filename_rec.split("_")[0]))				
 	
