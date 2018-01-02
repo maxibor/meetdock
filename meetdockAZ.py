@@ -32,9 +32,9 @@ if __name__ == '__main__':
     current_path = os.getcwd() 
     sampl6path = current_path + '/lib/sampling6/Tools'
 
-
+    choix2 = ''
     default = True
-    minimize = True
+    minimize = False
 
     receptorpath = os.getcwd()+'/data/1j5prec.pdb'
     ligandpath = os.getcwd()+'/data/1j5plig.pdb'
