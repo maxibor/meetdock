@@ -14,7 +14,7 @@ set PROTNAME1=$PROT1
 
 # loop on LIG
 #============
-foreach PROTT ('\ls $SEPDIR/1j5plig_rota449.pdb')
+foreach PROTT ('\ls $SEPDIR/1j5plig_rota266.pdb')
 set PROT2={$PROTT:t:r}
 set PROTNAME2=$PROT2
 
