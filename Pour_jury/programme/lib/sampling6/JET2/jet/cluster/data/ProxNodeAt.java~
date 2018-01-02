@@ -1,0 +1,25 @@
+package jet.cluster.data;
+
+import java.util.*;
+
+public class ProxNodeAt
+{
+    float distance;
+    jet.cluster.data.ProxListAt ref;
+
+    public ProxNode(jet.cluster.data.ProxListAt ref, float distance)
+    {
+	setRef(ref);
+	setDistance(distance);
+    }
+
+    public void setRef(jet.cluster.data.ProxListAt ref){ this.ref=ref;}
+
+    public jet.cluster.data.ProxListAt getRef(){ return ref;}
+   
+    public void setDistance(float distance){ this.distance=distance;}
+
+    public float getDistance(){return distance;}
+
+    public jet.data.datatype.Atom getAtom() { return ref.getAtom(); }
+}

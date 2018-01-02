@@ -1,0 +1,26 @@
+Purpose: 
+--------
+runs the MAXDo suite to minimize the orientation of a ligand according to a receptor. The receptor coordinates (internals and relative to the ligand) are fixed during the minimization. Internal coordinates of the ligand are fixed (rigid body minimization) while the ligand is authorized to move around the receptor. 
+
+To do so: 
+---------
+runs the runMini.py script
+
+Input and constraints: 
+----------------------
+pdb filenames of the receptor and the ligand. The corresponding pdb files must be stored in ./Proteins. Please do not move/remove/edit the template script files stored in ./templates. All the programs and run directories are stored in ./minimizer (do not touch, MAXDo is very touchy!). 
+
+Output:
+-------
+-> a pdb corresponding to the minimized ligand (keep in mind that the coordinates of the receptor ARE FIXED during the minimization!!!). The corresponding file is stored in ./pdb_mini. 
+
+-> The MAXDo output file is stored in ./global_out and contains respectively:
+#num of the ligand's position (we do not care here) #num of the ligand's rotation (idem) #distance between the 2 CM #phi (radian)  #theta (radian) #alpha (degree) (do not try to understand why we switch between radians and degrees, MAXDo is full of surprises!) #beta (degree) #gamma (degree) #LJ energy term #Coulomb energy term #TOTAL ENERGY
+
+
+Command line:
+-------------
+python runMini.py -rec 1JP3_A.pdb -lig 1JP3_B_rota12.pdb
+
+
+

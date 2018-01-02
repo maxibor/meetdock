@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+import sys, argparse, os
+import pandas as pd
+from sklearn import preprocessing
+from lib import combine_methods as cm
+from lib import tm_score as tm
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
+import warnings
+warnings.filterwarnings("ignore")
+
+# Change this to false to switch off MultiProcessing. Can be useful for debugging.
+MULTI = True
+
+def get_args():
+    '''This function parses and return arguments passed in'''
+    parser = argparse.ArgumentParser(
+        prog='MeetDockOne',
+        description='MeetDockOne scores a protein complex docking')
+    parser.add_argument('pdbpath', help="absolute path to pdb complex directory. Each pdb file must contain the receptor and the ligand as separated chains.")
+    parser.add_argument(
+        '-shape',
+        action="store_true",
+        help="compute shape complementarity")
+    parser.add_argument(
+        '-electro',
+        action="store_true",
+        help="compute Electrostatic interactions")
+
+    parser.add_argument(
+        '-jones',
+        action="store_true",
+        help="compute Lennard-Jones interactions")
+
+    parser.add_argument(
+        '-proba',
+        action="store_true",
+        help="Compute knowledge based interactions")
+
+    parser.add_argument(
+        '-outdir',
+        default="./",
+        help="path to (existing) output directory")
+
+    parser.add_argument(
+        '-recChain',
+        default="A",
+        help="receptor Chain ID. If there more than one, separate by a ','. Default = 'A'")
+
+    parser.add_argument(
+        '-ligChain',
+        default="B",
+        help="ligand Chain ID. If there more than one, separate by a ','. Default = 'B'")
+
+    parser.add_argument(
+        '-depth',
+        default="msms",
+        help="Method for residue depth/solvant accessibility. [msms | naccess]. Default = msms")
+
+    parser.add_argument(
+        '-pH',
+        default=7,
+        type=int,
+        help="pH for electrostatic interactions. Default = 7")
+
+    parser.add_argument(
+        '-dist',
+        default=8.5,
+        type=float,
+        help="Threshold for interface determination (Angstrom). Default = 8.5")
+
+    parser.add_argument(
+        '-thread',
+        default=999,
+        type=int,
+        help="Number of threads for MultiThreading. Default: automatic detection")
+
+    args = parser.parse_args()
+
+    mypath = args.pdbpath
+    myoutdir = args.outdir
+    shape = args.shape
+    electro = args.electro
+    jones = args.jones
+    recChain = args.recChain
+    ligChain = args.ligChain
+    proba = args.proba
+    pH = args.pH
+    depth = args.depth
+    dist = args.dist
+    thread = args.thread
+
+
+
+    return(mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread)
+
+def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True, jones = True, recChain = True, ligChain = True, proba = True, foldx = True, pH = 7, dist = 8.6):
+    pdbs = os.listdir(mypath)
+    pdbs = [i for i in pdbs if i.endswith(".pdb")]
+    all_res = []
+    execdir = os.path.dirname(os.path.realpath(__file__))
+    if MULTI == True:
+        try:
+            def runpdbs(apdb):
+                thepdb = mypath+"/"+apdb
+                print("Computing scores for ", apdb)
+                res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+                all_res.append(res)
+
+            if thread == 999:
+                num_cores = multiprocessing.cpu_count()
+
+            pool = ThreadPool(num_cores)
+
+            print("MultiProcessing available\nRunning on",num_cores, "threads")
+            pool.map(runpdbs, pdbs)
+
+        except:
+            print("...")
+    else :
+        print("MultiProcessing turned off, running on a single thread.")
+        for apdb in pdbs:
+            thepdb = mypath+"/"+apdb
+            print("Computing scores for ", apdb)
+            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+            all_res.append(res)
+
+    mydf = pd.DataFrame(all_res)
+    mydf = mydf.set_index('pdb')
+    print(mydf.to_string())
+    tm.tm_score(mydf, outdir = myoutdir, execdir = execdir)
+
+
+if __name__ == "__main__":
+    mypath, myoutdir, shape, electro, jones, recChain, ligChain, proba, pH, depth, dist, thread = get_args()
+    run_meetdock(mypath=mypath, myoutdir=myoutdir, ligChain="A", recChain="B", shape = shape, electro = electro, jones =jones, proba =proba, pH =pH, dist =dist, depth =depth, thread=thread)

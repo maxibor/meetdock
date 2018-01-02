@@ -1,0 +1,82 @@
+  *** Start Simulation on 1/ 2/2018 at  9:10:42 hours ***
+
+     20.000000     1.000000
+      0.000100     1.000000
+      1.500000     1.000000
+      1.000000     1.000000     1.000000
+    100.000000
+      7.000000
+      14      7      1
+
+ ********** Activated/deactivated branches **********
+ constraint           
+ no art               
+ ****************************************************
+
+       1
+       1
+       1
+       1
+     500
+     254
+ ********************* Files  connected ********************
+ Input   from file   :  input.dat                               
+ Output  to   file   :  output.dat                              
+ ***********************************************************
+
+                    Number of proteins  :      2.000000
+                1j5pre
+                1j5pli
+ Protein number    1  chain  A  particles    528
+ Protein number    2  chain  B  particles    528
+             Total number of particles  :   1056.000000
+                    Protein number/radius      1.000000    37.554799
+                    Protein number/radius      2.000000    37.554799
+
+                        Receptor position     29.139251    18.130574    23.631357
+                        ligand position       81.340574    15.165749    19.692357
+              ligand-receptor separation      52.433616
+    ligand-receptor orientation theta/phi      1.645991     6.226450
+
+                                             making potential map
+         Total number of ligand positions    254.000000
+  Total number of alpha/beta orientations     21.000000
+      Total number of gamma  orientations      1.000000
+
+                                           original configuration
+                        Receptor position     29.139251    18.130574    23.631357
+                        ligand position       81.340574    15.165749    19.692357
+              ligand-receptor separation      52.433616
+    ligand-receptor orientation theta/phi      1.645991     6.226450
+
+        starting angles alpha/beta/gamma:    -31.420303    46.694450    97.594983
+
+                                        After separation/rotation
+                        Receptor position     29.139251    18.130574    23.631357
+                        ligand position       81.340574    15.165749    19.692357
+              ligand-receptor separation      52.433616
+    ligand-receptor orientation theta/phi      1.645991     6.226450
+
+        starting angles alpha/beta/gamma:    -31.420303    46.694450    97.594983
+                    starting minimization      1.000000
+     81.340574    15.165749    19.692357   -31.420303    46.694450    97.594983
+ No rotation here
+                         Starting energy      -0.739930
+                    Starting forces      7.68933E-02    3.65284E-02    1.49673E-01
+                    Starting moments    -1.18803E-01    4.27175E-02    1.25640E-02
+
+                                                calling minimizer
+                      minimizing with simple(Zacharias) potential
+                       calling move final     58.000000
+                      End of minimization     58.000000    -9.136502    -0.739930
+      0.000006    -0.000032     0.000027     0.000013    -0.000015     0.000007
+     81.970783    15.132537    19.645477  -102.321463    47.333718   171.684106
+                        Receptor position     29.139251    18.130574    23.631357
+                        ligand position       81.970783    15.132537    19.645477
+              ligand-receptor separation      53.066433
+    ligand-receptor orientation theta/phi      1.645978     6.226499
+
+     CPU time elapsed since start :      7.67200E+00
+
+ lower energy yet           1  -9.1366431463054969     
+ Energy evaluations during run:           60
