@@ -76,8 +76,8 @@ The compilation of Naccess requires a Fortran compiler.
 
 There are two programs you can use from the root directory of the project
 
-meetdock --> meetdock is our scoring-only program for the other teams
-meetdockAZ --> meetdockAZ is our full program that includes the work of team sampling n°6
+#### meetdock --> meetdock is our scoring-only program for the other teams
+#### meetdockAZ --> meetdockAZ is our full program that includes the work of team sampling n°6
 
 ## Quick start with meetdockAZ
 
@@ -90,6 +90,9 @@ Just type
 The program will then ask you if you want to run a demo on a preconfigured ligand+receptor (without minimizer) and very little amount of ligand rotations
 
 If you say no, then it will ask you to manually specify your inputs (receptor, chain, outputdir, minimizer, nb of rotations) 
+
+#### Default output
+-By default, output is in ./out/ 
 
 ## Quick start with meetdock
 ```
@@ -137,7 +140,7 @@ If you say no, then it will ask you to manually specify your inputs (receptor, c
 
 ```
 (meetu)$ ./meetdock -h
-usage: MeetDockOne [-h] [-shape] [-electro] [-jones] [-proba] [-outdir OUTDIR]
+usage: meetdock    [-h] [-shape] [-electro] [-jones] [-proba] [-outdir OUTDIR]
                    [-recChain RECCHAIN] [-ligChain LIGCHAIN] [-depth DEPTH]
                    [-pH PH] [-dist DIST] [-thread THREAD]
                    pdbpath
