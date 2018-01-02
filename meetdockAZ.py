@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
     #Whatever the choice
 
-    os.system('cd '+outdir+'\n'+'rm -rf *')
+    #os.system('cd '+outdir+'\n'+'rm -rf *')
 
     os.system('mkdir -p '+outdir+'/sampling')
     os.system('mkdir -p '+outdir+'/results')
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     if default == True:
         print('Starting the demo: All your results will show up in ./out/ . On a decently recent computer you can expect ~ 3 mn of computation time')
-        do_samplings() #All values to default
+        do_samplings(receptorpath=os.getcwd()+'/data/1j5prec.pdb', ligandpath=os.getcwd()+'/data/1j5plig.pdb', outputdir=os.getcwd()+'/out/' #All values to default
     elif default == False:
         do_samplings(receptorpath=receptorpath, ligandpath=ligandpath,outputdir=outputdir, nbrot=nbrot, nbx=nbx, nby=nby)
 
@@ -163,4 +163,4 @@ if __name__ == '__main__':
 
     os.chdir(current_path)
 
-    os.system('python meetdock ./out/sampling/'+' '+'-depth naccess') #Lancer meetdock vers le répertoire
+    os.system('python meetdock ./out/sampling/'+' '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
