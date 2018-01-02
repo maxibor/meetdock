@@ -213,7 +213,7 @@ if __name__ == '__main__':
 	#################################"""
 	
 	#tracer le graphe pyplot des points de depart
-	st.graph_ptDepart(list_ptDepart,recepteur)
+	#st.graph_ptDepart(list_ptDepart,recepteur)
 	
 	
 		
