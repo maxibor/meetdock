@@ -1,0 +1,69 @@
+package jet.cluster.data;
+
+import java.util.*;
+
+/** Classe stockant pour chaque residu toutes les distances aux autres residus */
+
+public class AtomDistanceMap
+{
+    ArrayList plList;
+
+    public DistanceMap(jet.data.datatype.Sequence3D seq,float distanceMax)
+    {
+	plList=new ArrayList(seq.size());
+	initDistanceMap(seq,distanceMax);
+    }
+
+    public jet.cluster.data.ProxList getProxList(int index) 
+    { 
+	return (jet.cluster.data.ProxList)plList.get(index); 
+    }
+
+   public void initDistanceMap(jet.data.datatype.Sequence3D seq,float distanceMax)
+    {
+	int i,j;
+	in nbBonded;
+	float distance;
+	jet.data.datatype.Atom atomRef,atomComp;
+	jet.cluster.data.ProxListAt plRef=null,plComp=null;
+	
+	for (int pos=0;pos<seq.size();pos++)
+	    {
+		Vector atoms=seq.getResidue(pos,jet.data.datatype.Sequence3D.DIRECT).getAllAtoms();
+		
+		for (int posAtom=0;posAtom<atoms.size();posAtom++)
+		    {
+			plList.add(new jet.cluster.data.ProxListAt((jet.data.datatype.Atom)atoms.get(posAtom),atoms.get(posAtom)));
+		    }
+	    }
+
+	for (int i=0;i<plList.size();i++)
+	    {
+		atomRef=getProxList(i).getAtom();
+		plRef=getProxList(i);
+		nbBonded=0;
+
+		for(j=i+1;j<plList.size();j++)
+		    {
+			plComp=getProxList(j);
+			atomComp=getProxList(j).getAtom(); 
+			distance=atomRef.distance(atomComp);
+			/* get atom in the neighbour list only if it is closer than 
+			   the cutoff value and if it is not bonded to the atom
+			   assume that any two non-bonded atoms should be at a distance greater than 2 A */
+			if ( (distance<=distanceMax) && (distance > 2.0) )
+			    {
+				plRef.addProxNodeAt(new jet.cluster.data.ProxNodeAt(plComp,distance));
+				plComp.addProxNodeAt(new jet.cluster.data.ProxNodeAt(plRef,distance));
+			    }
+			else
+			    {
+				nbBonded++;
+			    }
+		    }
+		if(nbBonded>2){System.out.println("WARNING this atom has more than two bonded neighbours");}
+	    }
+    }
+    
+    public int getLength(){ return plList.size();}
+}

@@ -175,28 +175,6 @@ except:
     print('An error has occured while we tried to create your env. Installation has failed')
     input('')
     sys.exit(1)
-
-#Unzip foldx
-#Move it in meetuenv
-
-print('****** Installation of foldx in the conda env ******')
-
-try:
-    error = os.system('cd ./lib \n unzip ./foldx.zip -d '+str(current_path)+'/temp/')
-
-    if error != 0:
-        raise TypeError('Unexpected execution')
-
-    error = os.system('mv ./temp/foldx '+str(conda_path)+'/../envs/'+str(envname)+'/bin/foldx')
-
-    if error != 0:
-        raise TypeError('Unexpected execution')
-
-    print('\n******************************************************************************** \n foldx has been successfully installed \n ********************************************************************************\n')
-except:
-    print('foldx couldn\'t be installed properly... Retry if needed')
-    input('')
-    sys.exit(1)
     
 print('***** Installation of NACCESS in the conda env *****')
 
@@ -219,96 +197,6 @@ try:
 
 except:
     print('An error has occured while installing naccess in conda env. Please retry')
-    input('')
-    sys.exit(1)
-
-    
-print('***** Installation of Sampling6 in the conda env *****')
-
-try:
-#Copie de sampling6 Dans l'environnement
-
-    os.chdir('./lib/')
-
-    error = os.system('rsync -v -r --progress ./sampling6 '+str(conda_path)+'/../envs/'+str(envname)+'/bin')
-
-    if error != 0:
-            raise TypeError('Unexpected execution')
-
-    liste_fichiers_sampling6 = os.listdir()
-
-    os.chdir(current_path)
-    print('\n********************************************************************************\nSAMPLING6 has been successfully installed ! \n********************************************************************************\n')
-
-except:
-    print('An error has occured while installing sampling6 in conda env. Please retry')
-    input('')
-    sys.exit(1)
-
-
-#Déplacement de la librairie meetdock dans l'environnement anaconda
-
-print('***** Installation of Meetdock in the conda env')
-
-try:
-    os.chdir('./lib/')
-
-    error = os.system('rsync -v -r --progress ./ '+str(conda_path)+'/../envs/'+str(envname)+'/lib/python3.5/site-packages/meetdockone/')
-
-    if error != 0:
-            raise TypeError('Unexpected execution')
-
-    print('Installation of meetdock succeeded !')
-
-    os.chdir(current_path)
-
-except:
-    print('FAILED TO INSTALL MEETDOCK IN THE CONDA ENV')
-    print('PLease check what happened and retry')
-    input('')
-    sys.exit(1)
-
-#Déplacement de la librairie meetdock dans l'environnement anaconda (part II)
-
-print('***** Installation of Meetdock in the conda env so that it can be callable')
-
-try:
-    error = os.system('rsync -v -r --progress ./ '+str(conda_path)+'/')
-
-    if error != 0:
-            raise TypeError('Unexpected execution')
-
-    print('Configuration of meetdock succeeded !')
-
-    os.chdir(current_path)
-
-except:
-    print('FAILED TO INSTALL CALL MECHANISM OF MEETDOCK IN THE CONDA ENV')
-    print('PLease check what happened and retry')
-    input('')
-    sys.exit(1)
-
-
-#Déplacement de MaxDo dans l'environnement
-
-print('***** Installation of MAXDO in the conda env *****')
-
-try:
-#Copie de MAXDO Dans l'environnement
-
-    os.chdir('./lib/')
-
-    error = os.system('rsync -v -r --progress ./Minimizer/ '+str(conda_path)+'/../envs/'+str(envname)+'/bin')
-
-    if error != 0:
-            raise TypeError('Unexpected execution')
-
-
-    os.chdir(current_path)
-    print('\n********************************************************************************\nMAXDO has been successfully installed ! \n********************************************************************************\n')
-
-except:
-    print('An error has occured while installing MAXDO in conda env. Please retry')
     input('')
     sys.exit(1)
 

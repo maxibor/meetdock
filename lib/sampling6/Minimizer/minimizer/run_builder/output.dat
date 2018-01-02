@@ -1,0 +1,21 @@
+ building selected position           1
+ relocating ligand protein
+ Number of valid positions:            0
+ Minimum energy for position:            0   0.0000000000000000     
+ Average energy and standard deviation   0.0000000000000000        0.0000000000000000     
+ Receptor protein 1j5pre
+ Ligand protein 1j5pli
+ reading pdb           1
+ atoms in protein            1 :         2235
+ residues in protein            1 :          235 Ca         235
+ reading pdb           2
+ atoms in protein            2 :         2235
+ residues in protein            2 :          235 Ca         235
+ Number of atoms :        4470
+ Number of residues :         470
+                        Receptor position     29.13925    18.13057    23.63136
+                        ligand position       23.72389   -32.93430    25.36715
+              ligand-receptor separation      51.38055
+    ligand-receptor orientation theta/phi      1.53701     4.60674
+
+         current angles alpha/beta/gamma:     37.49126   -59.00959  -134.38650

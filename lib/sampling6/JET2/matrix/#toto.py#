@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+import glob,shutil, os, sys, csv, re, tarfile, pickle
+
+"""Construct matrix with II values or analyze a matrix II for diagonal, real interfac, clustering"""
+
+
+
+
+# definitions of paths and dictionnaries
+PATHDICO_unboundRename2unboundOri = os.path.expanduser("~/PPI/WCG/unbounded/pdb/pdb_unbounded_details/dict_corespondancy_unbound_renamed_unbound_original.pickle")
+dicofile = open(PATHDICO_unboundRename2unboundOri,"r")
+d_unboudRename2unboundOri = pickle.load(dicofile)
+dicofile.close()
+PATH_InterfaceUnboundRename = os.path.expanduser("~/PPI/WCG/Results_NACCESS/Unbounded/Interface_By_Correspondancy_With_Bounded")
+PATH_OUT = os.path.expanduser("~/PPI/WCG/Results_NACCESS/Unbounded/InterfaceUnboundOri_fromBounded/")
+
+
+# loop over every interface file with renamed chains and replace the renamed chain by the original ones
+# in a new file stored in PATH_OUT
+for interfaceFile in glob.glob("%s/*largeInterface_All_atoms.txt"%(PATH_InterfaceUnboundRename)):
+    curfile = os.path.basename(interfaceFile)
+    curprot = curfile.split("renamed")[0] + "renamed.pdb"
+    outfilename = PATH_OUT + curfile.split("renamed")[0] + "largeInterface_All_atoms.txt"
+    outfile = open(outfilename, "w")
+    outfile.write("AA Pos Chain\n")
+
+    f = open(curfile)
+    infile = f.readlines()
+    
+    # treat all the lines of the file
+    for aa in infile[1:] :
+        s = aa.split()
+        renamedchain = s[2]
+        orichain = d_unboudRename2unboundOri[curprot][1][renamedchain]
+        outfile.write("%s %s %s\n"%(s[0], s[1], orichain))
+
+    outfile.close()
+

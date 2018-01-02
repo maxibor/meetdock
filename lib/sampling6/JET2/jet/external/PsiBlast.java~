@@ -1,0 +1,32 @@
+package jet.external;
+
+import jet.JET;
+
+public class PsiBlast extends jet.external.Command 
+{
+	/** Classe permettant d'executer une commande psi-blast */	
+	
+	public PsiBlast(String command, String database, String matrix, String queryFile, String outputFile, int maxResults, double eValue, double psithreshold, int gap_exist,int gap_ext,int maxIteration, String GI, String format, String methods)
+	{
+	    command=command+" -d "+database;
+	    command=command+" -I "+GI;
+	    command=command+" -e "+eValue;
+	    command=command+" -G "+gap_exist;
+	    command=command+" -E "+gap_ext;
+	    command=command+" -v "+maxResults;
+	    command=command+" -b "+maxResults;
+	    command=command+" -M "+matrix;
+	    command=command+" -i "+queryFile;
+	    command=command+" -h "+psithreshold;
+	    command=command+" -j "+maxIteration;
+	    command=command+" -o "+outputFile;
+	    command=command+" -T "+format;
+	    command=command+" -t "+methods;
+	    if (JET.DEBUG) System.out.println(command);
+	    setCommand(command);
+	    setDirectory(".");
+	    sendCommand();
+	}
+	
+	
+}
