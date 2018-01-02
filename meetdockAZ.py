@@ -21,7 +21,7 @@ def do_samplings(receptorpath='./data/1j5prec.pdb', ligandpath='./data/1j5plig.p
 
 
     cmd = 'python3 '+sampl6path+'/confsGenerator.py '+'-r '+ receptorpath +' -l '+ ligandpath +' -p '+sampl6path+' -nbPt '+ str(nbrot)+" -XRota "+str(nbx)+" -YRota "+str(nby)+" -ZRota "+str(nbz)+" -minimize False"+" -jet False"
-
+    print(cmd)
     answer = os.system(cmd)
     if answer != 0:
         raise ValueError('Unexpected error while doing the sampling')
@@ -29,7 +29,7 @@ def do_samplings(receptorpath='./data/1j5prec.pdb', ligandpath='./data/1j5plig.p
 
 if __name__ == '__main__':
 
-    current_path = os.getcwd() 
+    current_path = os.getcwd()
     sampl6path = current_path + '/lib/sampling6/Tools'
 
     choix2 = ''
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     if choix == 'y':
         default = True
-        
+
 
     elif choix == 'n':
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     elif default == False:
         do_samplings(receptorpath=receptorpath, ligandpath=ligandpath,outputdir=outputdir, nbrot=nbrot, nbx=nbx, nby=nby)
 
-    input('debug')
+    # input('debug')
 
     receptorname = receptorpath.split('/')[-1]
     ligandname = ligandpath.split('/')[-1]
@@ -96,8 +96,8 @@ if __name__ == '__main__':
     sampl6outdir = sampl6path + '/Results/pdb/'+receptorname+'/'
 
     os.chdir(current_path+'/lib/sampling6/Minimizer/')
-    os.system('python clean.py')
-    
+    # os.system('python clean.py')
+
 
     os.chdir(sampl6outdir)
     liste_samples = os.listdir()
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     elif minimize == False:
 
     #Si pas de minimiseur, juste déplacer vers la sortie
-        input('debug2')
+        # input('debug2')
         for elt in liste_samples:
             os.system('mv '+str(elt)+' '+str(outdir)+'sampling/'+str(elt))
 
@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
     os.chdir(current_path)
 
-    os.system('python meetdock '+str(outdir)+'sampling/ '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
+    os.system('python meetdock '+str(outdir)+'sampling/ '+'-shape -electro -jones -proba -depth naccess -outdir '+outdir) #Lancer meetdock vers le répertoire
 
-    os.system('mv ./MeetDockOne_results.csv'+' '+outdir+str(MeetDockOne_results.csv))
-    os.system('mv ./MeetDockOne_results.png'+' '+outdir+str(MeetDockOne_results.png))
+    os.system('mv ./out/MeetDockOne_results.csv'+' '+outdir+str("MeetDockOne_results.csv"))
+    os.system('mv ./out/MeetDockOne_results.png'+' '+outdir+str("MeetDockOne_results.png"))
