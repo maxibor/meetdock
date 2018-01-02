@@ -139,20 +139,21 @@ if __name__ == '__main__':
 
     for ligand in liste_ligands:
         ligandid = ligand.replace('rota', '.').split('.')[-2]
-        print(os.getcwd())
         filinreceptor = open(receptorpath, 'r')
         filinligand = open(ligand, 'r')
         filout = open(ligandname.replace('.pdb', '')+'_'+ligandid+'.pdb', 'w')
 
         for ligne in filinreceptor:
-            newligne = ligne[0:21]+'A'+ligne[22:]
-            filout.write(newligne)
+            if ligne.split()[0].strip() == 'ATOM':
+                newligne = ligne[0:21]+'A'+ligne[22:]
+                filout.write(newligne)
 
         del (ligne)
 
         for ligne in filinligand:
-            newligne = ligne[0:21]+'B'+ligne[22:]
-            filout.write(newligne)
+            if ligne.split()[0].strip() =='ATOM':
+                newligne = ligne[0:21]+'B'+ligne[22:]
+                filout.write(newligne)
 
         filinreceptor.close()
         filinligand.close()
