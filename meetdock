@@ -116,30 +116,17 @@ def run_meetdock(mypath, myoutdir, thread,  depth, shape = True, electro = True,
     #     print("Running on",num_cores, "threads")
     #     results = Parallel(n_jobs=num_cores)(delayed(runpdbs)(apdb) for apdb in pdbs)
 
-    try:
-        def runpdbs(apdb):
-            thepdb = mypath+"/"+apdb
-            print("Computing scores for ", apdb)
-            res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-            all_res.append(res)
 
-        if thread == 999:
-            num_cores = multiprocessing.cpu_count()
+    print("No MultiThreading available, running on a single thread.")
+    for apdb in pdbs:
+        thepdb = mypath+"/"+apdb
+        print("Computing scores for ", apdb)
+        res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
+        print(res)
+        all_res.append(res)
 
-        pool = ThreadPool(num_cores)
 
-        print("MultiProcessing available\nRunning on",num_cores, "threads")
-        pool.map(runpdbs, pdbs)
-
-    except:
-        print("...")
-        # print("No MultiThreading available, running on a single thread.")
-        # for apdb in pdbs:
-        #     thepdb = mypath+"/"+apdb
-        #     print("Computing scores for ", apdb)
-        #     res = cm.combine_score(thepdb, recepChain=recChain, ligChain=ligChain, statpotrun=proba, vdwrun=jones, electrorun=electro, shaperun=shape, pH = pH, depth=depth, dist=dist)
-        #     all_res.append(res)
-
+    print(all_res)
     mydf = pd.DataFrame(all_res)
     mydf = mydf.set_index('pdb')
     tm.tm_score(mydf, outdir = myoutdir, execdir = execdir)

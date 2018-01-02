@@ -14,7 +14,7 @@ set PROTroot = `echo {$PROT1:r}| cut -c 1-4`
 set minroot = `echo $PROTroot |tr "[A-Z]" "[a-z]"`
 
 # to specify the pdb to build (ligand) (Here, only the pdb 1TMQ_r_u will be considered as ligand)
-foreach PROTT (1j5plig_rota266.pdb)
+foreach PROTT (1j5plig_rota6.pdb)
 set PROT2 = ${PROTT:t:r}
 set PROTid2 = `echo {$PROT2:r}| cut -c 1-6`
 

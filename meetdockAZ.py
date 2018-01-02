@@ -10,7 +10,7 @@
 
 import os
 
-def do_samplings(receptorpath='./data/1j5prec.pdb', ligandpath='./data/1j5plig.pdb', outputdir='./out/', nbrot=10, nbx=3, nby=3, nbz=3):
+def do_samplings(receptorpath='./data/1j5prec.pdb', ligandpath='./data/1j5plig.pdb', outputdir='./out/', nbrot=4, nbx=3, nby=3, nbz=3):
 
     print('The sampling will be done using TEAM6 naive software')
     print('Receptor: {}\nLigand: {}\noutputdir: {}\nnbrot: {}\nnbx: {}\nnby: {}\nnbz: {}'.format(receptorpath.split('/')[-1], ligandpath.split('/')[-1], outputdir, nbrot, nbx, nby, nbz))
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
 
     default = True
-    minimize = False
+    minimize = True
 
     receptorpath = os.getcwd()+'/data/1j5prec.pdb'
     ligandpath = os.getcwd()+'/data/1j5plig.pdb'
@@ -74,13 +74,17 @@ if __name__ == '__main__':
 
     #os.system('cd '+outdir+'\n'+'rm -rf *')
 
+    os.chdir(outdir)
+    os.system('rm -rf *')
+    os.chdir(current_path)
+
     os.system('mkdir -p '+outdir+'/sampling')
     os.system('mkdir -p '+outdir+'/results')
-    os.system('mkdir -p '+outdir+'/summary')
+    #os.system('mkdir -p '+outdir+'/summary')
 
     if default == True:
         print('Starting the demo: All your results will show up in ./out/ . On a decently recent computer you can expect ~ 3 mn of computation time')
-        do_samplings(receptorpath=os.getcwd()+'/data/1j5prec.pdb', ligandpath=os.getcwd()+'/data/1j5plig.pdb', outputdir=os.getcwd()+'/out/' #All values to default
+        do_samplings(receptorpath=os.getcwd()+'/data/1j5prec.pdb', ligandpath=os.getcwd()+'/data/1j5plig.pdb', outputdir=os.getcwd()+'/out/') #All values to default
     elif default == False:
         do_samplings(receptorpath=receptorpath, ligandpath=ligandpath,outputdir=outputdir, nbrot=nbrot, nbx=nbx, nby=nby)
 
@@ -91,6 +95,7 @@ if __name__ == '__main__':
 
     os.chdir(current_path+'/lib/sampling6/Minimizer/')
     os.system('python clean.py')
+    
 
     os.chdir(sampl6outdir)
     liste_samples = os.listdir()
@@ -163,4 +168,7 @@ if __name__ == '__main__':
 
     os.chdir(current_path)
 
-    os.system('python meetdock ./out/sampling/'+' '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
+    os.system('python meetdock '+str(outdir)+' '+'-shape -electro -jones -proba -depth naccess') #Lancer meetdock vers le répertoire
+
+    os.system('mv ./'+str(MeetDockOne_results.csv)+' '+outdir+str(MeetDockOne_results.csv))
+    os.system('mv ./'+str(MeetDockOne_results.png)+' '+outdir+str(MeetDockOne_results.png))
