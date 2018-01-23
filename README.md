@@ -4,16 +4,25 @@
 
 ---
 
-## Authors:  
-- [Guillaume Delevoye](https://github.com/GDelevoye)  
-- [François Gravey](https://github.com/fgravey)  
-- [Ilyes Abdelhamid](https://github.com/IlyesAbdelhamid)  
-- [Paula Milan Rodriguez](https://github.com/PaulaMilanRguez)  
+## Authors of the scoring method:
 - [Maxime Borry](https://github.com/maxibor)  
+- [Guillaume Delevoye](https://github.com/GDelevoye)   
+- [Ilyes Abdelhamid](https://github.com/IlyesAbdelhamid)  
+- [Paula Milan Rodriguez](https://github.com/PaulaMilanRguez)
+- [François Gravey](https://github.com/fgravey) 
+
+
+## Authors of the sampling method:
+- [Arnaud Begue](https://github.com/ArnaudBegue)
+- [Wanying Bei](https://github.com/WanyingBEI)
+- [Taylor Vingadassalon](https://github.com/TaylorVingadassalon)
+- [Mathilde Bertrand](https://github.com/MathildeBertrand)
+
 
 ## Introduction
 
-This scoring method uses the following steps:
+This Protein-Protein docking method was developped for the [Meet-U competition](http://meet-u.org/).
+A sampling method was selected from one of the participating sampling teams, while we developped our own scoring method, using the followings:  
 
 - Checking for shape complementarity and steric clashes.
 - Knowledge based scoring on amino-acids interactions.
